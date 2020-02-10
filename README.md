@@ -4,7 +4,23 @@
 ```
 npm install
 ```
+## Config
+create a config.json file with the following content.
+```json
+{
+  "firebase-api": {
+    "apiKey": "",
+    "authDomain": "",
+    "databaseURL": "",
+    "projectId": "",
+    "storageBucket": "",
+    "messagingSenderId": "",
+    "appId": "",
+    "measurementId": ""
+  }
+}
 
+```
 ### Compiles and hot-reloads for development
 ```
 npm run serve
