@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import Vuelidate from 'vuelidate';
 import App from './App.vue';
 import router from './router';
 import { store } from './store';
@@ -9,7 +8,6 @@ import './assets/scss/app.scss';
 const fb = require('./firebaseConfig.js');
 
 Vue.config.productionTip = false;
-Vue.use(Vuelidate);
 
 //bootstrap
 // import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
