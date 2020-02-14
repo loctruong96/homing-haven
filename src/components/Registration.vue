@@ -191,7 +191,7 @@
             login() {
                 this.performingRequest = true
 
-                fb.auth.signInWithEmailAndPassword(this.loginForm.email, this.loginForm.password).then(user => {
+                fb.auth.signInWithEmailAndPassword(this.loginForm.emai, this.loginForm.password).then(user => {
                     this.$store.commit('setCurrentUser', user.user)
                     this.$store.dispatch('fetchUserProfile')
                     this.performingRequest = false
@@ -203,15 +203,15 @@
                 })
             },
             signup() {
-                if(!this.signupForm.name || !this.signupForm.city || !this.signupForm.state || !this.signupForm.country){
+                if(!this.signupForm.name || !this.signupForm.city || !this.selectedState || !this.selectedCountry){
                     this.performingRequest = false;
                     if(!this.signupForm.name){
                         this.errorMsg = "Name is required."
                     } else if(!this.signupForm.city){
                         this.errorMsg = "City is required."
-                    } else if(!this.signupForm.state){
+                    } else if(!this.selectedState){
                         this.errorMsg = "State is required."
-                    } else if(!this.signupForm.country){
+                    } else if(!this.selectedCountry){
                         this.errorMsg = "Country is required."
                     }
                     // this.errorMsg = "one of the missing fields are required."
