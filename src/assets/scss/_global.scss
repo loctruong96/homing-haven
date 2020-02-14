@@ -70,12 +70,13 @@ p {
 a {
   font-family: 'Open Sans', sans-serif;
   text-decoration: none;
+  //color: $primary;
   color: $primary;
   margin: 0;
   cursor: pointer;
 
   &:hover {
-    color: lighten($primary, 5%);
+    color: lighten($main, 5%);
   }
 }
 
@@ -133,7 +134,7 @@ section {
 }
 
 .button {
-  background: #30A0EE;
+  background: $button;
   border: 0;
   outline: 0;
   color: $white;
@@ -145,13 +146,13 @@ section {
   cursor: pointer;
 
   &:hover {
-    background: lighten($primary, 5%);
+    background: lighten($main, 5%);
   }
   &:disabled {
     opacity: 0.5;
 
     &:hover {
-      background: $primary;
+      background: $main;
     }
   }
 }
@@ -162,7 +163,7 @@ section {
 
 .inline {
   margin: 0;
-  padding: 0;
+  //padding: 0;
   list-style: none;
 
   li {
@@ -187,6 +188,20 @@ form {
     width: 100%;
     margin-bottom: 1rem;
     font-size: 13.5px;
+    padding: 10px;
+    outline: 0;
+    border: 1px solid #e6ecf0;
+    border-radius: 3px;
+
+    &:focus {
+      box-shadow: 0 0 5px 0 rgba($dark, 0.2);
+    }
+  }
+  select {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+    font-size: 16px;
     padding: 10px;
     outline: 0;
     border: 1px solid #e6ecf0;
