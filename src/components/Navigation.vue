@@ -22,7 +22,8 @@
                                     </option>
                                 </select>
                             </li>
-                            <li>John Doe</li>
+                            <li><a href="userinfo">{{ userProfile.name }}</a></li>
+<!--                            <h5 style="float: right; margin-top: 60px;">{{ userProfile.name }}</h5>-->
 <!--                            button-->
                         </ul>
                         <ul class="bottomButtons">
@@ -52,6 +53,7 @@
 
 <script>
     const fb = require('../firebaseConfig.js')
+    import { mapState } from 'vuex'
 
     export default {
         data() {
@@ -59,6 +61,9 @@
                 views: ["Popular Communities"],
                  selectedView: "Popular Communities",
             }
+        },
+        computed: {
+            ...mapState(['userProfile'])
         },
         methods: {
             logout() {
