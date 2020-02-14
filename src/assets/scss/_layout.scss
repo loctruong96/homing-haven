@@ -1,7 +1,7 @@
 // navigation
 header {
   position: relative;
-  background: $white;
+  background: #7a00d3;
   box-shadow: 0 0 5px 0 rgba($dark, 0.5);
   z-index: 10;
 
@@ -9,16 +9,59 @@ header {
     display: inline-block;
   }
 
-  ul {
-    float: right;
-    text-align: right;
+
+
+  .top {
+    //float: right;
+    //justify-content: center;
+    //margin-left: 100px;
+    //flex-flow: wrap;
+    flex-direction: row;
+    display: flex;
+    list-style: none;
+    ul {
+      float: none;
+      text-align: left;
+    }
+  }
+  .title {
+    //margin-right: 10px;
+    //height: 10px;
+    width:20%;
+    //flex-direction: column;
+    border-width: 2px;
+    border-color:black;
+    border-style: solid;
+    //float: left;
+  }
+  .search {
+    //height:10px;
+    //float: right;
+    width:50%;
+    //flex-direction: column;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    input {
+      width: 400px;
+      height: 30px;
+    }
+  }
+
+  .navBar {
+    flex-direction: row;
+    border-width: 10px;
+    ul {
+    float: center;
+    text-align: center;
 
     li {
       margin-top: 4px;
       margin-left: 6px;
-      a {
-        display: block;
-        padding: 5px;
+        a {
+          display: block;
+          padding: 5px;
+        }
       }
     }
   }
@@ -67,7 +110,7 @@ header {
     }
 
     a {
-      color: $white;
+      color: $button;
       text-decoration: underline;
     }
   }
@@ -282,6 +325,17 @@ header {
         display: inline-block;
         margin-right: 1rem;
         font-size: 12px;
+      }
+    }
+    a {
+      font-family: 'Open Sans', sans-serif;
+      text-decoration: none;
+      color: $button;
+      margin: 0;
+      cursor: pointer;
+
+      &:hover {
+        color: lighten($hover, 5%);
       }
     }
   }
