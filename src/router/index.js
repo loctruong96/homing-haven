@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import firebase from 'firebase'
 
 import Login from '@/components/Login'
+import Registration from '@/components/Registration'
 import Dashboard from '@/components/Dashboard'
 import Settings from '@/components/Settings'
 
@@ -19,6 +20,11 @@ const router = new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path:'/registration',
+      name: 'Registration',
+      component: Registration
     },
     {
       path: '/dashboard',
