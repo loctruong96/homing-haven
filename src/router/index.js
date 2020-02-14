@@ -7,6 +7,7 @@ import Registration from '@/components/Registration'
 import Dashboard from '@/components/Dashboard'
 import UDashboard from '@/components/UDashboard'
 import Settings from '@/components/Settings'
+import UserInfo from '@/components/UserInfo'
 
 Vue.use(Router);
 
@@ -31,6 +32,14 @@ const router = new Router({
       path:'/udashboard',
       name: 'UDashboard',
       component: UDashboard
+    },
+    {
+      path: '/userinfo',
+      name: 'UserInfo',
+      component: UserInfo,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/dashboard',

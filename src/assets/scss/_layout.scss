@@ -7,6 +7,7 @@ header {
 
   h3 {
     display: inline-block;
+    color: white;
   }
 
 
@@ -350,7 +351,7 @@ header {
     }
 
     .new-posts {
-      color: $primary;
+      color: $main;
     }
     p {
       padding: 15px;
@@ -414,6 +415,12 @@ header {
     background: $white;
     text-align: center;
     padding: 100px 1rem;
+  }
+  .user-form {
+    border: 1px solid #e6ecf0;
+    background: $white;
+    text-align: center;
+    padding: 50px 1rem;
   }
   .c-modal {
     position: fixed;
