@@ -100,7 +100,7 @@
 
 <script>
     const fb = require('../firebaseConfig.js');
-    import { required, minLength } from 'vuelidate/lib/validators';
+
     export default {
         data() {
             return {
@@ -176,11 +176,6 @@
                     "Wyoming"]},
                 selectedCountry: false,
                 selectedState: false,
-            }
-        },
-        validations: {
-            form: {
-                name: { required },
             }
         },
         methods: {
