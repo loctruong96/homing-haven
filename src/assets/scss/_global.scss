@@ -139,6 +139,7 @@ section {
   outline: 0;
   color: $white;
   padding: 0.8rem 1rem;
+  margin-left: 10px;
   min-width: 150px;
   font-size: 16px;
   border-radius: 3px;
@@ -175,9 +176,10 @@ section {
 }
 
 form {
+  font-size: 13.5px;
   label {
     display: block;
-    font-size: 16px;
+    font-size: 13.5px;
     margin-bottom: 0.5rem;
   }
 
@@ -185,7 +187,7 @@ form {
     display: block;
     width: 100%;
     margin-bottom: 1rem;
-    font-size: 16px;
+    font-size: 13.5px;
     padding: 10px;
     outline: 0;
     border: 1px solid #e6ecf0;
