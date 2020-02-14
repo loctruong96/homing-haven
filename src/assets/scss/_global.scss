@@ -2,13 +2,16 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 // colors
-$primary: #30A0EE;
+$main: #7a00d3;
+$primary: rgb(255, 255, 255);
+$button: rgb(0, 120, 247);
+$hover: rgb(0, 192, 255);
 $error: #ef5777;
 $success: #1abc9c;
 $light: #F5F8FA;
 $medium: #657786;
 $dark: #34495E;
-$white: #fff;
+$white: #ffffff;
 // resets
 body {
   margin: 0;
@@ -72,7 +75,7 @@ a {
   cursor: pointer;
 
   &:hover {
-    color: lighten($primary, 5%);
+    color: lighten($main, 5%);
   }
 }
 
@@ -130,7 +133,7 @@ section {
 }
 
 .button {
-  background: $primary;
+  background: $button;
   border: 0;
   outline: 0;
   color: $white;
@@ -141,13 +144,13 @@ section {
   cursor: pointer;
 
   &:hover {
-    background: lighten($primary, 5%);
+    background: lighten($main, 5%);
   }
   &:disabled {
     opacity: 0.5;
 
     &:hover {
-      background: $primary;
+      background: $main;
     }
   }
 }

@@ -37,7 +37,7 @@ header {
 
 // login
 #login {
-  background: linear-gradient(to right, $primary 0%, $primary 50%, $white 50%, $white 100%);
+  background: linear-gradient(to right, $main 0%, $main 50%, $white 50%, $white 100%);
 
   @media screen and (max-width: 742px) {
     height: 100vh;
@@ -92,6 +92,7 @@ header {
       a {
         display: block;
         margin-bottom: 0.5rem;
+        color: $main;
       }
     }
 
@@ -105,6 +106,83 @@ header {
     }
   }
 }
+
+//registration
+#registration {
+  background: white;
+
+  @media screen and (max-width: 742px) {
+    height: 100vh;
+    background: $white;
+  }
+
+  .col2 {
+    height: 170vh;
+    width: 120vh;
+    padding-top: 15vh;
+
+    @media screen and (max-width: 742px) {
+      height: auto;
+      padding-top: 15vh;
+    }
+  }
+  .interests {
+    height: 75vh;
+    width: 120vh;
+    padding-top: 15vh;
+    padding-left: 20vh;
+
+    @media screen and (max-width: 742px) {
+      height: auto;
+      padding-top: 20vh;
+    }
+  }
+  .matched {
+    height: 75vh;
+    width: 120vh;
+    margin-top: 15vh;
+
+    @media screen and (max-width: 742px) {
+      height: auto;
+      padding-top: 20vh;
+    }
+  }
+ 
+  .col2 {
+    background: $main;;
+    h1 {
+      margin-bottom: 2rem;
+      color: white;
+    }
+    form {
+      color: white;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    .button{
+      margin-top: 50px;
+      background-color:#BD80E9;
+      font-weight: bold;
+    }
+    .extras {
+      float: right;
+      text-align: right;
+      a {
+        display: block;
+        color: white;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+  .interests {
+    background: $white;
+    h1 {
+      margin-bottom: 2rem;
+    }  
+  }
+ 
+}
+
 
 // dashboard
 #dashboard {
