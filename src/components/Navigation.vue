@@ -37,7 +37,7 @@
                 <div class="navBar">
                     <ul class="inline">
                         <li><router-link to="dashboard">Dashboard</router-link></li>
-                        <li><router-link to="settings">Settings</router-link></li>
+                        <li><router-link to="userinfo">Settings</router-link></li>
 <!--                        <li><router-link to="">Documentation</router-link></li>-->
 <!--                        <li><router-link to="">Healthcare</router-link></li>-->
 <!--                        <li><router-link to="">Lifestyle</router-link></li>-->
