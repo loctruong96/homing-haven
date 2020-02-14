@@ -1,5 +1,5 @@
 <template>
-    <div id="dashboard">
+    <div id="userinfo">
         <section>
             <div class="col1">
                 <div class="profile">
@@ -21,12 +21,12 @@
                         <p>
                             State:<input placeholder="Your State">
                         </p>
-                        <p>    
+                        <p>
                             Country:<input placeholder="Your Country">
                         </p>
                         <button @click="updateProfile" class="button">Update Profile</button>
 
-                        <transition name="fade">   
+                        <transition name="fade">
                             <img v-if="showSuccess" class="success" style="margin-left: 10px;" height="30px" width="33px" src="../assets/green_check.png"/>
                         </transition>
                     </form>
@@ -63,7 +63,7 @@
                         <button class="button">Tacoma</button>
                         <button class="button" style="background: lightgrey;">+</button>
                     </p>
-                    
+
                 </div>
             </div>
         </section>

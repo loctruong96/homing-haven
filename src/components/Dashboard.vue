@@ -1,5 +1,5 @@
 <template>
-    <div id="udashboard">
+    <div id="dashboard">
         <div class="banner">
             <div class="bannerStuff">
                 <h1>Welcome to HomingHaven!!</h1>
