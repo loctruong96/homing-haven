@@ -6,6 +6,7 @@ import Login from '@/components/Login'
 import Registration from '@/components/Registration'
 import Dashboard from '@/components/Dashboard'
 import Settings from '@/components/Settings'
+import UserInfo from '@/components/UserInfo'
 
 Vue.use(Router);
 
@@ -25,6 +26,14 @@ const router = new Router({
       path:'/registration',
       name: 'Registration',
       component: Registration
+    },
+    {
+      path: '/userinfo',
+      name: 'UserInfo',
+      component: UserInfo,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/dashboard',
