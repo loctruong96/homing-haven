@@ -1,12 +1,13 @@
 // navigation
 header {
   position: relative;
-  background: $white;
+  background: $main;
   box-shadow: 0 0 5px 0 rgba($dark, 0.5);
   z-index: 10;
 
   h3 {
     display: inline-block;
+    color: white;
   }
 
   ul {
@@ -17,6 +18,7 @@ header {
       margin-top: 4px;
       margin-left: 6px;
       a {
+        color: white;
         display: block;
         padding: 5px;
       }
@@ -37,7 +39,7 @@ header {
 
 // login
 #login {
-  background: linear-gradient(to right, $primary 0%, $primary 50%, $white 50%, $white 100%);
+  background: linear-gradient(to right, $main 0%, $main 50%, $white 50%, $white 100%);
 
   @media screen and (max-width: 742px) {
     height: 100vh;
@@ -159,7 +161,7 @@ header {
     }
 
     .new-posts {
-      color: $primary;
+      color: $main;
     }
     p {
       padding: 15px;
@@ -212,6 +214,12 @@ header {
     background: $white;
     text-align: center;
     padding: 100px 1rem;
+  }
+  .user-form {
+    border: 1px solid #e6ecf0;
+    background: $white;
+    text-align: center;
+    padding: 50px 1rem;
   }
   .c-modal {
     position: fixed;
