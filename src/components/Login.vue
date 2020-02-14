@@ -178,6 +178,7 @@
                 selectedState: false,
             }
         },
+
         methods: {
             toggleForm() {
                 this.errorMsg = ''

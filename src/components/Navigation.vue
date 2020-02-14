@@ -12,6 +12,24 @@
 <!--                <i class="searchbar-icon"></i>-->
 <!--                <span class="input-clear-button"></span>-->
                     </li>
+                    <li>
+                        <ul class="topButton">
+                            <li>
+
+                                <select v-model="selectedView" id="country" >
+                                    <option v-for="view in views" v-bind:value="view">
+                                        {{ view }}
+                                    </option>
+                                </select>
+                            </li>
+                            <li>John Doe</li>
+<!--                            button-->
+                        </ul>
+                        <ul class="bottomButtons">
+                            <li><button @click=""  class="button">New Community</button></li>
+                            <li><button @click=""  class="button">New Resource</button></li>
+                        </ul>
+                    </li>
 
                 </ul>
 
@@ -19,9 +37,13 @@
                     <ul class="inline">
                         <li><router-link to="dashboard">Dashboard</router-link></li>
                         <li><router-link to="settings">Settings</router-link></li>
+<!--                        <li><router-link to="">Documentation</router-link></li>-->
+<!--                        <li><router-link to="">Healthcare</router-link></li>-->
+<!--                        <li><router-link to="">Lifestyle</router-link></li>-->
+<!--                        <li><router-link to="">Wait Time</router-link></li>-->
                         <li><a @click="logout">Logout</a></li>
                     </ul>
-                </div>>
+                </div>
 
             </div>
         </section>
@@ -32,6 +54,12 @@
     const fb = require('../firebaseConfig.js')
 
     export default {
+        data() {
+            return {
+                views: ["Popular Communities"],
+                 selectedView: "Popular Communities",
+            }
+        },
         methods: {
             logout() {
                 fb.auth.signOut().then(() => {

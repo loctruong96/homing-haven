@@ -7,20 +7,6 @@
                 <button @click="register"  class="button">Get Started</button>
             </div>
         </div>
-        <div class="filter">
-            <ul>
-                <li>
-                    <h1>
-                        Need help finding a community to join??
-                    </h1>
-                </li>
-                <li>
-                    <button @click=""  class="button">Click Here!</button>
-                </li>
-            </ul>
-
-<!--            <button @click=""  class="button">Click Here!</button>-->
-        </div>
         <div class="comms">
             <div class="popComms">
                 <h1>Popular Communities</h1>
@@ -48,9 +34,9 @@
 <script>
     import { mapState } from 'vuex'
     import moment from 'moment'
-    const fb = require('../firebaseConfig.js')
     import { VueperSlides, VueperSlide } from 'vueperslides'
     import 'vueperslides/dist/vueperslides.css'
+    const fb = require('../firebaseConfig.js')
 
     export default {
         data() {
