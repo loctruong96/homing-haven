@@ -7,19 +7,18 @@
         </transition>
         <section>
             <div class="col1">
-                <h1>Vuegram</h1>
-                <p>Welcome to the <a href="https://savvyapps.com/" target="_blank">Savvy Apps</a> sample social media web app powered by Vue.js and Firebase.
-                    Build this project by checking out The Definitive Guide to Getting Started with Vue.js</p>
+                <h1>Homing Haven</h1>
+                <p>Look for Resources! Have resources to give out? Post them on here!</p>
             </div>
             <div class="col2" :class="{ 'signup-form': !showLoginForm && !showForgotPassword, }">
                 <form v-if="showLoginForm" @submit.prevent>
                     <h1>Welcome Back</h1>
 
                     <label for="email1">Email</label>
-                    <input v-model.trim="loginForm.email" type="text" placeholder="you@email.com" id="email1" />
+                    <input v-model.trim="loginForm.email" type="text" placeholder="" id="email1" />
 
                     <label for="password1">Password</label>
-                    <input v-model.trim="loginForm.password" type="password" placeholder="******" id="password1" />
+                    <input v-model.trim="loginForm.password" type="password" placeholder="" id="password1" />
 
                     <button @click="login" class="button">Log In</button>
 
@@ -75,7 +74,7 @@
                         <p>We will send you an email to reset your password</p>
 
                         <label for="email3">Email</label>
-                        <input v-model.trim="passwordForm.email" type="text" placeholder="you@email.com" id="email3" />
+                        <input v-model.trim="passwordForm.email" type="text" placeholder="" id="email3" />
 
                         <button @click="resetPassword" class="button">Submit</button>
 
@@ -187,7 +186,8 @@
         methods: {
             toggleForm() {
                 this.errorMsg = ''
-                this.showLoginForm = !this.showLoginForm
+                //this.showLoginForm = !this.showLoginForm
+                this.$router.push('/registration')
             },
             togglePasswordReset() {
                 if (this.showForgotPassword) {

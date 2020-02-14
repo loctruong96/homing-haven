@@ -11,6 +11,13 @@ const fb = require('./firebaseConfig.js');
 Vue.config.productionTip = false;
 Vue.use(Vuelidate);
 
+//bootstrap
+// import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+// Vue.use(BootstrapVue)
+// import 'bootstrap/dist/css/bootstrap.css'
+// import 'bootstrap-vue/dist/bootstrap-vue.css'
+// import './custom.scss'
+
 // handle page reloads
 let app;
 fb.auth.onAuthStateChanged((user) => {
