@@ -5,6 +5,7 @@ import firebase from 'firebase'
 import Login from '@/components/Login'
 import Registration from '@/components/Registration'
 import Dashboard from '@/components/Dashboard'
+import UDashboard from '@/components/UDashboard'
 import Settings from '@/components/Settings'
 
 Vue.use(Router);
@@ -14,7 +15,7 @@ const router = new Router({
   routes: [
     {
       path: '*',
-      redirect: '/dashboard'
+      redirect: '/udashboard'
     },
     {
       path: '/login',
@@ -25,6 +26,11 @@ const router = new Router({
       path:'/registration',
       name: 'Registration',
       component: Registration
+    },
+    {
+      path:'/udashboard',
+      name: 'UDashboard',
+      component: UDashboard
     },
     {
       path: '/dashboard',

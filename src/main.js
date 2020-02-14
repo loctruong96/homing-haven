@@ -1,15 +1,16 @@
 import Vue from 'vue';
-import Vuelidate from 'vuelidate';
 import App from './App.vue';
 import router from './router';
 import { store } from './store';
 import './assets/scss/app.scss';
-
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 const fb = require('./firebaseConfig.js');
-
+library.add(faUserSecret);
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false;
-Vue.use(Vuelidate);
 
 //bootstrap
 // import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'

@@ -169,7 +169,12 @@ section {
     display: inline-block;
   }
 }
+.ex--center-mode {
+  width: 600px;
+  max-width: 100%;
+  margin: auto;
 
+}
 .clear {
   clear: both;
 }
