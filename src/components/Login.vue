@@ -11,7 +11,7 @@
                 <p>Welcome to the <a href="https://savvyapps.com/" target="_blank">Savvy Apps</a> sample social media web app powered by Vue.js and Firebase.
                     Build this project by checking out The Definitive Guide to Getting Started with Vue.js</p>
             </div>
-            <div class="col2" :class="{ 'signup-form': !showLoginForm && !showForgotPassword }">
+            <div class="col2" :class="{ 'signup-form': !showLoginForm && !showForgotPassword, }">
                 <form v-if="showLoginForm" @submit.prevent>
                     <h1>Welcome Back</h1>
 
@@ -43,14 +43,25 @@
                     <label for="password2">Password</label>
                     <input v-model.trim="signupForm.password" type="password" placeholder="min 6 characters" id="password2" />
 
-                    <label for="city">City</label>
-                    <input v-model.trim="signupForm.city" type="text" placeholder="" id="city" />
+                    <label for="country">Country</label>
+<!--                    <input v-model.trim="signupForm.country" type="text" placeholder="" id="country" />-->
+                    <select v-model="selectedCountry" id="country" >
+                        <option v-for="country in countries" v-bind:value="country">
+                            {{ country }}
+                        </option>
+                    </select>
 
                     <label for="state">State</label>
-                    <input v-model.trim="signupForm.state" type="text" placeholder="" id="state" />
+<!--                    <input v-model.trim="signupForm.state" type="text" placeholder="" id="state" />-->
+                    <select v-model="selectedState" id="state" >
+                        <option v-for="state in states[selectedCountry]" v-bind:value="state">
+                            {{ state }}
+                        </option>
+                    </select>
 
-                    <label for="country">Country</label>
-                    <input v-model.trim="signupForm.country" type="text" placeholder="" id="country" />
+
+                    <label for="city">City</label>
+                    <input v-model.trim="signupForm.city" type="text" placeholder="" id="city" />
 
                     <button @click="signup" class="button">Sign Up</button>
 
@@ -89,8 +100,8 @@
 </template>
 
 <script>
-    const fb = require('../firebaseConfig.js')
-
+    const fb = require('../firebaseConfig.js');
+    import { required, minLength } from 'vuelidate/lib/validators';
     export default {
         data() {
             return {
@@ -163,7 +174,14 @@
                     "Washington",
                     "West Virginia",
                     "Wisconsin",
-                    "Wyoming"]}
+                    "Wyoming"]},
+                selectedCountry: false,
+                selectedState: false,
+            }
+        },
+        validations: {
+            form: {
+                name: { required },
             }
         },
         methods: {
@@ -213,7 +231,6 @@
 
                     fb.auth.createUserWithEmailAndPassword(this.signupForm.email, this.signupForm.password).then(user => {
                         this.$store.commit('setCurrentUser', user.user);
-
 
                         // create user obj
                         fb.usersCollection.doc(user.user.uid).set({

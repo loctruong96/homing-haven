@@ -191,6 +191,20 @@ form {
       box-shadow: 0 0 5px 0 rgba($dark, 0.2);
     }
   }
+  select {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+    font-size: 16px;
+    padding: 10px;
+    outline: 0;
+    border: 1px solid #e6ecf0;
+    border-radius: 3px;
+
+    &:focus {
+      box-shadow: 0 0 5px 0 rgba($dark, 0.2);
+    }
+  }
 
   textarea {
     resize: none;

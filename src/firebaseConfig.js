@@ -1,7 +1,8 @@
-import firebase from 'firebase'
-import 'firebase/firestore'
-import "firebase/analytics"
-const config = require("../config")["firebase-api"];
+import firebase from 'firebase';
+import 'firebase/firestore';
+import 'firebase/analytics';
+
+const config = require('../config')['firebase-api'];
 
 firebase.initializeApp(config);
 firebase.analytics();
@@ -13,7 +14,7 @@ const currentUser = auth.currentUser;
 
 // date issue fix according to firebase
 const settings = {
-    // timestampsInSnapshots: true
+  // timestampsInSnapshots: true
 };
 db.settings(settings);
 
@@ -24,11 +25,11 @@ const commentsCollection = db.collection('comments');
 const likesCollection = db.collection('likes');
 
 export {
-    db,
-    auth,
-    currentUser,
-    usersCollection,
-    postsCollection,
-    commentsCollection,
-    likesCollection
-}
+  db,
+  auth,
+  currentUser,
+  usersCollection,
+  postsCollection,
+  commentsCollection,
+  likesCollection,
+};
