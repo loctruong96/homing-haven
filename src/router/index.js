@@ -8,7 +8,8 @@ import Dashboard from '@/components/Dashboard'
 import UDashboard from '@/components/UDashboard'
 import Settings from '@/components/Settings'
 import UserInfo from '@/components/UserInfo'
-
+import NewComm from '@/components/NewComm'
+import Community from '@/components/Community'
 Vue.use(Router);
 
 const router = new Router({
@@ -56,7 +57,23 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
-    }
+    },
+    {
+      path: '/newcomm',
+      name: 'NewComm',
+      component: NewComm,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/community',
+      name: 'Community',
+      component: Community,
+      meta: {
+        requiresAuth: true
+      }
+    },
   ]
 });
 
