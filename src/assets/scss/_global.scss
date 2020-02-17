@@ -2,9 +2,15 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 // colors
-$main: #7a00d3;
+$darkestmain:#2B3168;
+$darkmain: #3D4381;
+$main: #5A61A6;
+$lightmain: #C3C7E7;
+$lightestmain: #E5E7F3; 
+
 $primary: rgb(255, 255, 255);
 $button: rgb(0, 120, 247);
+$button2: $lightestmain;
 $hover: rgb(0, 192, 255);
 $error: #ef5777;
 $success: #1abc9c;

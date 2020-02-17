@@ -24,7 +24,7 @@
                 :key="i"
                 :title="slide.title"
                 :content="slide.content"
-                :style="'background-color: ' + ['#b385d2', '#b385d2'][i % 2]" />
+                :style="'background-color: ' + ['#C3C7E7', '#C3C7E7'][i % 2]" />
 <!--              </div>-->
             </vueper-slides>
         </div>
