@@ -27,7 +27,7 @@
 <!--                            button-->
                         </ul>
                         <ul class="bottomButtons">
-                            <li><button @click=""  class="button">New Community</button></li>
+                            <li><button @click="createComm"  class="button">New Community</button></li>
                             <li><button @click=""  class="button">New Resource</button></li>
                         </ul>
                     </li>
@@ -73,6 +73,9 @@
                 }).catch(err => {
                     console.log(err)
                 })
+            },
+            createComm() {
+                this.$router.push('/newcomm')
             }
         }
     }
