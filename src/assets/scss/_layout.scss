@@ -1,7 +1,7 @@
 // navigation
 header {
   position: relative;
-  background: #7a00d3;
+  background: $main;
   box-shadow: 0 0 5px 0 rgba($dark, 0.5);
   z-index: 10;
 
@@ -151,7 +151,7 @@ header {
 
 // login
 #login {
-  background: linear-gradient(to right, $main 0%, $main 50%, $white 50%, $white 100%);
+  background: linear-gradient(to right, $lightestmain 0%, $lightestmain 50%, $white 50%, $white 100%);
 
   @media screen and (max-width: 742px) {
     height: 100vh;
@@ -169,7 +169,7 @@ header {
     }
   }
   .col1 {
-    color: $white;
+    color: $main;
     @media screen and (max-width: 742px) {
       display: none;
     }
@@ -181,7 +181,7 @@ header {
     }
 
     a {
-      color: $button;
+      color: $lightestmain;
       text-decoration: underline;
     }
   }
@@ -194,9 +194,11 @@ header {
   }
   .col2 {
     h1 {
+      color: $main;
       margin-bottom: 2rem;
     }
     form {
+      color: $main;
       max-width: 450px;
       margin: 0 auto;
     }
@@ -263,19 +265,19 @@ header {
   }
 
   .col2 {
-    background: $main;;
+    background: $lightestmain;
     h1 {
       margin-bottom: 2rem;
-      color: white;
+      color: $main;
     }
     form {
-      color: white;
+      color: $darkestmain;
       max-width: 300px;
       margin: 0 auto;
     }
     .button{
       margin-top: 50px;
-      background-color:#BD80E9;
+      background-color: $main;
       font-weight: bold;
     }
     .extras {
@@ -283,7 +285,7 @@ header {
       text-align: right;
       a {
         display: block;
-        color: white;
+        color: $main;
         margin-bottom: 0.5rem;
       }
     }
@@ -521,8 +523,8 @@ header {
     width: 100%;
     height: 30vh;
     //border-style: solid;
-    background-color: #9ba4cc;
-    color: black;
+    background-color: $lightestmain;
+    color:$darkmain;
     margin-top: 15px;
   }
 
@@ -546,6 +548,7 @@ header {
   }
 
   .comms {
+    color: $darkestmain;
     border-color: black;
     border-style: solid;
     border-color:black;
@@ -996,8 +999,8 @@ header {
     width: 100%;
     height: 30vh;
     //border-style: solid;
-    background-color: #9ba4cc;
-    color: black;
+    background-color: $lightestmain;
+    color: $darkmain;
     margin-top: 15px;
   }
 
@@ -1021,6 +1024,7 @@ header {
   }
 
   .comms {
+    color: $darkestmain;
     border-color: black;
     border-style: solid;
     border-color:black;
