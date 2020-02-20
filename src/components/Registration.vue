@@ -171,7 +171,7 @@
         },
         methods: {
             toggleForm() {
-                this.errorMsg = ''
+                this.errorMsg = '';
                 this.$router.push('/login')
                 //this.showLoginForm = !this.showLoginForm
             },

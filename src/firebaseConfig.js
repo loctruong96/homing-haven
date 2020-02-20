@@ -1,7 +1,9 @@
-import firebase from 'firebase';
-import 'firebase/firestore';
-import 'firebase/analytics';
 
+const firebase = require('firebase/app');
+require ('firebase/firestore');
+require ('firebase/analytics');
+require ('firebase/auth');
+require ('firebase/firestore');
 const config = require('../config')['firebase-api'];
 
 firebase.initializeApp(config);
@@ -23,7 +25,9 @@ const usersCollection = db.collection('users');
 const postsCollection = db.collection('posts');
 const commentsCollection = db.collection('comments');
 const likesCollection = db.collection('likes');
-
+const communityCollection = db.collection('communities');
+const resourceCollection = db.collection('resources');
+const countryCollection = db.collection('countries');
 export {
   db,
   auth,
@@ -32,4 +36,7 @@ export {
   postsCollection,
   commentsCollection,
   likesCollection,
+  communityCollection,
+  resourceCollection,
+  countryCollection
 };

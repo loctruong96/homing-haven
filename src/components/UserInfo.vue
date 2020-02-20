@@ -29,22 +29,28 @@
             <div class="col2">
                 <div class="user-form">
                     <h5 style=" margin-bottom: 20px;">Current Interests</h5>
-                        <p>
-                            <button class="button">Books</button>
-                            <button class="button">Career</button>
-                        </p>
-                        <p>
-                            <button class="button">Legal</button>
-                            <button class="button" style="background: lightgrey;">+</button>
-                        </p>
-                        <p>
-                            <button class="button">Food Assistance</button>
-                            <button class="button" style="background-color: white; pointer-events: none;"></button>
-                        </p>
-                        <p>
-                            <button class="button">Photography</button>
-                            <button class="button" style="background-color: white; pointer-events: none;"></button>
-                            </p>
+<!--                        <p>-->
+<!--                            <button class="button">Books</button>-->
+<!--                            <button class="button">Career</button>-->
+<!--                        </p>-->
+<!--                        <p>-->
+<!--                            <button class="button">Legal</button>-->
+<!--                            <button class="button" style="background: lightgrey;">+</button>-->
+<!--                        </p>-->
+<!--                        <p>-->
+<!--                            <button class="button">Food Assistance</button>-->
+<!--                            <button class="button" style="background-color: white; pointer-events: none;"></button>-->
+<!--                        </p>-->
+<!--                        <p>-->
+<!--                            <button class="button">Photography</button>-->
+<!--                            <button class="button" style="background-color: white; pointer-events: none;"></button>-->
+<!--                        </p>-->
+                    <ListInterests v-bind:interests="interests"
+                                   @remove-interest="removeInterest" v-if="interests.length"
+                    />
+                    <p class="emptylist" v-else>How lonely... add try adding an interest.</p>
+                    <AddInterest @add-interest="addInterest"/>
+
                 </div>
                 <div class="user-form">
                     <h5 style=" margin-bottom: 20px;">Communities you have joined:</h5>
@@ -57,7 +63,6 @@
                         <button class="button">Tacoma</button>
                         <button class="button" style="background: lightgrey;">+</button>
                     </p>
-
                 </div>
             </div>
         </section>
@@ -66,7 +71,8 @@
 
 <script>
     import { mapState } from 'vuex'
-
+    import ListInterests from "@/components/ListInterests"
+    import AddInterest from "@/components/AddInterest"
     export default {
         data() {
             return {
@@ -75,7 +81,12 @@
                 city: '',
                 state: '',
                 country: '',
-                showSuccess: false
+                showSuccess: false,
+                interests: [
+                    {id: 1, title:"Food' ", completed: false},
+                    {id: 2, title:"Game", completed: false},
+                    {id: 3, title:"Legal", completed: false}
+                ]
             }
         },
         computed: {
@@ -94,7 +105,18 @@
                 this.showSuccess = true;
 
                 setTimeout(() => { this.showSuccess = false }, 2000)
+            },
+            removeInterest(id) {
+                this.interests = this.interests.filter(t=> t.id !== id)
+            },
+            addInterest(interest) {
+                this.interests.push(interest)
             }
+        },
+        components: {
+            ListInterests,
+            AddInterest
         }
     }
 </script>
+
