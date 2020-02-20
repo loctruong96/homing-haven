@@ -2,9 +2,7 @@
     <div id="newcomm">
         <div class="ncBanner">
             <div class="span">
-                <div class="span">
-                    <h1>Create a Community</h1>
-                </div>
+                <h1>Create a Community</h1>
             </div>
 
         </div>
@@ -15,25 +13,26 @@
                 <div class="profile">
 <!--                    <img height="150px" width="150px" src="../assets/user_icon.png"/>-->
 
-                    <h5 style="float: right; margin-top: 60px;">Help us know where to send people in need....</h5>
+                    <h3 style="float: right; ">Help us know where to send people in need....</h3>
                     <form @submit.prevent>
                         <p style=" margin-top: 20px;">
-                            Community:<input v-model.trim="name" type="text"  id="name" />
+                            Community:<input v-model.trim="name" type="text"  id="name" placeholder="Your community"/>
                         </p>
                         <p>
                             Moderator:<input placeholder="some@email.com">
                         </p>
                         <p>
-                            City:<input placeholder="Your Password">
+                            City:<input placeholder="City">
                         </p>
                         <p>
-                            State:<input placeholder="Your City">
+                            State:<input placeholder="State">
                         </p>
                         <p>
-                            Country:<input placeholder="Your State">
+                            Country:<input placeholder="Country">
                         </p>
                         <div>
                             <button @click="updateProfile" class="button">Create Community</button>
+                            <br><br>
                             <button @click="updateProfile" class="button">Cancel</button>
                         </div>
                         <transition name="fade">
