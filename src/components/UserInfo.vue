@@ -10,19 +10,13 @@
                             Name:<input v-model.trim="name" type="text" :placeholder="userProfile.name" id="name" />
                         </p>
                         <p>
-                            Email:<input placeholder="some@email.com">
+                            City:<input v-model.trim="city" type="text" :placeholder="userProfile.city" id="city">
                         </p>
                         <p>
-                            Password:<input placeholder="Your Password">
+                            State:<input v-model.trim="state" type="text" :placeholder="userProfile.state" id="state">
                         </p>
                         <p>
-                            City:<input placeholder="Your City">
-                        </p>
-                        <p>
-                            State:<input placeholder="Your State">
-                        </p>
-                        <p>
-                            Country:<input placeholder="Your Country">
+                            Country:<input v-model.trim="country" type="text" :placeholder="userProfile.country" id="country">
                         </p>
                         <button @click="updateProfile" class="button">Update Profile</button>
 
@@ -78,6 +72,9 @@
             return {
                 name: '',
                 title: '',
+                city: '',
+                state: '',
+                country: '',
                 showSuccess: false
             }
         },
@@ -89,12 +86,12 @@
                 this.$store.dispatch('updateProfile', {
                     name: this.name !== '' ? this.name : this.userProfile.name,
                     title: this.title !== '' ? this.title : this.userProfile.title
-                })
+                });
 
-                this.name = ''
-                this.title = ''
+                this.name = '';
+                this.title = '';
 
-                this.showSuccess = true
+                this.showSuccess = true;
 
                 setTimeout(() => { this.showSuccess = false }, 2000)
             }
