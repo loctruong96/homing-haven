@@ -994,6 +994,258 @@ header {
   }
 }
 
+#newcomm {
+  //height: 100%;
+  section {
+    padding: 2rem 0;
+  }
+
+  .col1 {
+    flex: 0 0 30%;
+    @media screen and (max-width: 1000px) {
+      flex: 0 0 40%;
+    }
+  }
+  .profile {
+    background: $white;
+    padding: 2rem;
+
+    h5 {
+
+    }
+
+    p {
+      color: $medium;
+      margin-bottom: 1rem;
+    }
+  }
+  .create-post {
+    p {
+      margin-bottom: 0.5rem;
+    }
+    textarea {
+      height: 200px;
+      margin: 0;
+    }
+    .button {
+      margin-top: 1rem;
+      width: 100%;
+      z-index: 5;
+      border-radius: 0 0 3px 3px;
+    }
+  }
+  .hidden-posts {
+    text-align: center;
+    border: 1px solid #e6ecf0;
+    font-size: 14px;
+    border-bottom: 0;
+    background: $white;
+
+    &:hover {
+      background: #f5f8fa;
+      cursor: pointer;
+    }
+
+    .new-posts {
+      color: $main;
+    }
+    p {
+      padding: 15px;
+      margin: 0 auto;
+      color: darken($light, 25%);
+    }
+  }
+  .post {
+    border: 1px solid #e6ecf0;
+    border-bottom: 0;
+    font-size: 14px;
+    padding: 1.5rem;
+    background: $white;
+
+    &:hover {
+      background: #f5f8fa;
+    }
+
+    &:last-of-type {
+      border-bottom: 1px solid $light;
+    }
+
+    h5 {
+      margin: 0 0 0.5rem;
+    }
+    span {
+      display: block;
+      font-style: italic;
+      font-size: 12px;
+      margin-bottom: 0.5rem;
+      color: darken($light, 25%);
+    }
+    p {
+      margin: 0;
+    }
+    ul {
+      list-style: none;
+      margin: 1rem 0 0;
+      padding: 0;
+
+      li {
+        display: inline-block;
+        margin-right: 1rem;
+        font-size: 12px;
+      }
+    }
+    a {
+      font-family: 'Open Sans', sans-serif;
+      text-decoration: none;
+      color: $button;
+      margin: 0;
+      cursor: pointer;
+
+      &:hover {
+        color: lighten($hover, 5%);
+      }
+    }
+  }
+  .no-results {
+    border: 1px solid #e6ecf0;
+    background: $white;
+    text-align: center;
+    padding: 100px 1rem;
+  }
+  .user-form {
+    border: 1px solid #e6ecf0;
+    background: $white;
+    text-align: center;
+    padding: 50px 1rem;
+  }
+  .c-modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba($dark, 0.4);
+    z-index: 999;
+
+    .c-container {
+      position: relative;
+      max-width: 600px;
+      margin: 30vh auto 0;
+      padding: 2rem;
+      border-radius: 3px;
+      background: $white;
+      box-shadow: 0 0 20px 0 rgba($dark, 0.5);
+
+      a {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        padding: 5px;
+      }
+      .button {
+        margin-top: 1rem;
+      }
+    }
+  }
+  .p-modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba($dark, 0.4);
+    z-index: 999;
+
+    .p-container {
+      position: fixed;
+      max-width: 600px;
+      top: 2vh;
+      bottom: 2vh;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      padding: 2rem;
+      border-radius: 3px;
+      background: $white;
+      box-shadow: 0 0 20px 0 rgba($dark, 0.5);
+      overflow: auto;
+
+      .close {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        padding: 5px;
+      }
+
+      .post {
+        border: 0;
+        border-bottom: 1px solid #e6ecf0;
+
+        &:hover {
+          background: $white;
+        }
+      }
+
+      .comment {
+        font-size: 14px;
+        padding: 1.5rem;
+        border-top: 1px solid #e6ecf0;
+
+        &:first-of-type {
+          border-top: 0;
+        }
+
+        h5 {
+          margin: 0 0 0.5rem;
+        }
+        span {
+          display: block;
+          font-style: italic;
+          font-size: 12px;
+          margin-bottom: 0.5rem;
+          color: darken($light, 20%);
+        }
+        p {
+          margin: 0;
+        }
+      }
+    }
+  }
+  .ncBanner {
+    position: relative;
+    width: 100%;
+    height: 20vh;
+    padding-left: 2%;
+    margin-top: 1%;
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+
+
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    background-color: $lightmain;
+
+    .span {
+      //display: inline-block;
+      //vertical-align: middle;
+      //line-height: normal;
+      //border-color: red;
+      //border-style: solid;
+      //border-width: 2px;
+    }
+
+    h1 {
+      //padding-left: 5px;
+      //justify-content: center;
+      font-size: 300%;
+    }
+  }
+}
+
 #udashboard {
   .banner {
     width: 100%;
