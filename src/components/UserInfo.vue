@@ -54,15 +54,20 @@
                 </div>
                 <div class="user-form">
                     <h5 style=" margin-bottom: 20px;">Communities you have joined:</h5>
-                    <p>
-                        <button class="button">Bellevue</button>
-                        <button class="button">Renton</button>
-                        <button class="button">Seattle</button>
-                    </p>
-                    <p>
-                        <button class="button">Tacoma</button>
-                        <button class="button" style="background: lightgrey;">+</button>
-                    </p>
+<!--                    <p>-->
+<!--                        <button class="button">Bellevue</button>-->
+<!--                        <button class="button">Renton</button>-->
+<!--                        <button class="button">Seattle</button>-->
+<!--                    </p>-->
+<!--                    <p>-->
+<!--                        <button class="button">Tacoma</button>-->
+<!--                        <button class="button" style="background: lightgrey;">+</button>-->
+<!--                    </p>-->
+                    <ListInterests v-bind:interests="communities"
+                                   @remove-interest="removeCommunity" v-if="interests.length"
+                    />
+                    <p class="emptylist" v-else>How lonely... add try looking for a community.</p>
+                    <AddCommunity @add-interest="addCommunity"/>
                 </div>
             </div>
         </section>
@@ -73,6 +78,7 @@
     import { mapState } from 'vuex'
     import ListInterests from "@/components/ListInterests"
     import AddInterest from "@/components/AddInterest"
+    import AddCommunity from "./AddCommunity";
     export default {
         data() {
             return {
@@ -86,7 +92,12 @@
                     {id: 1, title:"Food' ", completed: false},
                     {id: 2, title:"Game", completed: false},
                     {id: 3, title:"Legal", completed: false}
-                ]
+                ],
+                communities: [
+                    {id: 1, title:"Food' ", completed: false},
+                    {id: 2, title:"Game", completed: false},
+                    {id: 3, title:"Legal", completed: false}
+                ],
             }
         },
         computed: {
@@ -111,11 +122,19 @@
             },
             addInterest(interest) {
                 this.interests.push(interest)
+            },
+            removeCommunity(id) {
+                this.communities = this.communities.filter(t=> t.id !== id)
+            },
+            addCommunity(community) {
+                this.communities.push(community)
             }
+
         },
         components: {
             ListInterests,
-            AddInterest
+            AddInterest,
+            AddCommunity
         }
     }
 </script>
