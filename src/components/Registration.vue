@@ -27,7 +27,7 @@
 
                     <label for="country">Country</label>
                     <!--                    <input v-model.trim="signupForm.country" type="text" placeholder="" id="country" />-->
-                    <select v-model="selectedCountry" id="country" >
+                    <select v-model="signupForm.country" id="country" >
                         <option v-for="country in countries" v-bind:value="country">
                             {{ country }}
                         </option>
@@ -35,12 +35,11 @@
 
                     <label for="state">State</label>
                     <!--                    <input v-model.trim="signupForm.state" type="text" placeholder="" id="state" />-->
-                    <select v-model="selectedState" id="state" >
-                        <option v-for="state in states[selectedCountry]" v-bind:value="state">
+                    <select v-model="signupForm.state" id="state" >
+                        <option v-for="state in states[signupForm.country]" v-bind:value="state">
                             {{ state }}
                         </option>
                     </select>
-
 
                     <label for="city">City</label>
                     <input v-model.trim="signupForm.city" type="text" placeholder="" id="city" />
@@ -106,8 +105,8 @@
                     password: '',
                     confirmpassword: '',
                     city: '',
-                    state: '',
-                    country: ''
+                    state: false,
+                    country: 'United States'
                 },
                 passwordForm: {
                     email: ''
@@ -168,8 +167,6 @@
                         "West Virginia",
                         "Wisconsin",
                         "Wyoming"]},
-                selectedCountry: false,
-                selectedState: false,
             }
         },
         methods: {
@@ -203,18 +200,21 @@
                 })
             },
             signup() {
-                if(!this.signupForm.name || !this.signupForm.city || !this.selectedState || !this.selectedCountry){
+                if(!this.signupForm.name || !this.signupForm.city || !this.signupForm.state || !this.signupForm.country){
                     this.performingRequest = false;
                     if(!this.signupForm.name){
                         this.errorMsg = "Name is required."
                     } else if(!this.signupForm.city){
                         this.errorMsg = "City is required."
-                    } else if(!this.selectedState){
+                    } else if(!this.signupForm.state){
                         this.errorMsg = "State is required."
-                    } else if(!this.selectedCountry){
+                    } else if(!this.signupForm.country){
                         this.errorMsg = "Country is required."
                     }
                     // this.errorMsg = "one of the missing fields are required."
+                } else if(this.signupForm.password !== this.signupForm.confirmpassword){
+                    this.performingRequest = false;
+                    this.errorMsg = "Password confirmation did not match."
                 } else {
                     this.performingRequest = true;
 
@@ -244,7 +244,6 @@
                         this.errorMsg = err.message
                     })
                 }
-
             },
             resetPassword() {
                 this.performingRequest = true
