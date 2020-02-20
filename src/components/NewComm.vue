@@ -1,31 +1,40 @@
 <template>
     <div id="newcomm">
+        <div class="ncBanner">
+            <div class="span">
+                <h1>Create a Community</h1>
+            </div>
+
+        </div>
         <section>
+
             <div class="col1">
+
                 <div class="profile">
-                    <img height="150px" width="150px" src="../assets/user_icon.png"/>
-                    <h5 style="float: right; margin-top: 60px;">{{ userProfile.name }}</h5>
+<!--                    <img height="150px" width="150px" src="../assets/user_icon.png"/>-->
+
+                    <h3 style="float: right; ">Help us know where to send people in need....</h3>
                     <form @submit.prevent>
                         <p style=" margin-top: 20px;">
-                            Name:<input v-model.trim="name" type="text" :placeholder="userProfile.name" id="name" />
+                            Community:<input v-model.trim="name" type="text"  id="name" placeholder="Your community"/>
                         </p>
                         <p>
-                            Email:<input placeholder="some@email.com">
+                            Moderator:<input placeholder="some@email.com">
                         </p>
                         <p>
-                            Password:<input placeholder="Your Password">
+                            City:<input placeholder="City">
                         </p>
                         <p>
-                            City:<input placeholder="Your City">
+                            State:<input placeholder="State">
                         </p>
                         <p>
-                            State:<input placeholder="Your State">
+                            Country:<input placeholder="Country">
                         </p>
-                        <p>
-                            Country:<input placeholder="Your Country">
-                        </p>
-                        <button @click="updateProfile" class="button">Update Profile</button>
-
+                        <div>
+                            <button @click="updateProfile" class="button">Create Community</button>
+                            <br><br>
+                            <button @click="updateProfile" class="button">Cancel</button>
+                        </div>
                         <transition name="fade">
                             <img v-if="showSuccess" class="success" style="margin-left: 10px;" height="30px" width="33px" src="../assets/green_check.png"/>
                         </transition>
