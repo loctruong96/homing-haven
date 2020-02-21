@@ -7,7 +7,7 @@
                     <li class="title">
                         <router-link to="dashboard"><h3>HomingHaven</h3></router-link>
                     </li>
-                    <li class="search">
+                    <li class="search2">
                         <input type="search" placeholder="Search">
                     </li>
                     <li>
