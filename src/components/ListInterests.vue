@@ -15,7 +15,6 @@
         },
         methods: {
             removeInterest(id) {
-                console.log(id);
                 this.$emit('remove-interest', id)
             }
         },

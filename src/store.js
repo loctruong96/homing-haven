@@ -72,8 +72,9 @@ export const store = new Vuex.Store({
             let city = data.city;
             let userState = data.state;
             let country = data.country;
+            let interests = data.interests;
 
-            fb.usersCollection.doc(state.currentUser.uid).update({ name, title, city, state: userState, country }).then(user => {
+            fb.usersCollection.doc(state.currentUser.uid).update({ name, title, interests ,city, state: userState, country }).then(user => {
                 // update all posts by user to reflect new name
                 fb.postsCollection.where('userId', '==', state.currentUser.uid).get().then(docs => {
                     docs.forEach(doc => {
