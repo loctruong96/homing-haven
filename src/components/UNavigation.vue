@@ -9,8 +9,6 @@
                     </li>
                     <li class="search">
                         <input type="search" placeholder="Search">
-<!--                <i class="searchbar-icon"></i>-->
-<!--                <span class="input-clear-button"></span>-->
                     </li>
                     <li class="button1">
                     <button @click="register"  class="button">Register</button>
@@ -21,15 +19,6 @@
                     </li>
 
                 </ul>
-
-<!--                <div class="navBar">-->
-<!--                    <ul class="inline">-->
-<!--                        <li><router-link to="dashboard">Dashboard</router-link></li>-->
-<!--                        <li><router-link to="settings">Settings</router-link></li>-->
-
-<!--                    </ul>-->
-<!--                </div>-->
-
             </div>
         </section>
     </header>
