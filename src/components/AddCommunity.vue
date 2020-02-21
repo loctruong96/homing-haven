@@ -15,12 +15,12 @@
         methods: {
             onSubmit() {
                 if (this.title.trim()) {
-                    const newInterest = {
+                    const newCommunity = {
                         id: Date.now(),
                         title: this.title,
                         completed: false
                     };
-                    this.$emit('add-interest', newInterest);
+                    this.$emit('add-community', newCommunity);
                     this.title=""
                 }
             }

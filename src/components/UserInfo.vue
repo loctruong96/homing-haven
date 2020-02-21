@@ -48,7 +48,7 @@
                     <ListInterests v-bind:interests="interests"
                                    @remove-interest="removeInterest" v-if="interests.length"
                     />
-                    <p class="emptylist" v-else>How lonely... add try adding an interest.</p>
+                    <p class="emptylist" v-else>How lonely... try adding an interest.</p>
                     <AddInterest @add-interest="addInterest"/>
 
                 </div>
@@ -63,11 +63,11 @@
 <!--                        <button class="button">Tacoma</button>-->
 <!--                        <button class="button" style="background: lightgrey;">+</button>-->
 <!--                    </p>-->
-                    <ListInterests v-bind:interests="communities"
-                                   @remove-interest="removeCommunity" v-if="interests.length"
+                    <ListCommunities v-bind:communities="communities"
+                                   @remove-community="removeCommunity" v-if="communities.length"
                     />
-                    <p class="emptylist" v-else>How lonely... add try looking for a community.</p>
-                    <AddCommunity @add-interest="addCommunity"/>
+                    <p class="emptylist" v-else>How lonely... try looking for a community.</p>
+                    <AddCommunity @add-community="addCommunity"/>
                 </div>
             </div>
         </section>
@@ -77,6 +77,7 @@
 <script>
     import { mapState } from 'vuex'
     import ListInterests from "@/components/ListInterests"
+    import ListCommunities from "./ListCommunities";
     import AddInterest from "@/components/AddInterest"
     import AddCommunity from "./AddCommunity";
     export default {
@@ -139,7 +140,8 @@
         components: {
             ListInterests,
             AddInterest,
-            AddCommunity
+            AddCommunity,
+            ListCommunities
         }
     }
 </script>
