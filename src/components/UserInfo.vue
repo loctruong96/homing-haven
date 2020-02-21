@@ -89,14 +89,15 @@
                 country: '',
                 showSuccess: false,
                 interests: [
-                    {id: 1, title:"Food' ", completed: false},
+                    {id: 1, title:"Food", completed: false},
                     {id: 2, title:"Game", completed: false},
                     {id: 3, title:"Legal", completed: false}
                 ],
                 communities: [
-                    {id: 1, title:"Food' ", completed: false},
-                    {id: 2, title:"Game", completed: false},
-                    {id: 3, title:"Legal", completed: false}
+                    {id: 1, title:"Bellevue", completed: false},
+                    {id: 2, title:"Renton", completed: false},
+                    {id: 3, title:"Seattle", completed: false},
+                    {id: 4, title:"Tacoma", completed: false}
                 ],
             }
         },
@@ -107,11 +108,15 @@
             updateProfile() {
                 this.$store.dispatch('updateProfile', {
                     name: this.name !== '' ? this.name : this.userProfile.name,
-                    title: this.title !== '' ? this.title : this.userProfile.title
+                    title: this.title !== '' ? this.title : this.userProfile.title,
+                    city: this.city !== '' ? this.city: this.userProfile.city,
+                    state: this.state !== '' ? this.state: this.userProfile.state,
+                    country: this.country !== '' ? this.country: this.userProfile.country
                 });
 
                 this.name = '';
                 this.title = '';
+                this.city = '';
 
                 this.showSuccess = true;
 

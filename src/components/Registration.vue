@@ -59,27 +59,37 @@
             </div>
             <div class="interests">
                 <h1>Select an interest</h1>
-                <p>
-                <button  class="button">Food Assitance</button>
-                &nbsp;&nbsp;&nbsp;
-                <button  class="button">Education</button>
-                </p>
-                <p>
-                <button class="button">Healthcare</button>
-                &nbsp;&nbsp;&nbsp;
-                <button  class="button">Jobs</button>
-                </p>
+<!--                <p>-->
+<!--                <button  class="button">Food Assitance</button>-->
+<!--                &nbsp;&nbsp;&nbsp;-->
+<!--                <button  class="button">Education</button>-->
+<!--                </p>-->
+<!--                <p>-->
+<!--                <button class="button">Healthcare</button>-->
+<!--                &nbsp;&nbsp;&nbsp;-->
+<!--                <button  class="button">Jobs</button>-->
+<!--                </p>-->
+                <ListInterests v-bind:interests="interests"
+                               @remove-interest="removeInterest" v-if="interests.length"
+                />
+                <p class="emptylist" v-else>How lonely... add try adding an interest.</p>
+                <AddInterest @add-interest="addInterest"/>
 
                 <div class="matched">
-                <h4>Resources that matched your location and interests </h4>
-                <p>
-                <button  class="button">Seattle Food Bank</button>
-                &nbsp;&nbsp;&nbsp;
-                <button  class="button">Costco Free Food</button>
-                </p>
-                <p>
-                <button class="button">Seattle Public Library</button>
-                </p>
+                <h4>Communities that matched your location and interests </h4>
+<!--                <p>-->
+<!--                <button  class="button">Seattle Community</button>-->
+<!--                &nbsp;&nbsp;&nbsp;-->
+<!--                <button  class="button">Tacoma Community</button>-->
+<!--                </p>-->
+<!--                <p>-->
+<!--                <button class="button">Seatac Community</button>-->
+<!--                </p>-->
+                    <ListInterests v-bind:interests="communities"
+                                   @remove-interest="removeCommunity" v-if="interests.length"
+                    />
+                    <p class="emptylist" v-else>How lonely... add try looking for a community.</p>
+                    <AddCommunity @add-interest="addCommunity"/>
                 </div>
             </div>
 
@@ -89,8 +99,10 @@
 </template>
 
 <script>
-    const fb = require('../firebaseConfig.js')
-
+    const fb = require('../firebaseConfig.js');
+    import ListInterests from "@/components/ListInterests"
+    import AddInterest from "@/components/AddInterest"
+    import AddCommunity from "./AddCommunity";
     export default {
         data() {
             return {
@@ -167,6 +179,15 @@
                         "West Virginia",
                         "Wisconsin",
                         "Wyoming"]},
+                interests: [
+                    {id: 1, title:"Food Assitance", completed: false},
+                    {id: 2, title:"Education", completed: false},
+                    {id: 3, title:"Healthcare", completed: false},
+                    {id: 4, title:"Jobs", completed: false}
+                ],
+                communities: [
+                    {id: 1, title:"Seattle Community", completed: false},
+                ],
             }
         },
         methods: {
@@ -257,7 +278,24 @@
                     this.performingRequest = false
                     this.errorMsg = err.message
                 })
+            },
+            removeInterest(id) {
+                this.interests = this.interests.filter(t=> t.id !== id)
+            },
+            addInterest(interest) {
+                this.interests.push(interest)
+            },
+            removeCommunity(id) {
+                this.communities = this.communities.filter(t=> t.id !== id)
+            },
+            addCommunity(community) {
+                this.communities.push(community)
             }
+        },
+        components: {
+            ListInterests,
+            AddInterest,
+            AddCommunity
         }
     }
 </script>
