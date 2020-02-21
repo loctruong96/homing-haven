@@ -77,9 +77,9 @@
 <script>
     import { mapState } from 'vuex'
     import ListInterests from "@/components/ListInterests"
-    import ListCommunities from "./ListCommunities";
+    import ListCommunities from "@/components/ListCommunities";
     import AddInterest from "@/components/AddInterest"
-    import AddCommunity from "./AddCommunity";
+    import AddCommunity from "@/components/AddCommunity";
     export default {
         data() {
             return {
@@ -102,9 +102,9 @@
                 ],
             }
         },
-        computed: {
+        computed: mapState({
             ...mapState(['userProfile'])
-        },
+        }),
         methods: {
             updateProfile() {
                 this.$store.dispatch('updateProfile', {
