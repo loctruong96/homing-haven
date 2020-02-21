@@ -1530,3 +1530,60 @@ header {
     margin-top: 2rem;
   }
 }
+
+//Community Page
+#community {
+  background: $white;
+
+  .commBanner{
+    background: $lightmain;
+    padding: 2%;
+
+    h1{
+      color: $white;
+      font-size: 2em;
+    }
+  }
+
+  .navInterests{
+    background-color: $lightestmain;
+    overflow: hidden;
+
+    a {
+        float: left;
+        color: $darkmain;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+    a:hover {
+      background-color: $white;
+      color: $darkestmain;
+    }
+    a.active {
+      background-color: $main;
+      color: white;
+    }
+  }
+  .communityGuidelines {
+    color: $darkestmain;
+    background: $evenlightestmain;
+    padding-top: 3vw;
+    padding: 2vw;
+  }
+  .rules{
+    padding-top: 1.5vw;
+  }
+  .activity{
+    padding-top: 1.5vw;
+  }
+
+  .resourceCategories{
+    padding: 2vw;
+    color: $darkestmain;
+  }
+  
+
+
+}
