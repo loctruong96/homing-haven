@@ -85,11 +85,11 @@
 <!--                <p>-->
 <!--                <button class="button">Seatac Community</button>-->
 <!--                </p>-->
-                    <ListInterests v-bind:interests="communities"
-                                   @remove-interest="removeCommunity" v-if="interests.length"
+                    <ListCommunities v-bind:communities="communities"
+                                     @remove-community="removeCommunity" v-if="communities.length"
                     />
-                    <p class="emptylist" v-else>How lonely... add try looking for a community.</p>
-                    <AddCommunity @add-interest="addCommunity"/>
+                    <p class="emptylist" v-else>How lonely... try looking for a community.</p>
+                    <AddCommunity @add-community="addCommunity"/>
                 </div>
             </div>
 
@@ -101,8 +101,10 @@
 <script>
     const fb = require('../firebaseConfig.js');
     import ListInterests from "@/components/ListInterests"
+    import ListCommunities from "@/components/ListCommunities";
     import AddInterest from "@/components/AddInterest"
-    import AddCommunity from "./AddCommunity";
+    import AddCommunity from "@/components/AddCommunity";
+
     export default {
         data() {
             return {
@@ -241,14 +243,19 @@
 
                     fb.auth.createUserWithEmailAndPassword(this.signupForm.email, this.signupForm.password).then(user => {
                         this.$store.commit('setCurrentUser', user.user);
-
+                        // get current interests into a list
+                        // const finalInterests = [];
+                        // this.interests.map((interest) => {
+                        //     finalInterests.push(interest.title)
+                        // });
                         // create user obj
                         fb.usersCollection.doc(user.user.uid).set({
                             name: this.signupForm.name,
                             title: this.signupForm.title,
                             city: this.signupForm.city,
                             state: this.signupForm.state,
-                            country: this.signupForm.country
+                            country: this.signupForm.country,
+                            interests: this.interests
 
                         }).then(() => {
                             this.$store.dispatch('fetchUserProfile')
@@ -295,7 +302,8 @@
         components: {
             ListInterests,
             AddInterest,
-            AddCommunity
+            AddCommunity,
+            ListCommunities
         }
     }
 </script>
