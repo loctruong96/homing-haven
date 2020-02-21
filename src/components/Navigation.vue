@@ -7,10 +7,8 @@
                     <li class="title">
                         <router-link to="dashboard"><h3>HomingHaven</h3></router-link>
                     </li>
-                    <li class="search">
+                    <li class="search2">
                         <input type="search" placeholder="Search">
-<!--                <i class="searchbar-icon"></i>-->
-<!--                <span class="input-clear-button"></span>-->
                     </li>
                     <li>
                         <ul class="topButton">
