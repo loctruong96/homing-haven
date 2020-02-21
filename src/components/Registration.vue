@@ -241,14 +241,19 @@
 
                     fb.auth.createUserWithEmailAndPassword(this.signupForm.email, this.signupForm.password).then(user => {
                         this.$store.commit('setCurrentUser', user.user);
-
+                        // get current interests into a list
+                        const finalInterests = [];
+                        this.interests.map((interest) => {
+                            finalInterests.push(interest.title)
+                        });
                         // create user obj
                         fb.usersCollection.doc(user.user.uid).set({
                             name: this.signupForm.name,
                             title: this.signupForm.title,
                             city: this.signupForm.city,
                             state: this.signupForm.state,
-                            country: this.signupForm.country
+                            country: this.signupForm.country,
+                            interests: finalInterests
 
                         }).then(() => {
                             this.$store.dispatch('fetchUserProfile')
