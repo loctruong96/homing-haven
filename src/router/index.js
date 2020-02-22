@@ -10,6 +10,7 @@ import Settings from '@/components/Settings'
 import UserInfo from '@/components/UserInfo'
 import NewComm from '@/components/NewComm'
 import Community from '@/components/Community'
+import NotFound from '@/components/NotFound'
 Vue.use(Router);
 
 const router = new Router({
@@ -71,13 +72,21 @@ const router = new Router({
       }
     },
     {
-      path: '/community',
+      path: '/community/:id',
       name: 'Community',
       component: Community,
       meta: {
         requiresAuth: true
       }
     },
+    {
+      path: '/NotFound/',
+      name: 'NotFound',
+      component: NotFound,
+      meta: {
+        title: "Not Found"
+      }
+    }
   ]
 });
 
