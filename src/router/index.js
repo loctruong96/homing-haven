@@ -76,7 +76,7 @@ const router = new Router({
       name: 'Community',
       component: Community,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     },
     {

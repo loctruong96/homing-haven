@@ -55,7 +55,8 @@ export const store = new Vuex.Store({
         currentResource: null,
         userProfile: {},
         posts: [],
-        hiddenPosts: []
+        hiddenPosts: [],
+        popularCommunities: []
     },
     actions: {
         clearData({ commit }) {
@@ -65,7 +66,8 @@ export const store = new Vuex.Store({
             commit('setCurrentResource', null);
             commit('setUserProfile', {});
             commit('setPosts', null);
-            commit('setHiddenPosts', null)
+            commit('setHiddenPosts', null);
+            commit('setPopularCommunities', []);
         },
         fetchUserProfile({ commit, state }) {
             fb.usersCollection.doc(state.currentUser.uid).get().then(res => {
@@ -85,9 +87,10 @@ export const store = new Vuex.Store({
         ,
         fetchPopularCommunities({commit, state}){
             fb.communityCollection.orderBy('subscribers','desc').limit(5).get().then(res => {
-                console.log(res.docs.map((doc)=>{
+                const popComm = (res.docs.map((doc)=>{
                     return doc.data();
                 }));
+                commit('setPopularCommunities', popComm);
             }).catch(err => {
                 console.log(err)
             })
@@ -129,6 +132,10 @@ export const store = new Vuex.Store({
         setCurrentCommunity(state, val){
             state.currentCommunity = val
         },
+        setPopularCommunities(state, val){
+            state.popularCommunities = val
+        }
+        ,
         setCommunityProfile(state, val){
             state.communityProfile = val
         },

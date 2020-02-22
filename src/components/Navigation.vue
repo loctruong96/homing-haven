@@ -34,8 +34,8 @@
 
                 <div class="navBar">
                     <ul class="inline">
-                        <li><router-link to="dashboard">Dashboard</router-link></li>
-                        <li><router-link to="userinfo">Settings</router-link></li>
+                        <li><router-link to="/dashboard">Dashboard</router-link></li>
+                        <li><router-link to="/userinfo">Settings</router-link></li>
 <!--                        <li><router-link to="">Documentation</router-link></li>-->
 <!--                        <li><router-link to="">Healthcare</router-link></li>-->
 <!--                        <li><router-link to="">Lifestyle</router-link></li>-->
@@ -66,14 +66,14 @@
         methods: {
             logout() {
                 fb.auth.signOut().then(() => {
-                    this.$store.dispatch('clearData')
-                    this.$router.push('/login')
+                    this.$store.dispatch('clearData');
+                    this.$router.push({ name: 'Login' })
                 }).catch(err => {
                     console.log(err)
                 })
             },
             createComm() {
-                this.$router.push('/newcomm')
+                this.$router.push({ name: 'NewComm' })
             }
         }
     }
