@@ -768,12 +768,21 @@ header {
 }
 
 #newcomm {
+
   //height: 100%;
   section {
     padding: 2rem 0;
   }
 
   .col1 {
+    .error-msg {
+      margin-top: 1rem;
+      text-align: center;
+      p {
+        color: $error;
+        margin: 0;
+      }
+    }
     flex: 0 0 30%;
     @media screen and (max-width: 1000px) {
       flex: 0 0 40%;
@@ -1356,7 +1365,7 @@ header {
     padding: 2vw;
     color: $darkestmain;
   }
-  
+
 
 
 }

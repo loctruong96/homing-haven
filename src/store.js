@@ -6,13 +6,14 @@ Vue.use(Vuex)
 
 // handle page reload
 fb.auth.onAuthStateChanged(user => {
+    // if there exist a user the following information are fetched and monitor for the rest of the session.
     if (user) {
-        store.commit('setCurrentUser', user)
-        store.dispatch('fetchUserProfile')
+        store.commit('setCurrentUser', user);
+        store.dispatch('fetchUserProfile');
 
         fb.usersCollection.doc(user.uid).onSnapshot(doc => {
             store.commit('setUserProfile', doc.data())
-        })
+        });
 
         // realtime updates from our posts collection
         fb.postsCollection.orderBy('createdOn', 'desc').onSnapshot(querySnapshot => {
@@ -43,20 +44,26 @@ fb.auth.onAuthStateChanged(user => {
             }
         })
     }
-})
+});
 
 export const store = new Vuex.Store({
     state: {
         currentUser: null,
+        currentCommunity: null,
+        communityProfile: {},
+        currentResource: null,
         userProfile: {},
         posts: [],
         hiddenPosts: []
     },
     actions: {
         clearData({ commit }) {
-            commit('setCurrentUser', null)
-            commit('setUserProfile', {})
-            commit('setPosts', null)
+            commit('setCurrentUser', null);
+            commit('setCurrentCommunity', null);
+            commit('setCommunityProfile', {});
+            commit('setCurrentResource', null);
+            commit('setUserProfile', {});
+            commit('setPosts', null);
             commit('setHiddenPosts', null)
         },
         fetchUserProfile({ commit, state }) {
@@ -66,6 +73,14 @@ export const store = new Vuex.Store({
                 console.log(err)
             })
         },
+        fetchCommunityProfile({commit, state}) {
+            fb.communityCollection.doc(state.currentCommunity).get().then(res => {
+                commit('setCommunityProfile', res.data());
+            }).catch(err => {
+                console.log(err)
+            })
+        }
+        ,
         updateProfile({ commit, state }, data) {
             let name = data.name;
             let title = data.title;
@@ -82,7 +97,7 @@ export const store = new Vuex.Store({
                             userName: name
                         })
                     })
-                })
+                });
                 // update all comments by user to reflect new name
                 fb.commentsCollection.where('userId', '==', state.currentUser.uid).get().then(docs => {
                     docs.forEach(doc => {
@@ -99,6 +114,15 @@ export const store = new Vuex.Store({
     mutations: {
         setCurrentUser(state, val) {
             state.currentUser = val
+        },
+        setCurrentCommunity(state, val){
+            state.currentCommunity = val
+        },
+        setCommunityProfile(state, val){
+            state.communityProfile = val
+        },
+        setCurrentResource(state, val){
+          state.currentResource = val
         },
         setUserProfile(state, val) {
             state.userProfile = val

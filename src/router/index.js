@@ -32,7 +32,10 @@ const router = new Router({
     {
       path:'/udashboard',
       name: 'UDashboard',
-      component: UDashboard
+      component: UDashboard,
+      meta: {
+        title: "Homning Haven"
+      }
     },
     {
       path: '/userinfo',
@@ -47,7 +50,8 @@ const router = new Router({
       name: 'Dashboard',
       component: Dashboard,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        title: "Homning Haven"
       }
     },
     {
@@ -80,7 +84,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
   const currentUser = firebase.auth().currentUser;
-
+  document.title = to.meta.title || 'HomingHaven';
   if (requiresAuth && !currentUser) {
     next('/login')
   } else if (requiresAuth && currentUser) {
