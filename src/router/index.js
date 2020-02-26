@@ -10,6 +10,7 @@ import Settings from '@/components/Settings'
 import UserInfo from '@/components/UserInfo'
 import NewComm from '@/components/NewComm'
 import Community from '@/components/Community'
+import SearchResults from '@/components/SearchResults'
 Vue.use(Router);
 
 const router = new Router({
@@ -72,6 +73,14 @@ const router = new Router({
       component: Community,
       meta: {
         requiresAuth: true
+      }
+    },
+    {
+      path: '/searchResults',
+      name: 'SearchResults',
+      component: SearchResults,
+      meta: {
+        requiresAuth: false
       }
     },
   ]

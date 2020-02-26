@@ -7,12 +7,11 @@
 
         <div class="navInterests">
             <a class="active" href="#home">Home</a>
-            <a href="#news">News</a>
-            <a href="#contact">Contact</a>
-            <a href="#about">About</a>
+            <a href="#food">Food Assistance</a>
+            <a href="#health">Health Care</a>
+            <a href="#education">Education</a>
+            <a href="#legal">Legal Assistance</a>
         </div>
-
-
 
         <div class="communityGuidelines">
             <div class="description">
