@@ -3,7 +3,10 @@
   <div id="app">
     <Navigation v-if="currentUser"></Navigation>
     <UNavigation v-if="!currentUser"></UNavigation>
-    <router-view/>
+    <router-view>
+
+    </router-view>
+
   </div>
 </template>
 
