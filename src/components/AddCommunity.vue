@@ -35,6 +35,7 @@
         flex-wrap:wrap;
     }
     form input {
+        /*width: 40%;*/
         flex-grow:1;
         border:none;
         background:#f7f1f1;
