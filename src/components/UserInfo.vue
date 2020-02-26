@@ -45,10 +45,10 @@
 <!--                            <button class="button">Photography</button>-->
 <!--                            <button class="button" style="background-color: white; pointer-events: none;"></button>-->
 <!--                        </p>-->
-                    <ListInterests v-bind:interests="interests"
-                                   @remove-interest="removeInterest" v-if="interests.length"
+                    <ListInterests v-bind:interests="userProfile.interests"
+                                   @remove-interest="removeInterest" v-if="currentInterestLen"
                     />
-                    <p class="emptylist" v-else>How lonely... add try adding an interest.</p>
+                    <p class="emptylist" v-else>How lonely... try adding an interest.</p>
                     <AddInterest @add-interest="addInterest"/>
 
                 </div>
@@ -63,11 +63,11 @@
 <!--                        <button class="button">Tacoma</button>-->
 <!--                        <button class="button" style="background: lightgrey;">+</button>-->
 <!--                    </p>-->
-                    <ListInterests v-bind:interests="communities"
-                                   @remove-interest="removeCommunity" v-if="interests.length"
+                    <ListCommunities v-bind:communities="communities"
+                                   @remove-community="removeCommunity" v-if="communities.length"
                     />
-                    <p class="emptylist" v-else>How lonely... add try looking for a community.</p>
-                    <AddCommunity @add-interest="addCommunity"/>
+                    <p class="emptylist" v-else>How lonely... try looking for a community.</p>
+                    <AddCommunity @add-community="addCommunity"/>
                 </div>
             </div>
         </section>
@@ -77,8 +77,9 @@
 <script>
     import { mapState } from 'vuex'
     import ListInterests from "@/components/ListInterests"
+    import ListCommunities from "@/components/ListCommunities";
     import AddInterest from "@/components/AddInterest"
-    import AddCommunity from "./AddCommunity";
+    import AddCommunity from "@/components/AddCommunity";
     export default {
         data() {
             return {
@@ -101,9 +102,14 @@
                 ],
             }
         },
-        computed: {
-            ...mapState(['userProfile'])
-        },
+        computed: mapState({
+            ...mapState(['userProfile']),
+            currentInterestLen(state) {
+                // return state.userProfile.interests.length;
+                return 4;
+            }
+        }),
+
         methods: {
             updateProfile() {
                 this.$store.dispatch('updateProfile', {
@@ -111,7 +117,8 @@
                     title: this.title !== '' ? this.title : this.userProfile.title,
                     city: this.city !== '' ? this.city: this.userProfile.city,
                     state: this.state !== '' ? this.state: this.userProfile.state,
-                    country: this.country !== '' ? this.country: this.userProfile.country
+                    country: this.country !== '' ? this.country: this.userProfile.country,
+                    interests: this.userProfile.interests,
                 });
 
                 this.name = '';
@@ -123,23 +130,42 @@
                 setTimeout(() => { this.showSuccess = false }, 2000)
             },
             removeInterest(id) {
-                this.interests = this.interests.filter(t=> t.id !== id)
+                this.userProfile.interests = this.userProfile.interests.filter(t=> t.id !== id);
+                this.updateUserInterestFirebase();
             },
             addInterest(interest) {
-                this.interests.push(interest)
+                this.userProfile.interests.push(interest);
+                this.updateUserInterestFirebase();
             },
             removeCommunity(id) {
                 this.communities = this.communities.filter(t=> t.id !== id)
             },
             addCommunity(community) {
                 this.communities.push(community)
+            },
+            updateUserInterestFirebase() {
+                const updatedInterest = [];
+                let counter = 0;
+                this.userProfile.interests.map((interest) => {
+                    updatedInterest.push({id:counter, title: interest.title, completed: false});
+                    counter += 1;
+                });
+                this.$store.dispatch('updateProfile', {
+                    name: this.userProfile.name,
+                    title: this.userProfile.title,
+                    city:  this.userProfile.city,
+                    state: this.userProfile.state,
+                    country: this.userProfile.country,
+                    interests: updatedInterest
+                });
             }
 
         },
         components: {
             ListInterests,
             AddInterest,
-            AddCommunity
+            AddCommunity,
+            ListCommunities
         }
     }
 </script>

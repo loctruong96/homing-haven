@@ -42,14 +42,13 @@
                     </select>
 
                     <label for="city">City</label>
-                    <input v-model.trim="signupForm.city" type="text" placeholder="" id="city" />
+                    <input v-model.trim="signupForm.city" type="text" :disabled="signupForm.state === ''" placeholder="" id="city" />
 
 
                     <button @click="signup" class="button">Sign Up</button>
                     <div class="extras">
                         <a @click="toggleForm">Back to Log In</a>
                     </div>
-
                 </form>
                 <transition name="fade">
                     <div v-if="errorMsg !== ''" class="error-msg">
@@ -87,11 +86,11 @@
 <!--                <p>-->
 <!--                <button class="button">Seatac Community</button>-->
 <!--                </p>-->
-                    <ListInterests v-bind:interests="communities"
-                                   @remove-interest="removeCommunity" v-if="interests.length"
+                    <ListCommunities v-bind:communities="communities"
+                                     @remove-community="removeCommunity" v-if="communities.length"
                     />
-                    <p class="emptylist" v-else>How lonely... add try looking for a community.</p>
-                    <AddCommunity @add-interest="addCommunity"/>
+                    <p class="emptylist" v-else>How lonely... try looking for a community.</p>
+                    <AddCommunity @add-community="addCommunity"/>
                 </div>
 
 
@@ -102,8 +101,10 @@
 <script>
     const fb = require('../firebaseConfig.js');
     import ListInterests from "@/components/ListInterests"
+    import ListCommunities from "@/components/ListCommunities";
     import AddInterest from "@/components/AddInterest"
-    import AddCommunity from "./AddCommunity";
+    import AddCommunity from "@/components/AddCommunity";
+
     export default {
         data() {
             return {
@@ -118,12 +119,13 @@
                     password: '',
                     confirmpassword: '',
                     city: '',
-                    state: false,
+                    state: '',
                     country: 'United States'
                 },
                 passwordForm: {
                     email: ''
                 },
+                properName: /^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$/,
                 showLoginForm: false,
                 showForgotPassword: false,
                 passwordResetSuccess: false,
@@ -242,22 +244,23 @@
 
                     fb.auth.createUserWithEmailAndPassword(this.signupForm.email, this.signupForm.password).then(user => {
                         this.$store.commit('setCurrentUser', user.user);
-
                         // create user obj
                         fb.usersCollection.doc(user.user.uid).set({
                             name: this.signupForm.name,
                             title: this.signupForm.title,
                             city: this.signupForm.city,
                             state: this.signupForm.state,
-                            country: this.signupForm.country
+                            country: this.signupForm.country,
+                            interests: this.interests,
+                            email: this.signupForm.email
 
                         }).then(() => {
-                            this.$store.dispatch('fetchUserProfile')
-                            this.performingRequest = false
+                            this.$store.dispatch('fetchUserProfile');
+                            this.performingRequest = false;
                             this.$router.push('/dashboard')
                         }).catch(err => {
-                            console.log(err)
-                            this.performingRequest = false
+                            console.log(err);
+                            this.performingRequest = false;
                             this.errorMsg = err.message
                         })
                     }).catch(err => {
@@ -296,7 +299,8 @@
         components: {
             ListInterests,
             AddInterest,
-            AddCommunity
+            AddCommunity,
+            ListCommunities
         }
     }
 </script>

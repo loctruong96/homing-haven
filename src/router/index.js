@@ -10,6 +10,7 @@ import Settings from '@/components/Settings'
 import UserInfo from '@/components/UserInfo'
 import NewComm from '@/components/NewComm'
 import Community from '@/components/Community'
+import NotFound from '@/components/NotFound'
 Vue.use(Router);
 
 const router = new Router({
@@ -32,7 +33,10 @@ const router = new Router({
     {
       path:'/udashboard',
       name: 'UDashboard',
-      component: UDashboard
+      component: UDashboard,
+      meta: {
+        title: "Homning Haven"
+      }
     },
     {
       path: '/userinfo',
@@ -47,7 +51,8 @@ const router = new Router({
       name: 'Dashboard',
       component: Dashboard,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        title: "Homning Haven"
       }
     },
     {
@@ -67,20 +72,28 @@ const router = new Router({
       }
     },
     {
-      path: '/community',
+      path: '/community/:id',
       name: 'Community',
       component: Community,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     },
+    {
+      path: '/NotFound/',
+      name: 'NotFound',
+      component: NotFound,
+      meta: {
+        title: "Not Found"
+      }
+    }
   ]
 });
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
   const currentUser = firebase.auth().currentUser;
-
+  document.title = to.meta.title || 'HomingHaven';
   if (requiresAuth && !currentUser) {
     next('/login')
   } else if (requiresAuth && currentUser) {

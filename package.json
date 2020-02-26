@@ -10,6 +10,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.27",
     "@fortawesome/free-solid-svg-icons": "^5.12.1",
     "@fortawesome/vue-fontawesome": "^0.1.9",
+    "@johmun/vue-tags-input": "^2.1.0",
     "bootstrap": "^4.4.1",
     "bootstrap-vue": "^2.4.1",
     "element-ui": "^2.13.0",

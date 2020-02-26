@@ -36,7 +36,7 @@
     import moment from 'moment'
     import { VueperSlides, VueperSlide } from 'vueperslides'
     import 'vueperslides/dist/vueperslides.css'
-    const fb = require('../firebaseConfig.js')
+    const fb = require('../firebaseConfig.js');
 
     export default {
         data() {
