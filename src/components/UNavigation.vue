@@ -6,7 +6,7 @@
                  text-color="#fff"
                  :router="true"
                  active-text-color="#ffd04b">
-            <el-menu-item style="font-size: 30px" class="hide-nav">HomingHaven</el-menu-item>
+            <el-menu-item  index="1" style="font-size: 30px" :route="{name:'UDashboard'}" class="hide-nav">HomingHaven</el-menu-item>
             <el-menu-item style="width: 50vw; min-width: 200px">
                 <el-input placeholder="Search for communities or resources..." v-model="search">
                     <el-button slot="append" icon="el-icon-search"></el-button>
@@ -14,13 +14,12 @@
             </el-menu-item>
             <el-submenu index="4" style="float: right; font-size: 50px; color: #FFFFFF">
                 <template slot="title"><i class="el-icon-menu"  style="color: #FFFFFF"></i></template>
-                <el-menu-item index="4-1" :route="{name:'Login'}" style="color: #FFFFFF" ><i class="el-icon-user"  style="color: #FFFFFF"></i> Sign In</el-menu-item>
-                <el-menu-item index="4-2" :route="{name:'Registration'}" style="color: #FFFFFF" ><i class="el-icon-discover"  style="color: #FFFFFF"></i> Registration</el-menu-item>
+                <el-menu-item index="4-1" :route="{name:'Login'}" style="color: #FFFFFF" ><i class="el-icon-unlock"  style="color: #FFFFFF"></i>Sign In</el-menu-item>
+                <el-menu-item index="4-2" :route="{name:'Registration'}" style="color: #FFFFFF" ><i class="el-icon-discover"  style="color: #FFFFFF"></i>Registration</el-menu-item>
             </el-submenu>
-            <el-menu-item index="1" style="float: right; color: #FFFFFF" :route="{name:'Registration'}" class="hide-nav">Registration</el-menu-item>
-            <el-menu-item index="2" style="float: right; color: #FFFFFF" :route="{name:'Login'}" class="hide-nav">Sign In</el-menu-item>
+            <el-menu-item index="2" style="float: right; color: #FFFFFF" :route="{name:'Registration'}" class="hide-nav"><i class="el-icon-discover"  style="color: #FFFFFF"></i>Registration</el-menu-item>
+            <el-menu-item index="3" style="float: right; color: #FFFFFF" :route="{name:'Login'}" class="hide-nav"><i class="el-icon-unlock"  style="color: #FFFFFF"></i>Sign In</el-menu-item>
         </el-menu>
-
     </div>
 </template>
 

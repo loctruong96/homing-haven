@@ -96,6 +96,8 @@ router.beforeEach((to, from, next) => {
   document.title = to.meta.title || 'HomingHaven';
   if (requiresAuth && !currentUser) {
     next('/login')
+  } else if(to.name === 'UDashboard' && currentUser){
+    next('/dashboard')
   } else if (requiresAuth && currentUser) {
     next()
   } else {
