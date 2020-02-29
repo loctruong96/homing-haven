@@ -29,6 +29,7 @@
               class="no-shadow"
               :visible-slides="3"
               slide-multiple
+              :arrows="false"
               :gap="3"
               :slide-ratio="1 / 8"
               :dragging-distance="200"

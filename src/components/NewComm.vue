@@ -106,6 +106,7 @@
             return {
                 moderator: '',
                 moderators: [],
+                link: '',
                 name: '',
                 title: '',
                 city: '',
@@ -122,6 +123,7 @@
                     {id: 5, title:"Photography", completed: false},
                 ],
                 properName: /^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$/,
+                properLink: /^[a-zA-Z0-9]*$/,
                 countries: ["United States"],
                 states: {"United States": ["Alabama",
                         "Alaska",
