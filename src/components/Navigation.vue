@@ -5,7 +5,7 @@
 <!--                <router-link to="dashboard"><h3>HomingHaven</h3></router-link>-->
                 <ul class="top">
                     <li class="title">
-                        <router-link to="dashboard"><h3>HomingHaven</h3></router-link>
+                        <router-link to="/dashboard"><h3>HomingHaven</h3></router-link>
                     </li>
                     <li class="search2">
                         <input type="search" placeholder="Search">
