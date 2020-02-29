@@ -99,7 +99,19 @@ section {
 }
 
 .hide-nav {
-  @media only screen and (max-width: 1068px) {
+  @media only screen and (max-width: 1100px) {
+    display: none;
+  }
+}
+
+.hide-nav-signed {
+  @media only screen and (max-width: 1216px) {
+    display: none;
+  }
+}
+
+.hide-icon {
+  @media only screen and (max-width: 600px) {
     display: none;
   }
 }
@@ -107,6 +119,14 @@ section {
 .show-nav {
   @media only screen and (max-width: 600px) {
     display: flex;
+  }
+}
+
+.flex-input {
+  @media only screen and (max-width: 600px) {
+    .el-input {
+      width: 70vw;
+    }
   }
 }
 

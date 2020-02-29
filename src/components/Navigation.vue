@@ -7,8 +7,8 @@
                  @select="handleSelect"
                  :router="true"
                  active-text-color="#ffd04b">
-            <el-menu-item  index="1" style="font-size: 30px" :route="{name:'Dashboard'}" class="hide-nav">HomingHaven</el-menu-item>
-            <el-menu-item style="width: 50vw; min-width: 200px">
+            <el-menu-item  index="1" style="font-size: 2vw" :route="{name:'UDashboard'}" class="hide-icon">HomingHaven</el-menu-item>
+            <el-menu-item style="width: 48vw; min-width: 200px" class="flex-input">
                 <el-input placeholder="Search for communities or resources..." v-model="search">
                     <el-button slot="append" icon="el-icon-search"></el-button>
                 </el-input>
@@ -20,8 +20,8 @@
                 <el-menu-item index="4-3" style="color: #FFFFFF" ><i class="el-icon-add-location" style="color: #FFFFFF"></i>New Resource</el-menu-item>
                 <el-menu-item index="4-4" style="color: #FFFFFF"><i class="el-icon-switch-button" style="color: #FFFFFF"></i>Logout</el-menu-item>
             </el-submenu>
-            <el-menu-item index="2" style="float: right; color: #FFFFFF" :route="{name:'NewComm'}" class="hide-nav"><i class="el-icon-folder-add"  style="color: #FFFFFF"></i>New Community</el-menu-item>
-            <el-menu-item index="3" style="float: right; color: #FFFFFF" class="hide-nav"><i class="el-icon-add-location" style="color: #FFFFFF"></i>New Resource</el-menu-item>
+            <el-menu-item index="2" style="float: right; color: #FFFFFF" :route="{name:'NewComm'}" class="hide-nav-signed"><i class="el-icon-folder-add"  style="color: #FFFFFF"></i>New Community</el-menu-item>
+            <el-menu-item index="3" style="float: right; color: #FFFFFF" class="hide-nav-signed"><i class="el-icon-add-location" style="color: #FFFFFF"></i>New Resource</el-menu-item>
         </el-menu>
     </div>
 </template>
@@ -63,9 +63,6 @@
     .el-menu--horizontal .el-submenu > .el-menu {
         left: initial !important;
         right: 0;
-    }
-    .el-input {
-        width: 200px;
     }
     .input-with-select .el-input-group__prepend {
         background-color: #fff;

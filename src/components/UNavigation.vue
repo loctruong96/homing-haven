@@ -6,8 +6,8 @@
                  text-color="#fff"
                  :router="true"
                  active-text-color="#ffd04b">
-            <el-menu-item  index="1" style="font-size: 30px" :route="{name:'UDashboard'}" class="hide-nav">HomingHaven</el-menu-item>
-            <el-menu-item style="width: 50vw; min-width: 200px">
+            <el-menu-item  index="1" style="font-size: 2vw" :route="{name:'UDashboard'}" class="hide-icon">HomingHaven</el-menu-item>
+            <el-menu-item style="width: 50vw; min-width: 200px" class="flex-input">
                 <el-input placeholder="Search for communities or resources..." v-model="search">
                     <el-button slot="append" icon="el-icon-search"></el-button>
                 </el-input>
@@ -46,9 +46,6 @@
     .el-menu--horizontal .el-submenu > .el-menu {
         left: initial !important;
         right: 0;
-    }
-    .el-input {
-        width: 200px;
     }
     .input-with-select .el-input-group__prepend {
         background-color: #fff;
