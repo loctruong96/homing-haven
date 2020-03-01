@@ -6,7 +6,7 @@ $darkestmain:#2B3168;
 $darkmain: #3D4381;
 $main: #5A61A6;
 $lightmain: #C3C7E7;
-$lightestmain: #E5E7F3; 
+$lightestmain: #E5E7F3;
 $evenlightestmain: rgb(241, 242, 247);
 
 $primary: rgb(255, 255, 255);
@@ -95,6 +95,38 @@ section {
 
   @media screen and (max-width: 742px) {
     display: block;
+  }
+}
+
+.hide-nav {
+  @media only screen and (max-width: 1100px) {
+    display: none;
+  }
+}
+
+.hide-nav-signed {
+  @media only screen and (max-width: 1216px) {
+    display: none;
+  }
+}
+
+.hide-icon {
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
+}
+
+.show-nav {
+  @media only screen and (max-width: 600px) {
+    display: flex;
+  }
+}
+
+.flex-input {
+  @media only screen and (max-width: 600px) {
+    .el-input {
+      width: 70vw;
+    }
   }
 }
 
@@ -246,3 +278,4 @@ form {
 .fade-leave-to {
   opacity: 0;
 }
+
