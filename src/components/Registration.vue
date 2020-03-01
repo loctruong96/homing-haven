@@ -42,14 +42,13 @@
                     </select>
 
                     <label for="city">City</label>
-                    <input v-model.trim="signupForm.city" type="text" placeholder="" id="city" />
+                    <input v-model.trim="signupForm.city" type="text" :disabled="signupForm.state === ''" placeholder="" id="city" />
 
 
                     <button @click="signup" class="button">Sign Up</button>
                     <div class="extras">
                         <a @click="toggleForm">Back to Log In</a>
                     </div>
-
                 </form>
                 <transition name="fade">
                     <div v-if="errorMsg !== ''" class="error-msg">
@@ -119,12 +118,13 @@
                     password: '',
                     confirmpassword: '',
                     city: '',
-                    state: false,
+                    state: '',
                     country: 'United States'
                 },
                 passwordForm: {
                     email: ''
                 },
+                properName: /^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$/,
                 showLoginForm: false,
                 showForgotPassword: false,
                 passwordResetSuccess: false,
@@ -243,11 +243,6 @@
 
                     fb.auth.createUserWithEmailAndPassword(this.signupForm.email, this.signupForm.password).then(user => {
                         this.$store.commit('setCurrentUser', user.user);
-                        // get current interests into a list
-                        // const finalInterests = [];
-                        // this.interests.map((interest) => {
-                        //     finalInterests.push(interest.title)
-                        // });
                         // create user obj
                         fb.usersCollection.doc(user.user.uid).set({
                             name: this.signupForm.name,
@@ -255,15 +250,16 @@
                             city: this.signupForm.city,
                             state: this.signupForm.state,
                             country: this.signupForm.country,
-                            interests: this.interests
+                            interests: this.interests,
+                            email: this.signupForm.email
 
                         }).then(() => {
-                            this.$store.dispatch('fetchUserProfile')
-                            this.performingRequest = false
+                            this.$store.dispatch('fetchUserProfile');
+                            this.performingRequest = false;
                             this.$router.push('/dashboard')
                         }).catch(err => {
-                            console.log(err)
-                            this.performingRequest = false
+                            console.log(err);
+                            this.performingRequest = false;
                             this.errorMsg = err.message
                         })
                     }).catch(err => {
