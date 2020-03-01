@@ -26,7 +26,7 @@
                         </ul>
                         <ul class="bottomButtons">
                             <li><button @click="createComm"  class="button">New Community</button></li>
-                            <li><button @click=""  class="button">New Resource</button></li>
+                            <li><button @click="createRec"  class="button">New Resource</button></li>
                         </ul>
                     </li>
 
@@ -74,6 +74,9 @@
             },
             createComm() {
                 this.$router.push({ name: 'NewComm' })
+            },
+            createRec() {
+                this.$router.push({ name: 'NewRec' })
             }
         }
     }
