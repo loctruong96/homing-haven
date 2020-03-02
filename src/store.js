@@ -6,8 +6,8 @@ Vue.use(Vuex)
 
 // handle page reload
 fb.auth.onAuthStateChanged(user => {
+
     // if there exist a user the following information are fetched and monitor for the rest of the session.
-    store.dispatch('fetchPopularCommunities');
     if (user) {
         store.commit('setCurrentUser', user);
         store.dispatch('fetchUserProfile');
@@ -86,10 +86,12 @@ export const store = new Vuex.Store({
         }
         ,
         fetchPopularCommunities({commit, state}){
+            let popComm;
             fb.communityCollection.orderBy('subscribers','desc').limit(5).get().then(res => {
-                const popComm = (res.docs.map((doc)=>{
+                popComm = (res.docs.map((doc)=>{
                     return doc.data();
                 }));
+            }).then(()=>{
                 commit('setPopularCommunities', popComm);
             }).catch(err => {
                 console.log(err)
