@@ -23,6 +23,7 @@
                             Community:<input v-model.trim="name" type="text"  id="name" placeholder="Your community"/>
                         </p>
                         <p>
+                            Moderator:
                             <vue-tags-input
                                     v-model="moderator"
                                     :tags="moderators"

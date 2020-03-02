@@ -74,8 +74,10 @@
                 <p class="emptylist" v-else>How lonely... add try adding an interest.</p>
                 <AddInterest @add-interest="addInterest"/>
 
-                <div class="matched">
-                <h4>Communities that matched your location and interests </h4>
+<!--                <div class="matched">-->
+<!--                -->
+<!--            </div>-->
+            <h4>Communities that matched your location and interests </h4>
 <!--                <p>-->
 <!--                <button  class="button">Seattle Community</button>-->
 <!--                &nbsp;&nbsp;&nbsp;-->
@@ -90,7 +92,6 @@
                     <p class="emptylist" v-else>How lonely... try looking for a community.</p>
                     <AddCommunity @add-community="addCommunity"/>
                 </div>
-            </div>
 
 
         </section>
