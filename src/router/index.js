@@ -9,6 +9,7 @@ import UDashboard from '@/components/UDashboard'
 import Settings from '@/components/Settings'
 import UserInfo from '@/components/UserInfo'
 import NewComm from '@/components/NewComm'
+import NewRec from '@/components/NewRec'
 import Community from '@/components/Community'
 import SearchResults from '@/components/SearchResults'
 import NotFound from '@/components/NotFound'
@@ -68,6 +69,14 @@ const router = new Router({
       path: '/newcomm',
       name: 'NewComm',
       component: NewComm,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/newrec',
+      name: 'NewRec',
+      component: NewRec,
       meta: {
         requiresAuth: true
       }
