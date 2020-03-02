@@ -17,11 +17,11 @@
                 <template slot="title"><i class="el-icon-menu"  style="color: #FFFFFF"></i></template>
                 <el-menu-item index="4-1" style="color: #FFFFFF" :route="{name:'UserInfo'}" ><i class="el-icon-user-solid" style="color: #FFFFFF"></i>{{ userProfile.name }}</el-menu-item>
                 <el-menu-item index="4-2" :route="{name:'NewComm'}" style="color: #FFFFFF" ><i class="el-icon-folder-add"  style="color: #FFFFFF"></i>New Community</el-menu-item>
-                <el-menu-item index="4-3" style="color: #FFFFFF" ><i class="el-icon-add-location" style="color: #FFFFFF"></i>New Resource</el-menu-item>
+                <el-menu-item index="4-3" :route="{name:'NewRec'}" style="color: #FFFFFF" ><i class="el-icon-add-location" style="color: #FFFFFF"></i>New Resource</el-menu-item>
                 <el-menu-item index="4-4" style="color: #FFFFFF"><i class="el-icon-switch-button" style="color: #FFFFFF"></i>Logout</el-menu-item>
             </el-submenu>
             <el-menu-item index="2" style="float: right; color: #FFFFFF" :route="{name:'NewComm'}" class="hide-nav-signed"><i class="el-icon-folder-add"  style="color: #FFFFFF"></i>New Community</el-menu-item>
-            <el-menu-item index="3" style="float: right; color: #FFFFFF" class="hide-nav-signed"><i class="el-icon-add-location" style="color: #FFFFFF"></i>New Resource</el-menu-item>
+            <el-menu-item index="3" :route="{name:'NewRec'}" style="float: right; color: #FFFFFF" class="hide-nav-signed"><i class="el-icon-add-location" style="color: #FFFFFF"></i>New Resource</el-menu-item>
         </el-menu>
     </div>
 </template>
