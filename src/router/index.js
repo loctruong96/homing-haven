@@ -11,6 +11,7 @@ import UserInfo from '@/components/UserInfo'
 import NewComm from '@/components/NewComm'
 import NewRec from '@/components/NewRec'
 import Community from '@/components/Community'
+import SearchResults from '@/components/SearchResults'
 import NotFound from '@/components/NotFound'
 Vue.use(Router);
 
@@ -84,6 +85,14 @@ const router = new Router({
       path: '/community/:id',
       name: 'Community',
       component: Community,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/searchResults',
+      name: 'SearchResults',
+      component: SearchResults,
       meta: {
         requiresAuth: false
       }
