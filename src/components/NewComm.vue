@@ -22,9 +22,11 @@
                         <p style=" margin-top: 20px;">
                             Community:<input v-model.trim="name" type="text"  id="name" placeholder="Your community"/>
                         </p>
+                        <p style=" margin-top: 20px;">
+                            Link:<input v-model.trim="link" type="text"  id="link" placeholder="/community/yourlinkname"/>
+                        </p>
                         <p>
-                            Moderator:
-                            <vue-tags-input
+                            Moderators: <vue-tags-input
                                     v-model="moderator"
                                     :tags="moderators"
                                     :validation="validation"
@@ -124,7 +126,7 @@
                     {id: 5, title:"Photography", completed: false},
                 ],
                 properName: /^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$/,
-                properLink: /^[a-zA-Z0-9]*$/,
+                properLink: /^[a-z0-9]*$/,
                 countries: ["United States"],
                 states: {"United States": ["Alabama",
                         "Alaska",
@@ -214,7 +216,7 @@
             }
             ,
             async createCommunity(){
-                if(!this.name || !this.city || !this.state || !this.country){
+                if(!this.name || !this.city || !this.state || !this.country || !this.link){
                     this.performingRequest = false;
                     if(!this.name){
                         this.errorMsg = "Community name is required."
@@ -224,6 +226,8 @@
                         this.errorMsg = "State is required."
                     } else if(!this.country){
                         this.errorMsg = "Country is required."
+                    } else if(!this.link){
+                        this.errorMsg = "Link is required."
                     }
                 } else if(this.interests.length > 30){
                     this.performingRequest = false;
@@ -233,7 +237,10 @@
                     this.errorMsg = `${this.userProfile.email} must be a moderator as the creator.`
                 } else if(!this.properName.test(this.name)){
                     this.performingRequest = false;
-                    this.errorMsg = "Invalid naming format."
+                    this.errorMsg = "Invalid naming format. Alpha characters and space only."
+                } else if(!this.properLink.test(this.link)){
+                    this.performingRequest = false;
+                    this.errorMsg = "Invalid link format. Must only contains lower case alphanumeric."
                 } else {
                     // check if all emails are actually valid
                     this.performingRequest = true;
@@ -259,11 +266,11 @@
                         this.errorMsg = `${this.city} city is not current supported. Please select a nearby city.`
                     }
                     if(valid){
-                        const communityRef = fb.communityCollection.doc(this.name);
+                        const communityRef = fb.communityCollection.doc(this.link);
                         communityRef.get().then((doc) => {
                             if(doc.exists){
                                 this.performingRequest = false;
-                                this.errorMsg = `Community name ${this.name} is already taken.`
+                                this.errorMsg = `The link homing.app/community/${this.link} is already taken.`
                             } else {
                                 // create the document
                                 communityRef.set({
@@ -275,14 +282,15 @@
                                     country: this.country,
                                     interests: this.interests,
                                     name: this.name,
+                                    link: this.link,
                                     description: "Your community's description",
                                     rules: "Your community's guidelines.",
                                 }).then(() => {
                                     // set the current community
                                     this.performingRequest = false;
-                                    this.$store.commit('setCurrentCommunity', this.name);
+                                    this.$store.commit('setCurrentCommunity', this.link);
                                     this.$store.dispatch('fetchCommunityProfile');
-                                    this.$router.push('/community');
+                                    this.$router.push(`/community/${this.link}`);
                                 });
                             }
                         }).catch((err) => {

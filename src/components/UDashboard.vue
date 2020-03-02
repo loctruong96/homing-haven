@@ -1,5 +1,10 @@
 <template>
     <div id="udashboard">
+        <transition name="fade">
+            <div v-if="!looked" class="loading">
+                <p>Loading..</p>
+            </div>
+        </transition>
         <div class="banner">
             <div class="bannerStuff">
                 <h1>Welcome to HomingHaven!!</h1>
@@ -7,26 +12,24 @@
                 <button @click="register"  class="button">Get Started</button>
             </div>
         </div>
-        <div class="comms">
+        <div class="comms" v-if="popularCommunities && looked">
             <div class="popComms">
                 <h1>Popular Communities</h1>
             </div>
-            <vueper-slides
-              class="no-shadow"
-              :visible-slides="3"
-              slide-multiple
-              :gap="3"
-              :arrows="false"
-              :slide-ratio="1 / 8"
-              :dragging-distance="200"
-              :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }">
-<!--              <div class="slide2">-->
-              <vueper-slide v-for="(slide, i) in slides"
-                :key="i"
-                :title="slide.title"
-                :content="slide.content"
-                :style="'background-color: ' + ['#C3C7E7', '#C3C7E7'][i % 2]" />
-<!--              </div>-->
+            <vueper-slides :slide-ratio="1 / 8"
+                           :visible-slides="3"
+                           :arrows="false"
+                           :gap="3">
+                <vueper-slide
+                        v-for="(slide, i) in slides"
+                        :key="i"
+                        :style="'background-color: ' + ['#C3C7E7', '#C3C7E7'][i % 2]">
+                    <template v-slot:content>
+                        <div class="vueperslide__content-wrapper" style="flex-direction: row; text-decoration-color: #007EFC">
+                            <p><span>{{ slide.title }}<br>{{slide.description}}<br><button class="button" v-on:click="navigateToCommunity(slide.link)">View</button></span></p>
+                        </div>
+                    </template>
+                </vueper-slide>
             </vueper-slides>
         </div>
     </div>
@@ -37,41 +40,33 @@
     import moment from 'moment'
     import { VueperSlides, VueperSlide } from 'vueperslides'
     import 'vueperslides/dist/vueperslides.css'
+    import {store} from "../store";
     const fb = require('../firebaseConfig.js');
 
     export default {
+        beforeCreate() {
+            this.$store.dispatch('fetchPopularCommunities');
+        },
+        beforeUpdate() {
+            if(this.slides.length < 5){
+                for(let i =0; i <  this.popularCommunities.length;i++){
+                    const community = {};
+                    community.title = this.popularCommunities[i].name;
+                    community.link = this.popularCommunities[i].link;
+                    community.description = this.popularCommunities[i].description;
+                    this.slides.push(community);
+                }
+            }
+            this.looked= true;
+        },
         data() {
             return {
                 post: {
                     content: ''
                 },
-                slides: [
-                {
-                  id: 'slide-0',
-                  title: '<b style="font-size: 1.3em;color: ">Bellingham</b>',
-                  content: 'This is the Bellingham community.'+
-                   '<br><br><button @click="register"  class="button">View</button>'
-
-                },
-                {
-                  id: 'slide-1',
-                  title: '<b style="font-size: 1.3em;color: ">Everett</b>',
-                  content: 'This is the Everett community.'+
-                   '<br><br><button @click="register"  class="button">View</button>'
-                },
-                {
-                  id: 'slide-2',
-                  title: '<b style="font-size: 1.3em;color: ">Seattle</b>',
-                  content: 'This is the Seattle community.'+
-                   '<br><br><button @click="register"  class="button">View</button>'
-                },
-                 {
-                  id: 'slide-3',
-                  title: '<b style="font-size: 1.3em;color: ">Tacoma</b>',
-                  content: 'This is the Tacoma community.'+
-                   '<br><br><button @click="register"  class="button">View</button>'
-                }
-              ],
+                popularComm: [],
+                looked: false,
+                slides: [],
                 comment: {
                     postId: '',
                     userId: '',
@@ -86,9 +81,12 @@
         },
         components: { VueperSlides, VueperSlide },
         computed: {
-            ...mapState(['userProfile', 'currentUser', 'posts', 'hiddenPosts'])
+            ...mapState(['userProfile', 'currentUser', 'posts', 'hiddenPosts', 'popularCommunities'])
         },
         methods: {
+            navigateToCommunity(link) {
+                this.$router.push(`/community/${link}`)
+            },
             register() {
                 this.$router.push('/registration')
             },
