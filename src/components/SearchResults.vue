@@ -11,21 +11,18 @@
 
                 <div class="commResults" v-if="commFound && looked">
                     <h1>Communities</h1>
-                    <!-- <el-table class="commTable"
-                        :commData="commTable"
-                        style="width: 95%">
-                        <el-table-column
-                            prop="community"
-                            label="Community">
-                        </el-table-column>
-                        <el-table-column
-                            prop="date"
-                            label="Created on">
-                        </el-table-column>
-                    </el-table> -->
-                    <el-table
+                    <el-table class="ctable_format"
                         :data="commTable"
                         style="width: 95%">
+                        <el-table-column
+                            width=90>
+                            <el-button class="viewButton"
+                                size="mini"
+                                @click="viewCommunity"
+                                round>
+                                View
+                            </el-button>
+                        </el-table-column>
                         <el-table-column
                             prop="community"
                             label="Community">
@@ -39,9 +36,18 @@
                
                 <div class="resourceResults" v-if="resFound && looked">
                     <h1>Resources</h1>
-                     <el-table
+                     <el-table class="rtable_format"
                         :data="resourceTable"
                         style="width: 95%">
+                        <el-table-column
+                            width=90>
+                            <el-button class="viewButton"
+                                size="mini"
+                                @click="viewResource"
+                                round>
+                                View
+                            </el-button>
+                        </el-table-column>
                         <el-table-column
                             prop="resource"
                             label="Resource">
@@ -75,15 +81,7 @@
     const fb = require('../firebaseConfig.js');
     export default {
         beforeCreate() {
-            // load table data
-            // this.resourceTable.push({
-            //         resource: "res 4",
-            //         name: "res name 4",
-            //         date: Date()
-            //     });
-            // this.$store.commit('setCommunityProfile', false);
-            // this.$store.commit('setCurrentCommunity', this.$route.params.id);
-            // this.$store.dispatch('fetchCommunityProfile');
+         
         },
         beforeUpdate() {
             this.looked = true;
@@ -115,7 +113,15 @@
                 commFound: true,
                 resFound: true,
             }
+        },
+        methods: {
+            viewCommunity(link){
+                this.$router.push(`/community/${link}`)
+            },
+            viewResource(link){
+                 this.$router.push(`/resource/${link}`)
+            }
         }
-        }
+    }
 
 </script>

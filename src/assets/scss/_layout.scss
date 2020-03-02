@@ -1635,6 +1635,10 @@ header {
     padding-left: 5vw;
     padding-top: 3vw;
 
+    p{
+      padding-left: 2vw;
+    }
+
     .resultCount{
       padding-bottom: 1vw;
       color: $medium;
@@ -1642,18 +1646,19 @@ header {
 
     .commResults{
       padding-bottom: 3vw;
-      color: $darkestmain;
+      color: $darkmain;
       
-      .commTable{
+      .ctable_format{
         border-radius: .5vw;
       }
+      
     }
 
     .resourceResults{
       padding-bottom: 3vw;
-      color: $darkestmain;
+      color: $darkmain;
 
-      .resTable{
+      .rtable_format{
         border-radius: .5vw;
       }
     }
