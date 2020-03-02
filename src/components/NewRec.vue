@@ -20,10 +20,13 @@
                     <h3 style="float: right; ">Help us know where to send people in need....</h3>
                     <form @submit.prevent>
                         <p style=" margin-top: 20px;">
-                            Resource:<input v-model.trim="name" type="text"  id="name" placeholder="Your resource"/>
+                            Resource:<input v-model.trim="name" type="text"  id="name" placeholder="Your resource's name"/>
+                        </p>
+                        <p style=" margin-top: 20px;">
+                            Link:<input v-model.trim="link" type="text"  id="link" placeholder="/resource/resourcelink"/>
                         </p>
                         <p>
-                        Moderator:
+                        Moderators:
                             <vue-tags-input
                                     v-model="moderator"
                                     :tags="moderators"
@@ -69,7 +72,7 @@
             </div>
             <div class="col2">
                 <div class="user-form">
-                    <h5 style=" margin-bottom: 20px;">What is your rescource about?</h5>
+                    <h5 style=" margin-bottom: 20px;">What is your resource about?</h5>
                     <ListInterests v-bind:interests="interests"
                                    @remove-interest="removeInterest" v-if="interests.length"
                     />
@@ -77,7 +80,7 @@
                     <AddInterest @add-interest="addInterest"/>
                 </div>
                 <div class="user-form">
-                    <h5 style=" margin-bottom: 20px;">Resources that matched your interests or location</h5>
+                    <h5 style=" margin-bottom: 20px;">Community that matched your interests or location</h5>
                     <p>
                         <button class="button">Seatle Food Bank</button>
                         <button class="button">Seattle Public Library</button>
@@ -111,6 +114,7 @@
                 title: '',
                 city: '',
                 state: '',
+                link: '',
                 country: 'United States',
                 showSuccess: false,
                 performingRequest: false,
@@ -123,6 +127,7 @@
                     {id: 5, title:"Photography", completed: false},
                 ],
                 properName: /^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$/,
+                properLink: /^[a-z0-9]*$/,
                 countries: ["United States"],
                 states: {"United States": ["Alabama",
                         "Alaska",
@@ -222,6 +227,8 @@
                         this.errorMsg = "State is required."
                     } else if(!this.country){
                         this.errorMsg = "Country is required."
+                    } else if(!this.link){
+                        this.errorMsg = "Link is required."
                     }
                 } else if(this.interests.length > 30){
                     this.performingRequest = false;
@@ -231,7 +238,10 @@
                     this.errorMsg = `${this.userProfile.email} must be a moderator as the creator.`
                 } else if(!this.properName.test(this.name)){
                     this.performingRequest = false;
-                    this.errorMsg = "Invalid naming format."
+                    this.errorMsg = "Invalid naming format. Alpha characters and space only."
+                } else if(!this.properLink.test(this.link)){
+                    this.performingRequest = false;
+                    this.errorMsg = "Invalid link format. Must only contains lower case alphanumeric."
                 } else {
                     // check if all emails are actually valid
                     this.performingRequest = true;
@@ -257,14 +267,14 @@
                         this.errorMsg = `${this.city} city is not current supported. Please select a nearby city.`
                     }
                     if(valid){
-                        const communityRef = fb.communityCollection.doc(this.name);
-                        communityRef.get().then((doc) => {
+                        const resourceRef = fb.resourceCollection.doc(this.link);
+                        resourceRef.get().then((doc) => {
                             if(doc.exists){
                                 this.performingRequest = false;
-                                this.errorMsg = `Community name ${this.name} is already taken.`
+                                this.errorMsg = `The link homing.app/resource/${this.link} is already taken.`
                             } else {
                                 // create the document
-                                communityRef.set({
+                                resourceRef.set({
                                     createdOn: new Date(),
                                     subscribers: 0,
                                     moderators: finalMods,
@@ -273,14 +283,15 @@
                                     country: this.country,
                                     interests: this.interests,
                                     name: this.name,
-                                    description: "Your community's description",
-                                    rules: "Your community's guidelines.",
+                                    link: this.link,
+                                    description: "Your resource's description",
+                                    rules: "Your resource's guidelines.",
                                 }).then(() => {
                                     // set the current community
                                     this.performingRequest = false;
-                                    this.$store.commit('setCurrentCommunity', this.name);
+                                    this.$store.commit('setCurrentCommunity', this.link);
                                     this.$store.dispatch('fetchCommunityProfile');
-                                    this.$router.push('/community');
+                                    this.$router.push(`/resource/${this.link}`);
                                 });
                             }
                         }).catch((err) => {
