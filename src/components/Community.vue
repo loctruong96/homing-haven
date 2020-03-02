@@ -11,31 +11,26 @@
             </div>
 
             <div class="navInterests" v-if="communityProfile">
-                <a class="active" href="#home" >Home</a>
-                <a href="#news">News</a>
-                <a href="#contact">Contact</a>
-                <a href="#about">About</a>
+<!--                <a class="active" href="#home" >Home</a>-->
+<!--                <a href="#news">News</a>-->
+<!--                <a href="#contact">Contact</a>-->
+<!--                <a href="#about">About</a>-->
+<!--                <a class="active" href="#home" index="4-1">Home</a>-->
+<!--                <a href="#resources" index="4-2">Resources</a>-->
+<!--                <a href="#about" index="4-3">About</a>-->
+                    <el-menu class="el-menu"
+                 mode="horizontal"
+                 background-color="#5A61A6"
+                 text-color="#fff"
+                 active-text-color="#ffd04b"
+                 @select="handleSelect">
+            <el-menu-item index="#home" style=" color: #FFFFFF"  ><i class="el-icon-s-home"  style="color: #FFFFFF"></i>Home</el-menu-item>
+            <el-menu-item index="#resources" style=" color: #FFFFFF"  ><i class="el-icon-present"  style="color: #FFFFFF"></i>Resources</el-menu-item>
+            <el-menu-item index="#about" style=" color: #FFFFFF"  ><i class="el-icon-notebook-2"  style="color: #FFFFFF"></i>About</el-menu-item>
+        </el-menu>
             </div>
-
-            <div class="communityGuidelines" v-if="communityProfile">
-                <div class="description" v-if="communityProfile">
-                    <h1>Description</h1>
-                    <p><span>{{ communityProfile.description }}</span></p>
-                </div>
-                <div class="commDetails" v-if="communityProfile">
-                    <div class="rules">
-                        <h3>Community Rules</h3>
-                        <p><span>{{ communityProfile.rules }}</span></p>
-                    </div>
-                    <div class="activity" v-if="communityProfile">
-                        <h3>Community Activity</h3>
-                        <p>[number] new posts today</p>
-                        <p>[number] members</p>
-                        <p><i>Created [number] years ago</i></p>
-                    </div>
-                </div>
-            </div>
-
+            <div v-if="home">
+<!--            sliders-->
             <div class="resourceCategories" v-if="communityProfile">
                 <div class="popCategories">
                     <h1>Popular Resource Categories</h1>
@@ -79,6 +74,32 @@
                     <!--              </div>-->
                 </vueper-slides>
             </div>
+            </div>
+            <div v-if="resources">
+
+            </div>
+            <div v-if="about">
+                <div class="communityGuidelines" v-if="communityProfile">
+                    <div class="description" v-if="communityProfile">
+                        <h1>Description</h1>
+                        <p><span>{{ communityProfile.description }}</span></p>
+                    </div>
+                    <div class="commDetails" v-if="communityProfile">
+                        <div class="rules">
+                            <h3>Community Rules</h3>
+                            <p><span>{{ communityProfile.rules }}</span></p>
+                        </div>
+                        <div class="activity" v-if="communityProfile">
+                            <h3>Community Activity</h3>
+                            <p>[number] new posts today</p>
+                            <p>[number] members</p>
+                            <p><i>Created [number] years ago</i></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
         <div class="commBanner" v-if="!communityProfile && looked">
             <h1 align="center">Community Not Found</h1>
@@ -113,6 +134,7 @@ export default {
             post: {
                     content: ''
                 },
+
                 slides: [
                 {
                   id: 'slide-0',
@@ -167,8 +189,34 @@ export default {
                 }
               ],
             looked: false,
+            home: true,
+            resources: false,
+            about: false
+            ,
+
         }
     },
+    methods: {
+            handleSelect(key, keyPath) {
+                // console.log(key, keyPath);
+                if(key === '#home'){
+                    console.log(key);
+                    this.home = true;
+                    this.resources = false;
+                    this.about = false;
+                }
+                else if(key === '#resources') {
+                    this.home = false;
+                    this.resources = true;
+                    this.about = false;
+                }
+                else if(key === '#about') {
+                    this.home = false;
+                    this.resources = false;
+                    this.about = true;
+                }
+            }
+        },
     components: { VueperSlides, VueperSlide }
 
 }
