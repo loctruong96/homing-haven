@@ -1,27 +1,4 @@
 <template>
-<<<<<<< HEAD
-    <div id="community">
-
-        <div class="commBanner">
-            <h1 align="center">[Name] Community</h1>
-        </div>
-
-        <div class="navInterests">
-            <a class="active" href="#home">Home</a>
-            <a href="#food">Food Assistance</a>
-            <a href="#health">Health Care</a>
-            <a href="#education">Education</a>
-            <a href="#legal">Legal Assistance</a>
-        </div>
-
-        <div class="communityGuidelines">
-            <div class="description">
-                <h1>Description</h1>
-                <p>Lorem ipsum dolor sit amet, diam etiam aeterno sed an, his cu falli eleifend accusamus,
-                    vim blandit disputationi te. Ei voluptatum dissentiunt mei. Qui ei vidit perpetua molestiae.
-                    Id qui alia iudico blandit, per elaboraret reformidans definitiones ne. Tota mucius nostrud
-                    id sed, solet dictas ocurreret mei ex, pri ut veritus mediocrem vituperatoribus</p>
-=======
     <div id="community" >
         <transition name="fade">
             <div v-if="!looked" class="loading">
@@ -38,7 +15,6 @@
                 <a href="#news">News</a>
                 <a href="#contact">Contact</a>
                 <a href="#about">About</a>
->>>>>>> origin
             </div>
 
             <div class="communityGuidelines" v-if="communityProfile">
