@@ -75,9 +75,11 @@
                 </vueper-slides>
             </div>
             </div>
+
             <div v-if="resources">
 
             </div>
+
             <div v-if="about">
                 <div class="communityGuidelines" v-if="communityProfile">
                     <div class="description" v-if="communityProfile">
@@ -191,8 +193,7 @@ export default {
             looked: false,
             home: true,
             resources: false,
-            about: false
-            ,
+            about: false,
 
         }
     },

@@ -1611,15 +1611,49 @@ header {
   }
   .communityGuidelines {
     color: $darkestmain;
-    background: $evenlightestmain;
+    background: $lightestmain;
+    //background: blue;
     padding-top: 3vw;
     padding: 2vw;
+    height: 100vh;
+
+    //border-style: solid;
+    //border-width: 2px;
+    ////border-color: black;
   }
+
+  .description {
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+  }
+
+  .commDetails {
+    display: flex;
+    height: 70%;
+
+    //border-style: solid;
+    //border-width: 2px;
+    //border-color: black;
+  }
+
   .rules{
     padding-top: 1.5vw;
+    flex-direction: column;
+    width: 50%;
+
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
   }
   .activity{
     padding-top: 1.5vw;
+    flex-direction: column;
+    width: 50%;
+
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
   }
 
   .resourceCategories{
