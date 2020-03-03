@@ -1635,6 +1635,14 @@ header {
     @media screen and (max-width: 1000px) {
       flex: 0 0 40%;
     }
+    .error-msg {
+      margin-top: 1rem;
+      text-align: center;
+      p {
+        color: $error;
+        margin: 0;
+      }
+    }
   }
   .profile {
     background: $white;

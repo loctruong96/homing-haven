@@ -11,13 +11,6 @@
             </div>
 
             <div class="navInterests" v-if="communityProfile">
-<!--                <a class="active" href="#home" >Home</a>-->
-<!--                <a href="#news">News</a>-->
-<!--                <a href="#contact">Contact</a>-->
-<!--                <a href="#about">About</a>-->
-<!--                <a class="active" href="#home" index="4-1">Home</a>-->
-<!--                <a href="#resources" index="4-2">Resources</a>-->
-<!--                <a href="#about" index="4-3">About</a>-->
                     <el-menu class="el-menu"
                  mode="horizontal"
                  background-color="#5A61A6"
@@ -27,11 +20,10 @@
             <el-menu-item index="#home" style=" color: #FFFFFF"  ><i class="el-icon-s-home"  style="color: #FFFFFF"></i>Home</el-menu-item>
             <el-menu-item index="#resources" style=" color: #FFFFFF"  ><i class="el-icon-present"  style="color: #FFFFFF"></i>Resources</el-menu-item>
             <el-menu-item index="#about" style=" color: #FFFFFF"  ><i class="el-icon-notebook-2"  style="color: #FFFFFF"></i>About</el-menu-item>
-            <el-menu-item index="#admin" style=" color: #FFFFFF" v-if="admin" ><i class="el-icon-notebook-2"  style="color: #FFFFFF"></i>Admin</el-menu-item>
+            <el-menu-item index="#admin" style=" color: #FFFFFF" v-if="admin" ><i class="el-icon-s-custom"  style="color: #FFFFFF"></i>Admin</el-menu-item>
         </el-menu>
             </div>
             <div v-if="home">
-<!--            sliders-->
             <div class="resourceCategories" v-if="communityProfile">
                 <div class="popCategories">
                     <h1>Popular Resource Categories</h1>
@@ -45,13 +37,11 @@
                         :slide-ratio="1 / 8"
                         :dragging-distance="200"
                         :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }">
-                    <!--              <div class="slide2">-->
                     <vueper-slide v-for="(slide, i) in slides"
                                   :key="i"
                                   :title="slide.title"
                                   :content="slide.content"
                                   :style="'background-color: ' + ['#C3C7E7', '#C3C7E7'][i % 2]" />
-                    <!--              </div>-->
                 </vueper-slides>
 
                 <div class="recCategories">
@@ -66,13 +56,11 @@
                         :slide-ratio="1 / 8"
                         :dragging-distance="200"
                         :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }">
-                    <!--              <div class="slide2">-->
                     <vueper-slide v-for="(slide, i) in slides_recc"
                                   :key="i"
                                   :title="slide.title"
                                   :content="slide.content"
                                   :style="'background-color: ' + ['#C3C7E7', '#C3C7E7'][i % 2]" />
-                    <!--              </div>-->
                 </vueper-slides>
             </div>
             </div>
@@ -132,7 +120,7 @@
                     <section>
                         <div class="col1">
                             <div class="profile">
-                                <img height="150px" width="150px" src="../assets/user_icon.png"/>
+<!--                                <img height="150px" width="150px" src="../assets/user_icon.png"/>-->
                                 <h5 style="float: right; margin-top: 20px;">{{ communityProfile.name }}</h5>
                                 <form @submit.prevent>
                                     <p style=" margin-top: 20px;">
@@ -159,6 +147,18 @@
                                     </el-input>
                                     </p>
                                     <p>
+                                        Owner:<input v-model.trim="newOwner" type="text" :placeholder="communityProfile.owner" id="Owner">
+                                    </p>
+                                    <p v-if="owner">
+                                        Moderators: <vue-tags-input
+                                            v-model="moderator"
+                                            :tags="moderators"
+                                            :validation="validation"
+                                            placeholder="Add moderators by emails"
+                                            @tags-changed="newTags => moderators = newTags"
+                                    />
+                                    </p>
+                                    <p>
                                         City:<input v-model.trim="city" type="text" :placeholder="communityProfile.city" id="city">
                                     </p>
                                     <p>
@@ -167,12 +167,19 @@
                                     <p>
                                         Country:<input v-model.trim="country" type="text" :placeholder="communityProfile.country" id="country">
                                     </p>
-                                    <button class="button">Update Community Profile</button>
+                                    <button @click="errorCheck" class="button">Update Community Profile</button>
 
-                                    <transition name="fade">
-                                        <img v-if="showSuccess" class="success" style="margin-left: 10px;" height="30px" width="33px" src="../assets/green_check.png"/>
-                                    </transition>
+                                    <el-alert
+                                            title="Your changes has been saved."
+                                            type="success"
+                                            v-if="showSuccess">
+                                    </el-alert>
                                 </form>
+                                <transition name="fade">
+                                    <div v-if="errorMsg !== ''" class="error-msg">
+                                        <p>{{ errorMsg }}</p>
+                                    </div>
+                                </transition>
                             </div>
                         </div>
                         <div class="col2">
@@ -184,6 +191,11 @@
                                                         />
                                                         <p class="emptylist" v-else>How lonely... try adding an interest.</p>
                                                         <AddInterest @add-interest="addInterest"/>
+                                <el-alert
+                                        title="Your changes has been saved."
+                                        type="success"
+                                        v-if="showSuccessInt">
+                                </el-alert>
 
                             </div>
 <!--                            <div class="user-form">-->
@@ -216,6 +228,7 @@
     import { VueperSlides, VueperSlide } from 'vueperslides'
     import 'vueperslides/dist/vueperslides.css'
     const fb = require('../firebaseConfig.js');
+    import VueTagsInput from '@johmun/vue-tags-input';
     import ListInterests from "@/components/ListInterests"
     import ListCommunities from "@/components/ListCommunities";
     import AddInterest from "@/components/AddInterest"
@@ -226,12 +239,23 @@ export default {
         this.$store.commit('setCommunityProfile', false);
         this.$store.commit('setCurrentCommunity', this.$route.params.id);
         this.$store.dispatch('fetchCommunityProfile');
+
     },
     beforeUpdate() {
         this.looked = true;
         if(this.communityProfile.moderators.indexOf(this.userProfile.email) !== -1){
             this.admin = true;
         }
+        if(this.communityProfile.owner === this.userProfile.email){
+            this.owner = true;
+        }
+        if(!this.loadedMod){
+            this.moderators = this.communityProfile.moderators.map((mod)=> {
+                return {text: mod}
+            })
+            this.loadedMod = true;
+        }
+
     },
     computed: {
         ...mapState(['communityProfile', 'userProfile']),
@@ -299,12 +323,15 @@ export default {
                    '<br><br><button @click="recc4_card"  class="button">View</button>'
                 }
               ],
+            loadedMod: false,
+            newOwner: '',
             looked: false,
             home: true,
             resources: false,
             about: false,
             admin: false,
             adminSelect: false,
+            owner: false,
             properName: /^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$/,
             name: '',
             title: '',
@@ -314,11 +341,19 @@ export default {
             rules: '',
             description: '',
             errorMsg: '',
+            moderator: '',
+            moderators: [],
             showSuccess: false,
+            showSuccessInt: false,
             interests: [
             ],
             communities: [
             ],
+            validation: [{
+                classes: 'valid-email',
+                rule: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                disableAdd: true,
+            }],
             userInfo: "User 12345",
             postDate: "April 20, 2018",
             postTitle: "Food Drive at Westfield Food Bank",
@@ -358,31 +393,81 @@ export default {
                     this.adminSelect = true;
                 }
             },
-        updateProfile() {
-            this.$store.dispatch('updateCommunityProfile', {
-                name: this.name !== '' ? this.name : this.communityProfile.name,
-                rules: this.rules !== '' ? this.rules: this.communityProfile.rules,
-                description: this.description !== '' ? this.description: this.communityProfile.description,
-                city: this.city !== '' ? this.city: this.communityProfile.city,
-                state: this.state !== '' ? this.state: this.communityProfile.state,
-                country: this.country !== '' ? this.country: this.communityProfile.country,
-                interests: this.communityProfile.interests,
-                link: this.communityProfile.link,
-                createdOn: this.communityProfile.createdOn,
-                moderators: this.communityProfile.moderators,
-                subscribers: this.communityProfile.subscribers,
-                owner: this.communityProfile.owner,
+         errorCheck(){
+            let error = false;
+            let foundOwner = false;
+            this.moderators.map((mod) => {
+                if(mod.text === this.communityProfile.owner){
+                    foundOwner = true;
+                }
             });
-
-            this.name = '';
-            this.title = '';
-            this.city = '';
-            this.state = '';
-
-
-            this.showSuccess = true;
-
-            setTimeout(() => { this.showSuccess = false }, 2000)
+            if(!foundOwner){
+                error = true;
+                this.errorMsg = "Can not remove owner from admin."
+            } else if(this.interests.length > 30){
+                error = true;
+                this.errorMsg = "We currently only allow a community to have up to 30 interests."
+            } else if(!this.properName.test(this.name) && this.name !== ''){
+                error = true;
+                this.errorMsg = "Invalid naming format. Alpha characters and space only."
+            } else if(this.moderators.length !== this.communityProfile.moderators.length) {
+                this.$confirm('You are about to update moderators as an owner. Continue?', 'Warning', {
+                    confirmButtonText: 'OK',
+                    cancelButtonText: 'Cancel',
+                    type: 'warning'
+                }).then(async () => {
+                    const stat = await this.updateCommunityProfile();
+                }).catch(() => {
+                    error = true;
+                    this.$message({
+                        type: 'info',
+                        message: 'Moderators update canceled'
+                    });
+                })
+            } else {
+                this.updateCommunityProfile();
+            }
+        },
+        async updateCommunityProfile() {
+            this.errorMsg = "";
+            // check if all emails are actually valid
+            this.looked = false;
+            const userRef = fb.usersCollection;
+            let valid = true;
+            const finalMods = [];
+            await Promise.all(this.moderators.map(async (mod) => {
+                finalMods.push(mod.text);
+                const query  = await userRef.where("email", "==", mod.text);
+                const querySnapshot = await query.get();
+                if(querySnapshot.size === 0){
+                    valid = false;
+                    this.looked = true;
+                    this.errorMsg = `Cannot find user associated with ${mod.text}.`
+                }
+            }));
+            if(valid){
+                await this.$store.dispatch('updateCommunityProfile', {
+                    name: this.name !== '' ? this.name : this.communityProfile.name,
+                    rules: this.rules !== '' ? this.rules: this.communityProfile.rules,
+                    description: this.description !== '' ? this.description: this.communityProfile.description,
+                    city: this.city !== '' ? this.city: this.communityProfile.city,
+                    state: this.state !== '' ? this.state: this.communityProfile.state,
+                    country: this.country !== '' ? this.country: this.communityProfile.country,
+                    interests: this.communityProfile.interests,
+                    link: this.communityProfile.link,
+                    createdOn: this.communityProfile.createdOn,
+                    moderators: finalMods,
+                    subscribers: this.communityProfile.subscribers,
+                    owner: this.communityProfile.owner,
+                });
+                this.name = '';
+                this.title = '';
+                this.city = '';
+                this.state = '';
+                this.showSuccess = true;
+                setTimeout(() => { this.showSuccess = false }, 2000)
+            }
+            return valid;
         },
         removeInterest(id) {
             this.communityProfile.interests = this.communityProfile.interests.filter(t=> t.id !== id);
@@ -419,6 +504,9 @@ export default {
                 moderators: this.communityProfile.moderators,
                 owner: this.communityProfile.owner,
             });
+            this.showSuccessInt = true;
+
+            setTimeout(() => { this.showSuccessInt = false }, 2000)
         }
         },
     components: {
@@ -427,7 +515,8 @@ export default {
         ListInterests,
         AddInterest,
         AddCommunity,
-        ListCommunities }
+        ListCommunities,
+        VueTagsInput}
 
 }
 </script>
