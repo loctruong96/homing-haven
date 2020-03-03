@@ -11,7 +11,9 @@ import UserInfo from '@/components/UserInfo'
 import NewComm from '@/components/NewComm'
 import NewRec from '@/components/NewRec'
 import Community from '@/components/Community'
+import SearchResults from '@/components/SearchResults'
 import NotFound from '@/components/NotFound'
+import Resource from "../components/Resource";
 Vue.use(Router);
 
 const router = new Router({
@@ -36,7 +38,7 @@ const router = new Router({
       name: 'UDashboard',
       component: UDashboard,
       meta: {
-        title: "Homning Haven"
+        title: "Dashboard"
       }
     },
     {
@@ -53,7 +55,7 @@ const router = new Router({
       component: Dashboard,
       meta: {
         requiresAuth: true,
-        title: "Homning Haven"
+        title: "Dashboard"
       }
     },
     {
@@ -61,7 +63,8 @@ const router = new Router({
       name: 'Settings',
       component: Settings,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        title: "Settings"
       }
     },
     {
@@ -69,7 +72,8 @@ const router = new Router({
       name: 'NewComm',
       component: NewComm,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        title: "New Community"
       }
     },
     {
@@ -77,13 +81,32 @@ const router = new Router({
       name: 'NewRec',
       component: NewRec,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        title: "New Resource"
       }
     },
     {
       path: '/community/:id',
       name: 'Community',
       component: Community,
+      meta: {
+        requiresAuth: false,
+        title: "Community"
+      }
+    },
+    {
+      path: '/resource/:id',
+      name: 'Resource',
+      component: Resource,
+      meta: {
+        requiresAuth: false,
+        title: "Resource"
+      }
+    },
+    {
+      path: '/searchResults',
+      name: 'SearchResults',
+      component: SearchResults,
       meta: {
         requiresAuth: false
       }
@@ -102,7 +125,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
   const currentUser = firebase.auth().currentUser;
-  document.title = to.meta.title || 'HomingHaven';
+  document.title = to.meta.title || 'Homing Haven';
   if (requiresAuth && !currentUser) {
     next('/login')
   } else if(to.name === 'UDashboard' && currentUser){

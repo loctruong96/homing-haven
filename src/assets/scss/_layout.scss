@@ -1626,7 +1626,25 @@ header {
     padding: 2vw;
     color: $darkestmain;
   }
+}
 
+
+//Search Results
+#searchResults{
+  .resultsSection{
+    padding-left: 5vw;
+    padding-top: 3vw;
+
+    p{
+      padding-left: 2vw;
+    }
+
+    .resultCount{
+      padding-bottom: 1vw;
+      color: $medium;
+    }
+
+<<<<<<< HEAD
   .filterRecources{
     float: right;
   }
@@ -1680,6 +1698,33 @@ header {
     flex-direction: row;
     font-size: 25px;
     float: right;
+=======
+    .commResults{
+      padding-bottom: 3vw;
+      color: $darkmain;
+      
+      .ctable_format{
+        border-radius: .5vw;
+      }
+      
+    }
+
+    .resourceResults{
+      padding-bottom: 3vw;
+      color: $darkmain;
+
+      .rtable_format{
+        border-radius: .5vw;
+      }
+    }
+  }
+  .noResults{
+    padding-top: 5vw;
+    padding-left: 2vw;
+    padding-right:2vw;
+    text-align: center;
+    color: $darkestmain;
+>>>>>>> 5ac6ce4a4b83d562ded88e41eb4cc461b8a807d6
   }
 
 }
