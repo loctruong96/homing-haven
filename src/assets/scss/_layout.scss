@@ -1627,6 +1627,59 @@ header {
     color: $darkestmain;
   }
 
+  .filterRecources{
+    float: right;
+  }
 
+  .resourcePost{
+    border: 2px solid $lightmain;
+    padding-top: 5px;
+    width: 80%;
+  }
+
+  .text {
+    font-size: 14px;
+  }
+
+  .item {
+    margin-bottom: 18px;
+  }
+
+  .clearfix:before,
+  .clearfix:after {
+    //display: table;
+    display: flex;
+    content: "";
+  }
+  .clearfix:after {
+    clear: both
+  }
+
+  .box-card {
+    width: 80%;
+  }
+
+  .el-icon-user-solid{
+    font-size: 25px;
+  }
+
+  .userInfo{
+    flex-direction: row;
+  }
+
+  .postinfo{
+    font-size: 12px;
+  }
+
+  .title{
+    font-size: 25px;
+    flex-direction: row;
+  }
+
+  .votes{
+    flex-direction: row;
+    font-size: 25px;
+    float: right;
+  }
 
 }
