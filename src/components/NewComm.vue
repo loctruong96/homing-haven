@@ -13,7 +13,6 @@
         <section>
 
             <div class="col1">
-
                 <div class="profile">
 <!--                    <img height="150px" width="150px" src="../assets/user_icon.png"/>-->
 
@@ -34,7 +33,26 @@
                                     @tags-changed="newTags => moderators = newTags"
                             />
                         </p>
-
+                        <p>
+                            Description:<el-input
+                                type="textarea"
+                                placeholder="Community Description."
+                                v-model="description"
+                                maxlength="500"
+                                show-word-limit
+                        >
+                        </el-input>
+                        </p>
+                        <p>
+                            Rules:<el-input
+                                    type="textarea"
+                                    placeholder="Community Rules."
+                                    v-model="rules"
+                                    maxlength="500"
+                                    show-word-limit
+                            >
+                            </el-input>
+                        </p>
                         <label for="country">Country</label>
                         <!--                    <input v-model.trim="signupForm.country" type="text" placeholder="" id="country" />-->
                         <select v-model="country" id="country" >
@@ -110,6 +128,8 @@
                 moderator: '',
                 moderators: [],
                 link: '',
+                rules: '',
+                description: '',
                 name: '',
                 title: '',
                 city: '',
@@ -195,10 +215,10 @@
                     title: this.title !== '' ? this.title : this.userProfile.title
                 });
 
-                this.name = ''
-                this.title = ''
+                this.name = '';
+                this.title = '';
 
-                this.showSuccess = true
+                this.showSuccess = true;
 
                 setTimeout(() => { this.showSuccess = false }, 2000)
             },
@@ -283,13 +303,13 @@
                                     interests: this.interests,
                                     name: this.name,
                                     link: this.link,
-                                    description: "Your community's description",
-                                    rules: "Your community's guidelines.",
+                                    description: this.description,
+                                    rules: this.rules,
                                 }).then(() => {
                                     // set the current community
                                     this.performingRequest = false;
-                                    this.$store.commit('setCurrentCommunity', this.link);
-                                    this.$store.dispatch('fetchCommunityProfile');
+                                    this.$store.commit('setCurrentResource', this.link);
+                                    this.$store.dispatch('fetchResourceProfile');
                                     this.$router.push(`/community/${this.link}`);
                                 });
                             }

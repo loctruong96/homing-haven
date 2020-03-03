@@ -35,6 +35,26 @@
                                     @tags-changed="newTags => moderators = newTags"
                             />
                         </p>
+                        <p>
+                            Description:<el-input
+                                type="textarea"
+                                placeholder="Resource Description."
+                                v-model="description"
+                                maxlength="500"
+                                show-word-limit
+                        >
+                        </el-input>
+                        </p>
+                        <p>
+                            Rules:<el-input
+                                type="textarea"
+                                placeholder="Resource Rules."
+                                v-model="rules"
+                                maxlength="500"
+                                show-word-limit
+                        >
+                        </el-input>
+                        </p>
 
                         <label for="country">Country</label>
                         <!--                    <input v-model.trim="signupForm.country" type="text" placeholder="" id="country" />-->
@@ -115,6 +135,8 @@
                 city: '',
                 state: '',
                 link: '',
+                rules: '',
+                description: '',
                 country: 'United States',
                 showSuccess: false,
                 performingRequest: false,
@@ -284,8 +306,8 @@
                                     interests: this.interests,
                                     name: this.name,
                                     link: this.link,
-                                    description: "Your resource's description",
-                                    rules: "Your resource's guidelines.",
+                                    description: this.description,
+                                    rules: this.rules,
                                 }).then(() => {
                                     // set the current community
                                     this.performingRequest = false;
