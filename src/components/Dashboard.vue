@@ -33,13 +33,14 @@
             <vueper-slides :slide-ratio="1 / 8"
                            :visible-slides="3"
                            :arrows="false"
-                           :gap="3">
+                           :gap="3"
+                           :dragging-distance="20">
                 <vueper-slide
                         v-for="(slide, i) in slides"
                         :key="i"
                         :style="'background-color: ' + ['#C3C7E7', '#C3C7E7'][i % 2]">
                     <template v-slot:content>
-                        <div class="vueperslide__content-wrapper" style="flex-direction: row; text-decoration-color: #007EFC">
+                        <div class="vueperslide__content-wrapper" style="font-size: 1.3em;flex-direction: row; text-decoration-color: #007EFC">
                             <p><span>{{ slide.title }}<br>{{slide.description}}<br><button class="button" v-on:click="navigateToCommunity(slide.link)">View</button></span></p>
                         </div>
                     </template>
