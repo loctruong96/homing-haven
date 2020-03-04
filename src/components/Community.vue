@@ -281,17 +281,13 @@ export default {
             if(this.communityProfile.moderators.indexOf(this.userProfile.email) !== -1){
                 this.admin = true;
             }
-            const matchedCom = this.userProfile.communities.map((com)=>{
+            this.userProfile.communities.map((com)=>{
                 if (com.title !== undefined){
                     if(com.title === this.communityProfile.link){
-                        return com.title;
+                        this.subscribed = true;
                     }
                 }
             });
-            if (matchedCom.length > 0){
-                console.log(matchedCom)
-                this.subscribed = true;
-            }
             if(!this.loadedMod){
                 this.moderators = this.communityProfile.moderators.map((mod)=> {
                     return {text: mod}
