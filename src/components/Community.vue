@@ -77,7 +77,34 @@
             </div>
 
             <div v-if="resources">
-
+                <div class="resourceCategories" v-if="communityProfile">
+                    <div class="popCategories">
+                        <h1>Resources</h1>
+                    </div>
+                    <div class="filterRecources">
+                        <select >
+                            <option value="" disabled selected hidden>Sort by...</option>
+                            <option v-for="interest in sortby">{{interest}}</option>
+                        </select>
+                    </div>
+                    <el-card v-for="card in cards" class="box-card">
+                        <div slot="header" class="clearfix">
+                            <div class="userInfo">
+                                <i class="el-icon-user-solid"  style="color: gray"></i>
+                                <div class="postInfo">
+                                    <p>{{card.user}}</p>
+                                    <p><i>{{card.date}}</i></p>
+                                </div>
+                            </div>
+                            <div class="title">{{card.title}}</div>
+                            <div class="votes">{{card.votes}}</div>
+                        </div>
+                        <div class="text item">
+                            {{card.description}}
+                            <br><br><button class="button" style="float: right; margin-bottom: 20px">View</button>
+                        </div>
+                    </el-card>
+                </div>
             </div>
 
             <div v-if="about">
@@ -194,6 +221,16 @@ export default {
             home: true,
             resources: false,
             about: false,
+
+            userInfo: "User 12345",
+            postDate: "April 20, 2018",
+            postTitle: "Food Drive at Westfield Food Bank",
+            postDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+            postVotes: 68,
+            sortby: ["Food", "Education", "Documentation","Healthcare"],
+            cards: [{title: "Food Drive at Westfield Food Bank",
+            description: "stuff", votes: 68, date: "April 20, 2018", user: "User 12345"},{title: "Food Drive at Westfield Food Bank",
+            description: "stuff", votes: 68, date: "April 20, 2018", user: "User 6789"}]
 
         }
     },
