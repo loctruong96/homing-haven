@@ -11,6 +11,7 @@
                 <p>Checkout local communities, or resources like scholarships, food, legal help, etc... </p>
                 <button @click="register"  class="button">Get Started</button>
             </div>
+            <div class="line"></div>
             <div v-if="popularCommunities && looked">
                 <div class="bannerStuff">
                     <h1>Popular Communities</h1>

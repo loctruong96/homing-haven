@@ -219,17 +219,18 @@ header {
 #registration {
   background: white;
 
-  @media screen and (max-width: 742px) {
-    height: 100vh;
-    background: $white;
-  }
+  //@media screen and (max-width: 742px) {
+  //  height: 100vh;
+  //  background: $white;
+  //}
 
   .col2 {
-    height: 170vh;
-    width: 120vh;
+    height: 150vh;
+    width: 85vw;
     padding-top: 15vh;
 
     @media screen and (max-width: 742px) {
+      width: 100vw;
       height: auto;
       padding-top: 15vh;
     }
@@ -241,6 +242,7 @@ header {
     padding-left: 20vh;
 
     @media screen and (max-width: 742px) {
+      width: 90vw;
       height: auto;
       padding-top: 20vh;
     }
@@ -251,6 +253,7 @@ header {
     margin-top: 15vh;
 
     @media screen and (max-width: 742px) {
+      width: 90vw;
       height: auto;
       padding-top: 20vh;
     }
