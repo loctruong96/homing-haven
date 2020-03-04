@@ -21,6 +21,8 @@
             <el-menu-item index="#resources" style=" color: #FFFFFF"  ><i class="el-icon-present"  style="color: #FFFFFF"></i>Resources</el-menu-item>
             <el-menu-item index="#about" style=" color: #FFFFFF"  ><i class="el-icon-notebook-2"  style="color: #FFFFFF"></i>About</el-menu-item>
             <el-menu-item index="#admin" style=" color: #FFFFFF" v-if="admin" ><i class="el-icon-s-custom"  style="color: #FFFFFF"></i>Admin</el-menu-item>
+            <el-menu-item index="#subscribe" style=" color: #FFFFFF;" v-if="userProfile.name !== undefined && !subscribed"><i class="el-icon-message-solid"  style="color: #FFFFFF"></i>Subscribe</el-menu-item>
+            <el-menu-item index="#unsubscribe" style=" color: #FFFFFF" v-if="userProfile.name !== undefined && subscribed"><i class="el-icon-close-notification"  style="color: #FFFFFF"></i>Unsubscribe</el-menu-item>
         </el-menu>
             </div>
             <div v-if="home">
@@ -243,19 +245,32 @@ export default {
     },
     beforeUpdate() {
         this.looked = true;
-        if(this.communityProfile.moderators.indexOf(this.userProfile.email) !== -1){
-            this.admin = true;
+        // if logged in, find if the user is a owner and or moderator
+        if(this.userProfile.name !== undefined){
+            if(this.communityProfile.owner === this.userProfile.email){
+                this.owner = true;
+            }
+            if(this.communityProfile.moderators.indexOf(this.userProfile.email) !== -1){
+                this.admin = true;
+            }
+            const matchedCom = this.userProfile.communities.map((com)=>{
+                if (com.title !== undefined){
+                    if(com.title === this.communityProfile.link){
+                        return com.title;
+                    }
+                }
+            });
+            if (matchedCom.length > 0){
+                console.log(matchedCom)
+                this.subscribed = true;
+            }
+            if(!this.loadedMod){
+                this.moderators = this.communityProfile.moderators.map((mod)=> {
+                    return {text: mod}
+                });
+                this.loadedMod = true;
+            }
         }
-        if(this.communityProfile.owner === this.userProfile.email){
-            this.owner = true;
-        }
-        if(!this.loadedMod){
-            this.moderators = this.communityProfile.moderators.map((mod)=> {
-                return {text: mod}
-            })
-            this.loadedMod = true;
-        }
-
     },
     computed: {
         ...mapState(['communityProfile', 'userProfile']),
@@ -323,6 +338,7 @@ export default {
                    '<br><br><button @click="recc4_card"  class="button">View</button>'
                 }
               ],
+            subscribed: false,
             loadedMod: false,
             newOwner: '',
             looked: false,
@@ -391,6 +407,12 @@ export default {
                     this.resources = false;
                     this.about = false;
                     this.adminSelect = true;
+                } else if(key === '#subscribe'){
+                    this.subscribed = true;
+                    this.subscribe()
+                } else if(key === '#unsubscribe'){
+                    this.subscribed = false;
+                    this.unsubscribe();
                 }
             },
          errorCheck(){
@@ -507,6 +529,32 @@ export default {
             this.showSuccessInt = true;
 
             setTimeout(() => { this.showSuccessInt = false }, 2000)
+        },
+        subscribe(){
+            this.userProfile.communities.push({id:0, title: this.communityProfile.link, completed: false});
+            this.updateUserSubscription();
+        },
+        unsubscribe(){
+            this.userProfile.communities = this.userProfile.communities.filter(t=> t.title !== this.communityProfile.link);
+            this.updateUserSubscription();
+        }
+        ,
+        updateUserSubscription() {
+            const updatedCommunities = [];
+            let counter = 0;
+            this.userProfile.communities.map((community) => {
+                updatedCommunities.push({id:counter, title: community.title, completed: false});
+                counter += 1;
+            });
+            this.$store.dispatch('updateProfile', {
+                name: this.userProfile.name,
+                title: this.userProfile.title,
+                city:  this.userProfile.city,
+                state: this.userProfile.state,
+                country: this.userProfile.country,
+                interests: this.userProfile.interests,
+                communities: updatedCommunities,
+            });
         }
         },
     components: {
