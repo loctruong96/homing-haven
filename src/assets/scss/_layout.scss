@@ -1659,6 +1659,64 @@ header {
   .resourceCategories{
     padding: 2vw;
     color: $darkestmain;
+    //background-color: black;
+  }
+
+  .headerContainer {
+    width: 100%;
+    display: flex;
+    //background:blue;
+    //color: blue;
+
+    //border-style: solid;
+    //border-width: 2px;
+    //border-color: blue;
+
+    ul {
+      list-style-type: none;
+    }
+
+    li {
+      list-style-type: none;
+      display: inline;
+      float: left;
+    }
+
+  }
+
+
+  .clearfix:before,
+  .clearfix:after {
+    //display: table;
+    display: table-row;
+    content: "";
+  }
+  .clearfix:after {
+    display: table-row;
+    clear: both
+  }
+
+  .box-card {
+    width: 80%;
+  }
+
+  .el-icon-user-solid{
+    font-size: 50px;
+  }
+
+  .userInfo{
+    //flex-direction: column;
+    display: table-cell;
+  }
+
+  .postinfo{
+    font-size: 12px;
+  }
+
+  .title{
+    font-size: 25px;
+    //flex-direction: row;
+    display: table-cell;
   }
 }
 
@@ -1696,14 +1754,45 @@ header {
     margin-bottom: 18px;
   }
 
+  .test {
+    width: 100000000%;
+    height: 40vh;
+    border-style: solid;
+    border-width: 2px;
+    border-color: blue;
+  }
+
+  .headerContainer {
+    width: 100%;
+    display: flex;
+    //background:blue;
+    //color: blue;
+
+    border-style: solid;
+    border-width: 2px;
+    border-color: blue;
+
+    ul {
+      list-style-type: none;
+    }
+
+    li {
+      list-style-type: none;
+      display: inline;
+      float: left;
+    }
+
+  }
+
+
   .clearfix:before,
   .clearfix:after {
     //display: table;
-    display: flex;
+    display: table-row;
     content: "";
   }
   .clearfix:after {
-    display: flex;
+    display: table-row;
     clear: both
   }
 
@@ -1716,7 +1805,8 @@ header {
   }
 
   .userInfo{
-    flex-direction: row;
+    //flex-direction: column;
+    display: table-cell;
   }
 
   .postinfo{
@@ -1725,21 +1815,23 @@ header {
 
   .title{
     font-size: 25px;
-    flex-direction: row;
+    //flex-direction: row;
+    display: table-cell;
   }
 
   .votes{
-    flex-direction: row;
+    //flex-direction: row;
     font-size: 25px;
     float: right;
+    display: table-cell;
     .commResults{
       padding-bottom: 3vw;
       color: $darkmain;
-      
+
       .ctable_format{
         border-radius: .5vw;
       }
-      
+
     }
 
     .resourceResults{

@@ -87,18 +87,44 @@
                             <option v-for="interest in sortby">{{interest}}</option>
                         </select>
                     </div>
+                    <div class="test">
+                        hello
+                    </div>
                     <el-card v-for="card in cards" class="box-card">
-                        <div slot="header" class="clearfix">
-                            <div class="userInfo">
-                                <i class="el-icon-user-solid"  style="color: gray"></i>
-                                <div class="postInfo">
-                                    <p>{{card.user}}</p>
-                                    <p><i>{{card.date}}</i></p>
-                                </div>
-                            </div>
-                            <div class="title">{{card.title}}</div>
-                            <div class="votes">{{card.votes}}</div>
+                        <div class="headerContainer">
+                           <ul>
+                               <li><i class="el-icon-user-solid"  style="color: gray"></i></li>
+                                <li>
+                                    <div class="userInfo">
+                                        <div class="postInfo">
+                                            <p>{{card.user}}</p>
+                                            <p><i>{{card.date}}</i></p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="title"><h3>{{card.title}}</h3></div>
+                                </li>
+<!--                                <li>-->
+<!--                                    <div class="votes">{{card.votes}}</div>-->
+<!--                                </li>-->
+                            </ul>
                         </div>
+
+<!--                        <div class="headerContainer">-->
+<!--                            <div slot="header" class="clearfix">-->
+<!--                                <div class="userInfo">-->
+<!--                                    <i class="el-icon-user-solid"  style="color: gray"></i>-->
+<!--                                    <div class="postInfo">-->
+<!--                                        <p>{{card.user}}</p>-->
+<!--                                        <p><i>{{card.date}}</i></p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="title"><h4>{{card.title}}</h4></div>-->
+<!--                                <div class="votes">{{card.votes}}</div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
                         <div class="text item">
                             {{card.description}}
                             <br><br><button class="button" style="float: right; margin-bottom: 20px">View</button>
