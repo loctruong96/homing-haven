@@ -1625,14 +1625,11 @@ header {
     //border-style: solid;
     //border-width: 2px;
     ////border-color: black;
-  }
-
-  .description {
+.description {
     border-style: solid;
     border-width: 2px;
     border-color: black;
   }
-
   .commDetails {
     display: flex;
     height: 70%;
@@ -1687,8 +1684,7 @@ header {
       float: left;
     }
 
-  }
-
+}
 
   .clearfix:before,
   .clearfix:after {
@@ -1709,7 +1705,6 @@ header {
   .el-icon-user-solid{
     font-size: 50px;
   }
-
   .userInfo{
     //flex-direction: column;
     display: table-cell;
