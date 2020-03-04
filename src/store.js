@@ -53,6 +53,7 @@ export const store = new Vuex.Store({
         currentCommunity: null,
         communityProfile: {},
         currentResource: null,
+        resourceProfile: {},
         userProfile: {},
         posts: [],
         hiddenPosts: [],
@@ -68,6 +69,14 @@ export const store = new Vuex.Store({
             commit('setPosts', null);
             commit('setHiddenPosts', null);
             commit('setPopularCommunities', []);
+            commit('setResourceProfile', {});
+        },
+        fetchResourceProfile({commit, state}){
+          fb.resourceCollection.doc(state.currentResource).get().then(res => {
+              commit('setResourceProfile', res.data());
+          }).catch(err => {
+              console.log(err)
+          })
         },
         fetchUserProfile({ commit, state }) {
             fb.usersCollection.doc(state.currentUser.uid).get().then(res => {
@@ -147,6 +156,9 @@ export const store = new Vuex.Store({
         }
     },
     mutations: {
+        setResourceProfile(state, val){
+            state.resourceProfile = val;
+        },
         setCurrentUser(state, val) {
             state.currentUser = val
         },

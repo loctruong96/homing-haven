@@ -101,15 +101,11 @@
                 </div>
                 <div class="user-form">
                     <h5 style=" margin-bottom: 20px;">Community that matched your interests or location</h5>
-                    <p>
-                        <button class="button">Seatle Food Bank</button>
-                        <button class="button">Seattle Public Library</button>
-                        <button class="button">Costco Free Food</button>
-                    </p>
-                    <p>
-                        <button class="button">Tacoma Free Food</button>
-                        <button class="button" style="background: lightgrey;">+</button>
-                    </p>
+                    <ListCommunities v-bind:communities="communities"
+                                     @remove-community="removeCommunity" v-if="4"
+                    />
+                    <p class="emptylist" v-else>How lonely... try looking for a community.</p>
+                                        <AddCommunity @add-community="addCommunity"/>
 
                 </div>
             </div>
@@ -121,13 +117,16 @@
 <script>
     import { mapState } from 'vuex'
     import ListInterests from "@/components/ListInterests"
+    import ListCommunities from "@/components/ListCommunities";
     import AddInterest from "@/components/AddInterest"
+    import AddCommunity from "@/components/AddCommunity";
     import VueTagsInput from '@johmun/vue-tags-input';
     import {communityCollection} from "../firebaseConfig";
     const fb = require('../firebaseConfig.js');
     export default {
         data() {
             return {
+                communities: [],
                 moderator: '',
                 moderators: [],
                 name: '',
@@ -231,6 +230,13 @@
             addInterest(interest) {
                 this.interests.push(interest)
             },
+            removeCommunity(id) {
+                this.communities = this.communities.filter(t=> t.id !== id);
+            },
+            addCommunity(community) {
+                this.communities.push(community);
+
+            },
             cancel(){
                 this.$router.push('/dashboard');
             },
@@ -288,6 +294,17 @@
                         this.performingRequest = false;
                         this.errorMsg = `${this.city} city is not current supported. Please select a nearby city.`
                     }
+                    // check if community they wanted to joined is actually valid.
+                    const communityRef = fb.communityCollection;
+                    await Promise.all(this.communities.map(async (com) => {
+                        const query  = await communityRef.where("link", "==", com.title);
+                        const querySnapshot = await query.get();
+                        if(querySnapshot.size === 0){
+                            valid = false;
+                            this.performingRequest = false;
+                            this.errorMsg = `Cannot find community ${com.title}.`
+                        }
+                    }));
                     if(valid){
                         const resourceRef = fb.resourceCollection.doc(this.link);
                         resourceRef.get().then((doc) => {
@@ -295,8 +312,8 @@
                                 this.performingRequest = false;
                                 this.errorMsg = `The link homing.app/resource/${this.link} is already taken.`
                             } else {
-                                // create the document
-                                resourceRef.set({
+                                this.performingRequest = true;
+                                const resource = {
                                     createdOn: new Date(),
                                     subscribers: 0,
                                     moderators: finalMods,
@@ -308,11 +325,21 @@
                                     link: this.link,
                                     description: this.description,
                                     rules: this.rules,
-                                }).then(() => {
-                                    // set the current community
+                                };
+                                // create the document
+                                resourceRef.set(resource).then(async () => {
+                                    //add the resource to the community they selected
+                                    await Promise.all(this.communities.map(async (com) => {
+                                        const query  = await communityRef.where("link", "==", com.title);
+                                        const docs = await query.get();
+                                        docs.forEach(doc => {
+                                             fb.communityCollection.doc(doc.id).collection('resources').doc(this.link).set(resource);
+                                        })
+                                    }));
+                                    // set the current resource
                                     this.performingRequest = false;
-                                    this.$store.commit('setCurrentCommunity', this.link);
-                                    this.$store.dispatch('fetchCommunityProfile');
+                                    this.$store.commit('setCurrentResource', this.link);
+                                    await this.$store.dispatch('fetchResourceProfile');
                                     this.$router.push(`/resource/${this.link}`);
                                 });
                             }
@@ -327,7 +354,9 @@
         components: {
             ListInterests,
             AddInterest,
-            VueTagsInput
+            VueTagsInput,
+            ListCommunities,
+            AddCommunity
         }
     }
 </script>
