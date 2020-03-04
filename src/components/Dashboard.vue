@@ -5,48 +5,52 @@
                 <p>Loading..</p>
             </div>
         </transition>
-        <div class="banner">
+<!--        <div class="banner">-->
+<!--            -->
+<!--        </div>-->
+        <el-main>
             <div class="bannerStuff">
                 <h1>Welcome to HomingHaven!!</h1>
                 <p>Checkout local communities, or resources like scholarships, food, legal help, etc... </p>
                 <button @click="register"  class="button">Get Started</button>
             </div>
-        </div>
-        <div class="filter">
-            <ul>
-                <li>
-                    <h1>
-                        Need help finding a community to join??
-                    </h1>
-                </li>
-                <li>
-                    <button @click=""  class="button">Click Here!</button>
-                </li>
-            </ul>
-
-<!--            <button @click=""  class="button">Click Here!</button>-->
-        </div>
-        <div class="comms" v-if="popularCommunities && looked">
-            <div class="popComms">
+            <div class="line"></div>
+<!--            <div class="filter">-->
+<!--                <ul>-->
+<!--                    <li>-->
+<!--                        <h1>-->
+<!--                            Need help finding a community to join??-->
+<!--                        </h1>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <button @click=""  class="button">Click Here!</button>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </div>-->
+            <div class="bannerStuff" v-if="popularCommunities && looked">
                 <h1>Popular Communities</h1>
+                <vueper-slides
+                        class="no-shadow"
+                        :slide-ratio="1 / 8"
+                               :visible-slides="3"
+                               :arrows="false"
+                               :gap="3"
+                               :dragging-distance="200"
+                               :breakpoints="{ 1200: { slideRatio: 1 / 5 },800: { visibleSlides: 2, slideMultiple: 2, slideRatio:1/3 }, 600: { visibleSlides: 1, slideMultiple: 2, slideRatio:1/2 } }">
+                    <vueper-slide
+                            v-for="(slide, i) in slides"
+                            :key="i"
+                            :style="'background-color: ' + ['#C3C7E7', '#C3C7E7'][i % 2]">
+                        <template v-slot:content>
+                            <div class="vueperslide__content-wrapper" style="font-size: 1.3em; text-decoration-color: #007EFC">
+                                <p><span>{{ slide.title }}<br>{{slide.description}}<br><button class="button" v-on:click="navigateToCommunity(slide.link)">View</button></span></p>
+                            </div>
+                        </template>
+                    </vueper-slide>
+                </vueper-slides>
+
             </div>
-            <vueper-slides :slide-ratio="1 / 8"
-                           :visible-slides="3"
-                           :arrows="false"
-                           :gap="3"
-                           :dragging-distance="20">
-                <vueper-slide
-                        v-for="(slide, i) in slides"
-                        :key="i"
-                        :style="'background-color: ' + ['#C3C7E7', '#C3C7E7'][i % 2]">
-                    <template v-slot:content>
-                        <div class="vueperslide__content-wrapper" style="font-size: 1.3em;flex-direction: row; text-decoration-color: #007EFC">
-                            <p><span>{{ slide.title }}<br>{{slide.description}}<br><button class="button" v-on:click="navigateToCommunity(slide.link)">View</button></span></p>
-                        </div>
-                    </template>
-                </vueper-slide>
-            </vueper-slides>
-        </div>
+        </el-main>
     </div>
 </template>
 
@@ -62,7 +66,7 @@
             this.$store.dispatch('fetchPopularCommunities');
         },
         beforeUpdate() {
-            if(this.slides.length < 5){
+            if(this.slides.length < 5 && !this.looked){
                 for(let i =0; i <  this.popularCommunities.length;i++){
                     const community = {};
                     community.title = this.popularCommunities[i].name;
