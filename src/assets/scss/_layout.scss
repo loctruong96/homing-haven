@@ -242,9 +242,10 @@ header {
     padding-left: 20vh;
 
     @media screen and (max-width: 742px) {
-      width: 90vw;
+      width: 93vw;
       height: auto;
-      padding-top: 20vh;
+      padding-top: 10vh;
+      padding-left:10vw;
     }
   }
   .matched {
@@ -253,9 +254,10 @@ header {
     margin-top: 15vh;
 
     @media screen and (max-width: 742px) {
-      width: 90vw;
+      width: 93vw;
       height: auto;
       padding-top: 20vh;
+      padding-left:10vw;
     }
   }
 
