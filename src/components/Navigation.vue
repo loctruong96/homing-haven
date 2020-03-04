@@ -15,6 +15,7 @@
             </el-menu-item>
             <el-submenu index="4" style="float: right; font-size: 50px; color: #FFFFFF">
                 <template slot="title"><i class="el-icon-menu"  style="color: #FFFFFF"></i></template>
+                <el-menu-item  index="4-0" style="color: #FFFFFF" :route="{name:'UDashboard'}"><i class="el-icon-s-home"  style="color: #FFFFFF"></i>Home</el-menu-item>
                 <el-menu-item index="4-1" style="color: #FFFFFF" :route="{name:'UserInfo'}" ><i class="el-icon-user-solid" style="color: #FFFFFF"></i>{{ userProfile.name }}</el-menu-item>
                 <el-menu-item index="4-2" :route="{name:'NewComm'}" style="color: #FFFFFF" ><i class="el-icon-folder-add"  style="color: #FFFFFF"></i>New Community</el-menu-item>
                 <el-menu-item index="4-3" :route="{name:'NewRec'}" style="color: #FFFFFF" ><i class="el-icon-add-location" style="color: #FFFFFF"></i>New Resource</el-menu-item>
