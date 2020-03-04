@@ -1611,7 +1611,7 @@ header {
   }
   .communityGuidelines {
     color: $darkestmain;
-    background: $lightestmain;
+    background: $white;
     //background: blue;
     padding-top: 3vw;
     padding: 2vw;
@@ -1698,6 +1698,7 @@ header {
 
   .box-card {
     width: 80%;
+    margin-bottom: 20px;
   }
 
   .el-icon-user-solid{
@@ -1718,6 +1719,12 @@ header {
     //flex-direction: row;
     display: table-cell;
   }
+
+  .customSelect{
+    position: relative;
+    font-family: Arial;
+  }
+
   section {
     padding: 2rem 0;
   }
@@ -1949,7 +1956,6 @@ header {
   .resultsSection{
     padding-left: 5vw;
     padding-top: 3vw;
-
     p{
       padding-left: 2vw;
     }
@@ -2005,41 +2011,6 @@ header {
       float: left;
     }
 
-  }
-
-
-  .clearfix:before,
-  .clearfix:after {
-    //display: table;
-    display: table-row;
-    content: "";
-  }
-  .clearfix:after {
-    display: table-row;
-    clear: both
-  }
-
-  .box-card {
-    width: 80%;
-  }
-
-  .el-icon-user-solid{
-    font-size: 25px;
-  }
-
-  .userInfo{
-    //flex-direction: column;
-    display: table-cell;
-  }
-
-  .postinfo{
-    font-size: 12px;
-  }
-
-  .title{
-    font-size: 25px;
-    //flex-direction: row;
-    display: table-cell;
   }
 
   .votes{
