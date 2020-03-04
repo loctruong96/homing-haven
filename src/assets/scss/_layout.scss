@@ -1611,21 +1611,120 @@ header {
   }
   .communityGuidelines {
     color: $darkestmain;
-    background: $evenlightestmain;
+    background: $white;
+    //background: blue;
     padding-top: 3vw;
     padding: 2vw;
+    height: 100vh;
+
+    //border-style: solid;
+    //border-width: 2px;
+    ////border-color: black;
   }
+
+  .description {
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+  }
+
+  .commDetails {
+    display: flex;
+    height: 70%;
+
+    //border-style: solid;
+    //border-width: 2px;
+    //border-color: black;
+  }
+
   .rules{
     padding-top: 1.5vw;
+    flex-direction: column;
+    width: 50%;
+
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
   }
   .activity{
     padding-top: 1.5vw;
+    flex-direction: column;
+    width: 50%;
+
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
   }
 
   .resourceCategories{
     padding: 2vw;
     color: $darkestmain;
+    //background-color: black;
   }
+
+  .headerContainer {
+    width: 100%;
+    display: flex;
+    //background:blue;
+    //color: blue;
+
+    //border-style: solid;
+    //border-width: 2px;
+    //border-color: blue;
+
+    ul {
+      list-style-type: none;
+    }
+
+    li {
+      list-style-type: none;
+      display: inline;
+      float: left;
+    }
+
+  }
+
+
+  .clearfix:before,
+  .clearfix:after {
+    //display: table;
+    display: table-row;
+    content: "";
+  }
+  .clearfix:after {
+    display: table-row;
+    clear: both
+  }
+
+  .box-card {
+    width: 80%;
+    margin-bottom: 20px;
+  }
+
+  .el-icon-user-solid{
+    font-size: 50px;
+  }
+
+  .userInfo{
+    //flex-direction: column;
+    display: table-cell;
+  }
+
+  .postinfo{
+    font-size: 12px;
+  }
+
+  .title{
+    font-size: 25px;
+    //flex-direction: row;
+    display: table-cell;
+  }
+
+  .customSelect{
+    position: relative;
+    font-family: Arial;
+  }
+
   section {
     padding: 2rem 0;
   }
@@ -1857,7 +1956,6 @@ header {
   .resultsSection{
     padding-left: 5vw;
     padding-top: 3vw;
-
     p{
       padding-left: 2vw;
     }
@@ -1885,41 +1983,41 @@ header {
     margin-bottom: 18px;
   }
 
-  .clearfix:before,
-  .clearfix:after {
-    //display: table;
+  .test {
+    width: 100000000%;
+    height: 40vh;
+    border-style: solid;
+    border-width: 2px;
+    border-color: blue;
+  }
+
+  .headerContainer {
+    width: 100%;
     display: flex;
-    content: "";
-  }
-  .clearfix:after {
-    clear: both
-  }
+    //background:blue;
+    //color: blue;
 
-  .box-card {
-    width: 80%;
-  }
+    border-style: solid;
+    border-width: 2px;
+    border-color: blue;
 
-  .el-icon-user-solid{
-    font-size: 25px;
-  }
+    ul {
+      list-style-type: none;
+    }
 
-  .userInfo{
-    flex-direction: row;
-  }
+    li {
+      list-style-type: none;
+      display: inline;
+      float: left;
+    }
 
-  .postinfo{
-    font-size: 12px;
-  }
-
-  .title{
-    font-size: 25px;
-    flex-direction: row;
   }
 
   .votes{
-    flex-direction: row;
+    //flex-direction: row;
     font-size: 25px;
     float: right;
+    display: table-cell;
     .commResults{
       padding-bottom: 3vw;
       color: $darkmain;

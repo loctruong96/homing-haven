@@ -66,35 +66,63 @@
                 </vueper-slides>
             </div>
             </div>
+
             <div v-if="resources">
                 <div class="resourceCategories" v-if="communityProfile">
                     <div class="popCategories">
                         <h1>Resources</h1>
                     </div>
                     <div class="filterRecources">
-                        <select >
+                        <select style="float: right; margin-right: 7%;">
                             <option value="" disabled selected hidden>Sort by...</option>
                             <option v-for="interest in sortby">{{interest}}</option>
                         </select>
                     </div>
                     <el-card v-for="card in cards" class="box-card">
-                        <div slot="header" class="clearfix">
-                            <div class="userInfo">
-                                <i class="el-icon-user-solid"  style="color: gray"></i>
-                                <div class="postInfo">
-                                    <p>{{card.user}}</p>
-                                    <p><i>{{card.date}}</i></p>
-                                </div>
-                            </div>
-                            <div class="title">{{card.title}}</div>
-                            <div class="votes">{{card.votes}}</div>
+                        <div class="headerContainer">
+                           <ul>
+                               <li><i class="el-icon-user-solid"  style="color: gray"></i></li>
+                                <li>
+                                    <div class="userInfo">
+                                        <div class="postInfo">
+                                            <p>{{card.user}}</p>
+                                            <p><i>{{card.date}}</i></p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="title"><h3>{{card.title}}</h3></div>
+                                </li>
+<!--                                <li>-->
+<!--                                    <div class="votes">{{card.votes}}</div>-->
+<!--                                </li>-->
+                            </ul>
                         </div>
+
+<!--                        <div class="headerContainer">-->
+<!--                            <div slot="header" class="clearfix">-->
+<!--                                <div class="userInfo">-->
+<!--                                    <i class="el-icon-user-solid"  style="color: gray"></i>-->
+<!--                                    <div class="postInfo">-->
+<!--                                        <p>{{card.user}}</p>-->
+<!--                                        <p><i>{{card.date}}</i></p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="title"><h4>{{card.title}}</h4></div>-->
+<!--                                <div class="votes">{{card.votes}}</div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
                         <div class="text item">
                             {{card.description}}
-                            <br><br><button class="button" style="float: right; margin-bottom: 20px">View</button>
+                            <br><br><button v-on:click="postInfo=true" class="button" style="float: right; margin-bottom: 20px">View</button>
                         </div>
                     </el-card>
                 </div>
+            </div>
+
+            <div v-if="postInfo">
+                hello
             </div>
 
             <div v-if="about">
@@ -340,6 +368,7 @@ export default {
             looked: false,
             home: true,
             resources: false,
+            postInfo: false,
             about: false,
             admin: false,
             adminSelect: false,
@@ -386,23 +415,31 @@ export default {
                     this.resources = false;
                     this.about = false;
                     this.adminSelect = false;
+                    this.postInfo = false;
                 }
                 else if(key === '#resources') {
                     this.home = false;
                     this.resources = true;
                     this.about = false;
                     this.adminSelect = false;
+                    this.postInfo = false;
+                    if(key === '#postInfo') {
+                        this.resources = false;
+                        this.postInfo = true;
+                    }
                 }
                 else if(key === '#about') {
                     this.home = false;
                     this.resources = false;
                     this.about = true;
                     this.adminSelect = false;
+                    this.postInfo = false;
                 } else if(key === '#admin'){
                     this.home = false;
                     this.resources = false;
                     this.about = false;
                     this.adminSelect = true;
+                    this.postInfo = false;
                 } else if(key === '#subscribe'){
                     this.subscribed = true;
                     this.subscribe()
