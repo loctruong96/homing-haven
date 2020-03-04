@@ -14,6 +14,7 @@
             </el-menu-item>
             <el-submenu index="4" style="float: right; font-size: 50px; color: #FFFFFF">
                 <template slot="title"><i class="el-icon-menu"  style="color: #FFFFFF"></i></template>
+                <el-menu-item  index="4-0" style="color: #FFFFFF" :route="{name:'UDashboard'}"><i class="el-icon-s-home"  style="color: #FFFFFF"></i>Home</el-menu-item>
                 <el-menu-item index="4-1" :route="{name:'Login'}" style="color: #FFFFFF" ><i class="el-icon-unlock"  style="color: #FFFFFF"></i>Sign In</el-menu-item>
                 <el-menu-item index="4-2" :route="{name:'Registration'}" style="color: #FFFFFF" ><i class="el-icon-discover"  style="color: #FFFFFF"></i>Registration</el-menu-item>
             </el-submenu>
