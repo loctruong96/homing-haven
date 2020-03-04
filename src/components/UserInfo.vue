@@ -29,22 +29,7 @@
             <div class="col2">
                 <div class="user-form">
                     <h5 style=" margin-bottom: 20px;">Current Interests</h5>
-<!--                        <p>-->
-<!--                            <button class="button">Books</button>-->
-<!--                            <button class="button">Career</button>-->
-<!--                        </p>-->
-<!--                        <p>-->
-<!--                            <button class="button">Legal</button>-->
-<!--                            <button class="button" style="background: lightgrey;">+</button>-->
-<!--                        </p>-->
-<!--                        <p>-->
-<!--                            <button class="button">Food Assistance</button>-->
-<!--                            <button class="button" style="background-color: white; pointer-events: none;"></button>-->
-<!--                        </p>-->
-<!--                        <p>-->
-<!--                            <button class="button">Photography</button>-->
-<!--                            <button class="button" style="background-color: white; pointer-events: none;"></button>-->
-<!--                        </p>-->
+
                     <ListInterests v-bind:interests="userProfile.interests"
                                    @remove-interest="removeInterest" v-if="currentInterestLen"
                     />
@@ -54,15 +39,7 @@
                 </div>
                 <div class="user-form">
                     <h5 style=" margin-bottom: 20px;">Communities you have joined:</h5>
-<!--                    <p>-->
-<!--                        <button class="button">Bellevue</button>-->
-<!--                        <button class="button">Renton</button>-->
-<!--                        <button class="button">Seattle</button>-->
-<!--                    </p>-->
-<!--                    <p>-->
-<!--                        <button class="button">Tacoma</button>-->
-<!--                        <button class="button" style="background: lightgrey;">+</button>-->
-<!--                    </p>-->
+
                     <ListCommunities v-bind:communities="communities"
                                    @remove-community="removeCommunity" v-if="communities.length"
                     />

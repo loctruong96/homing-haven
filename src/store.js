@@ -97,6 +97,24 @@ export const store = new Vuex.Store({
                 console.log(err)
             })
         },
+        updateCommunityProfile({ commit, state}, data){
+            let name = data.name;
+            let communityState = data.state;
+            let city = data.city;
+            let country = data.country;
+            let interests = data.interests;
+            let link = data.link;
+            let subscribers = data.subscribers;
+            let createdOn = data.createdOn;
+            let moderators = data.moderators;
+            let rules = data.rules;
+            let description = data.description;
+            let owner = data.owner;
+            fb.communityCollection.doc(state.currentCommunity).update({name, communityState, city, country,
+                interests, link, subscribers, createdOn, moderators, rules, description, owner}).catch(err => {
+                console.log(err)
+            })
+        },
         updateProfile({ commit, state }, data) {
             let name = data.name;
             let title = data.title;
@@ -104,8 +122,9 @@ export const store = new Vuex.Store({
             let userState = data.state;
             let country = data.country;
             let interests = data.interests;
+            let communities = data.communities;
 
-            fb.usersCollection.doc(state.currentUser.uid).update({ name, title, interests ,city, state: userState, country }).then(user => {
+            fb.usersCollection.doc(state.currentUser.uid).update({ name, title, interests ,city, state: userState, country, communities }).then(user => {
                 // update all posts by user to reflect new name
                 fb.postsCollection.where('userId', '==', state.currentUser.uid).get().then(docs => {
                     docs.forEach(doc => {
