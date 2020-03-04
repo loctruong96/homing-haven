@@ -1952,98 +1952,102 @@ header {
 
 
 //Search Results
-#searchResults{
-  .resultsSection{
+#searchResults {
+  .resultsSection {
     padding-left: 5vw;
     padding-top: 3vw;
-    p{
+
+    p {
       padding-left: 2vw;
     }
 
-    .resultCount{
+    .resultCount {
       padding-bottom: 1vw;
       color: $medium;
     }
 
-  .filterRecources{
-    float: right;
-  }
-
-  .resourcePost{
-    border: 2px solid $lightmain;
-    padding-top: 5px;
-    width: 80%;
-  }
-
-  .text {
-    font-size: 14px;
-  }
-
-  .item {
-    margin-bottom: 18px;
-  }
-
-  .test {
-    width: 100000000%;
-    height: 40vh;
-    border-style: solid;
-    border-width: 2px;
-    border-color: blue;
-  }
-
-  .headerContainer {
-    width: 100%;
-    display: flex;
-    //background:blue;
-    //color: blue;
-
-    border-style: solid;
-    border-width: 2px;
-    border-color: blue;
-
-    ul {
-      list-style-type: none;
+    .filterRecources {
+      float: right;
     }
 
-    li {
-      list-style-type: none;
-      display: inline;
-      float: left;
+    .resourcePost {
+      border: 2px solid $lightmain;
+      padding-top: 5px;
+      width: 80%;
     }
 
-  }
+    .text {
+      font-size: 14px;
+    }
 
-  .votes{
-    //flex-direction: row;
-    font-size: 25px;
-    float: right;
-    display: table-cell;
-    .commResults{
-      padding-bottom: 3vw;
-      color: $darkmain;
+    .item {
+      margin-bottom: 18px;
+    }
 
-      .ctable_format{
-        border-radius: .5vw;
+    .test {
+      width: 100000000%;
+      height: 40vh;
+      border-style: solid;
+      border-width: 2px;
+      border-color: blue;
+    }
+
+    .headerContainer {
+      width: 100%;
+      display: flex;
+      //background:blue;
+      //color: blue;
+
+      border-style: solid;
+      border-width: 2px;
+      border-color: blue;
+
+      ul {
+        list-style-type: none;
+      }
+
+      li {
+        list-style-type: none;
+        display: inline;
+        float: left;
       }
 
     }
 
-    .resourceResults{
-      padding-bottom: 3vw;
-      color: $darkmain;
+    .votes {
+      //flex-direction: row;
+      font-size: 25px;
+      float: right;
+      display: table-cell;
 
-      .rtable_format{
-        border-radius: .5vw;
+      .commResults {
+        padding-bottom: 3vw;
+        color: $darkmain;
+
+        .ctable_format {
+          border-radius: .5vw;
+        }
+
+      }
+
+      .resourceResults {
+        padding-bottom: 3vw;
+        color: $darkmain;
+
+        .rtable_format {
+          border-radius: .5vw;
+        }
       }
     }
-  }
-  .noResults{
-    padding-top: 5vw;
-    padding-left: 2vw;
-    padding-right:2vw;
-    text-align: center;
-    color: $darkestmain;
-  }
 
+    .noResults {
+      padding-top: 5vw;
+      padding-left: 2vw;
+      padding-right: 2vw;
+      text-align: center;
+      color: $darkestmain;
+    }
+
+  }
 }
 }
