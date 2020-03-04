@@ -6,7 +6,24 @@
             </div>
         </transition>
         <section>
-            <div class="col2" :class="{ 'signup-form': !showLoginForm && !showForgotPassword }">
+            <div class="interests">
+                <h1>Select an interest</h1>
+                <ListInterests v-bind:interests="interests"
+                               @remove-interest="removeInterest" v-if="interests.length"
+                />
+                <p class="emptylist" v-else>How lonely... add try adding an interest.</p>
+                <AddInterest @add-interest="addInterest"/>
+                <br>
+                <div class="line"></div>
+
+                <h4>Communities that matched your location and interests </h4>
+                    <ListCommunities v-bind:communities="communities"
+                                     @remove-community="removeCommunity" v-if="communities.length"
+                    />
+                    <p class="emptylist" v-else>How lonely... try looking for a community.</p>
+                    <AddCommunity @add-community="addCommunity"/>
+                </div>
+            <div class="col2">
                 <form v-if="!showLoginForm && !showForgotPassword" @submit.prevent>
                     <h1>Get Started</h1>
 
@@ -56,44 +73,6 @@
                     </div>
                 </transition>
             </div>
-            <div class="interests">
-                <h1>Select an interest</h1>
-<!--                <p>-->
-<!--                <button  class="button">Food Assitance</button>-->
-<!--                &nbsp;&nbsp;&nbsp;-->
-<!--                <button  class="button">Education</button>-->
-<!--                </p>-->
-<!--                <p>-->
-<!--                <button class="button">Healthcare</button>-->
-<!--                &nbsp;&nbsp;&nbsp;-->
-<!--                <button  class="button">Jobs</button>-->
-<!--                </p>-->
-                <ListInterests v-bind:interests="interests"
-                               @remove-interest="removeInterest" v-if="interests.length"
-                />
-                <p class="emptylist" v-else>How lonely... add try adding an interest.</p>
-                <AddInterest @add-interest="addInterest"/>
-
-<!--                <div class="matched">-->
-<!--                -->
-<!--            </div>-->
-            <h4>Communities that matched your location and interests </h4>
-<!--                <p>-->
-<!--                <button  class="button">Seattle Community</button>-->
-<!--                &nbsp;&nbsp;&nbsp;-->
-<!--                <button  class="button">Tacoma Community</button>-->
-<!--                </p>-->
-<!--                <p>-->
-<!--                <button class="button">Seatac Community</button>-->
-<!--                </p>-->
-                    <ListCommunities v-bind:communities="communities"
-                                     @remove-community="removeCommunity" v-if="communities.length"
-                    />
-                    <p class="emptylist" v-else>How lonely... try looking for a community.</p>
-                    <AddCommunity @add-community="addCommunity"/>
-                </div>
-
-
         </section>
     </div>
 </template>
