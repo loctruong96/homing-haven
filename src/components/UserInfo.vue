@@ -40,11 +40,11 @@
                 <div class="user-form">
                     <h5 style=" margin-bottom: 20px;">Communities you have joined:</h5>
 
-                    <ListCommunities v-bind:communities="communities"
-                                   @remove-community="removeCommunity" v-if="communities.length"
+                    <ListCommunities v-bind:communities="userProfile.communities"
+                                   @remove-community="removeCommunity" v-if="currentInterestLen"
                     />
                     <p class="emptylist" v-else>How lonely... try looking for a community.</p>
-                    <AddCommunity @add-community="addCommunity"/>
+<!--                    <AddCommunity @add-community="addCommunity"/>-->
                 </div>
             </div>
         </section>
@@ -67,15 +67,8 @@
                 country: '',
                 showSuccess: false,
                 interests: [
-                    {id: 1, title:"Food", completed: false},
-                    {id: 2, title:"Game", completed: false},
-                    {id: 3, title:"Legal", completed: false}
                 ],
                 communities: [
-                    {id: 1, title:"Bellevue", completed: false},
-                    {id: 2, title:"Renton", completed: false},
-                    {id: 3, title:"Seattle", completed: false},
-                    {id: 4, title:"Tacoma", completed: false}
                 ],
             }
         },
@@ -115,10 +108,12 @@
                 this.updateUserInterestFirebase();
             },
             removeCommunity(id) {
-                this.communities = this.communities.filter(t=> t.id !== id)
+                this.userProfile.communities = this.userProfile.communities.filter(t=> t.id !== id);
+                this.updateUserInterestFirebase();
             },
             addCommunity(community) {
-                this.communities.push(community)
+                this.communities.push(community);
+
             },
             updateUserInterestFirebase() {
                 const updatedInterest = [];
@@ -127,13 +122,20 @@
                     updatedInterest.push({id:counter, title: interest.title, completed: false});
                     counter += 1;
                 });
+                const updatedCommunities = [];
+                counter = 0;
+                this.userProfile.communities.map((com) => {
+                    updatedCommunities.push({id:counter, title: com.title, completed: false});
+                    counter += 1;
+                });
                 this.$store.dispatch('updateProfile', {
                     name: this.userProfile.name,
                     title: this.userProfile.title,
                     city:  this.userProfile.city,
                     state: this.userProfile.state,
                     country: this.userProfile.country,
-                    interests: updatedInterest
+                    interests: updatedInterest,
+                    communities: updatedCommunities,
                 });
             }
 
