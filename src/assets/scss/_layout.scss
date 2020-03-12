@@ -239,7 +239,7 @@ header {
     height: 75vh;
     width: 120vh;
     padding-top: 15vh;
-    padding-left: 20vh;
+    padding-right: 20vh;
 
     @media screen and (max-width: 742px) {
       width: 93vw;
@@ -298,18 +298,22 @@ header {
 
 #dashboard {
   .banner {
-    width: 100%;
+    width:  100%;
     height: 30vh;
-    //border-style: solid;
+    margin-top: 20px;
     background-color: $lightmain;
-    color:$darkmain;
-    margin-top: 15px;
+    color: $main;
+    //padding-top: 20px;
+
+    border-style: solid;
+    border-width: 2px;
+    border-color: $lightmain;
   }
 
   .bannerStuff {
-    //margin-top: 20px;
-    margin-left: 20px;
-    padding-top: 20px;
+    width:  100%;
+    margin-left: 2%;
+    margin-top: 2%;
   }
 
   .filter {
@@ -1295,19 +1299,29 @@ header {
 }
 
 #udashboard {
+
+  .help {
+    border-style: solid;
+    border-width: 2px;
+    border-color: red;
+  }
   .banner {
-    width: 100%;
+    width:  100%;
     height: 30vh;
-    //border-style: solid;
+    margin-top: 20px;
     background-color: $lightmain;
-    color: $darkmain;
-    margin-top: 15px;
+    color: $main;
+    //padding-top: 20px;
+
+    border-style: solid;
+    border-width: 2px;
+    border-color: $lightmain;
   }
 
   .bannerStuff {
-    //margin-top: 20px;
-    margin-left: 20px;
-    padding-top: 20px;
+    width:  100%;
+    margin-left: 2%;
+    margin-top: 2%;
   }
 
   .filter {
@@ -1322,6 +1336,13 @@ header {
       list-style: none;
     }
   }
+
+    .popComms {
+      width: 100%;
+      border-style: solid;
+      border-width: 2px;
+      border-color: red;
+    }
 
   .comms {
     color: $darkestmain;

@@ -38,7 +38,7 @@
                         :arrows="false"
                         :slide-ratio="1 / 8"
                         :dragging-distance="200"
-                        :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }">
+                        :breakpoints="{ 1200: { slideRatio: 1 / 5 },800: { visibleSlides: 2, slideMultiple: 2, slideRatio:1/3 }, 600: { visibleSlides: 1, slideMultiple: 2, slideRatio:1/2 } }">
                     <vueper-slide v-for="(slide, i) in slides"
                                   :key="i"
                                   :title="slide.title"
@@ -57,7 +57,7 @@
                         :gap="3"
                         :slide-ratio="1 / 8"
                         :dragging-distance="200"
-                        :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }">
+                        :breakpoints="{ 1200: { slideRatio: 1 / 5 },800: { visibleSlides: 2, slideMultiple: 2, slideRatio:1/3 }, 600: { visibleSlides: 1, slideMultiple: 2, slideRatio:1/2 } }">
                     <vueper-slide v-for="(slide, i) in slides_recc"
                                   :key="i"
                                   :title="slide.title"

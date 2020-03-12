@@ -5,17 +5,20 @@
                 <p>Loading..</p>
             </div>
         </transition>
-        <el-main>
-            <div class="bannerStuff">
-                <h1>Welcome to HomingHaven!!</h1>
-                <p>Checkout local communities, or resources like scholarships, food, legal help, etc... </p>
-                <button @click="register"  class="button">Get Started</button>
-            </div>
-            <div class="line"></div>
-            <div v-if="popularCommunities && looked">
+<!--        <el-main class="help">-->
+            <div class="banner">
                 <div class="bannerStuff">
-                    <h1>Popular Communities</h1>
+                    <h1>Welcome to HomingHaven!!</h1>
+                    <p>Checkout local communities, or resources like scholarships, food, legal help, etc... </p>
+                    <button @click="register"  class="button">Get Started</button>
                 </div>
+            </div>
+<!--            <div class="line"></div>-->
+            <br>
+            <h1 style="margin-left: 2%; color:#3D4381">Popular Communities</h1>
+            <div v-if="popularCommunities && looked">
+
+
                 <vueper-slides
                         class="no-shadow"
                         :slide-ratio="1 / 8"
@@ -36,7 +39,7 @@
                     </vueper-slide>
                 </vueper-slides>
             </div>
-        </el-main>
+<!--        </el-main>-->
 
 
     </div>
