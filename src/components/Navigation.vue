@@ -56,7 +56,12 @@
                 }
             },
             search(search_term){
-                this.$router.push(`/search/${search_term}`)
+                this.$store.commit('setCommTable', null);
+                this.$store.commit('setResourceTable', null);
+                this.$store.commit('setLooking', true);
+                this.$store.commit('setCurrentSearch', this.search_term);
+                this.$store.dispatch('fetchSearchResults');
+                this.$router.push(`/search/${search_term}`);
             }
         }
     }

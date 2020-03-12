@@ -51,13 +51,19 @@ export const store = new Vuex.Store({
     state: {
         currentUser: null,
         currentCommunity: null,
+        currentSearch: null,
         communityProfile: {},
         currentResource: null,
         resourceProfile: {},
         userProfile: {},
         posts: [],
         hiddenPosts: [],
-        popularCommunities: []
+        popularCommunities: [],
+        resourceTable: null,
+        commTable: null,
+        notFoundCom: false,
+        notFoundRes: false,
+        looking: false,
     },
     actions: {
         clearData({ commit }) {
@@ -70,6 +76,49 @@ export const store = new Vuex.Store({
             commit('setHiddenPosts', null);
             commit('setPopularCommunities', []);
             commit('setResourceProfile', {});
+            commit('setResourceTable', null);
+            commit('setCommTable', null);
+            commit('setCurrentSearch', null);
+            commit('setLooking', false);
+        },
+        async fetchSearchResults({commit, state}){
+            commit('setResourceTable', null);
+            commit('setCommTable', null);
+            const communityResults = await fb.communityCollection.where("link","==", `${state.currentSearch}`);
+            const resourceResults = await fb.resourceCollection.where("link","==", `${state.currentSearch}`);
+            communityResults.get().then(function (querySnapshot) {
+                if(querySnapshot.size > 0){
+                    state.commTable = [];
+                    state.notFoundCom = false;
+                } else {
+                    state.commTable = null;
+                    state.notFoundCom = true;
+                }
+                querySnapshot.forEach(function (doc) {
+                        state.commTable.push({
+                            community: doc.id,
+                            date: Date.parse(doc.data().createdOn.toDate()),
+                            name: doc.data().name,
+                        })
+                });
+                resourceResults.get().then(function (querySnapshot) {
+                    if(querySnapshot.size > 0){
+                        state.resourceTable = [];
+                        state.notFoundRes = false;
+                    } else {
+                        state.resourceTable = null;
+                        state.notFoundRes = true;
+                    }
+                    querySnapshot.forEach(function (doc) {
+                        state.resourceTable.push({
+                            resource: doc.id,
+                            name: doc.data().link,
+                            date: Date.parse(doc.data().createdOn.toDate()),
+                        })
+                    });
+                    state.looking = false;
+                });
+            });
         },
         fetchResourceProfile({commit, state}){
           fb.resourceCollection.doc(state.currentResource).get().then(res => {
@@ -156,6 +205,26 @@ export const store = new Vuex.Store({
         }
     },
     mutations: {
+        setLooking(state,val){
+            if (val){
+                state.looking = true;
+            } else {
+                state.looking = false;
+            }
+        },
+        setCurrentSearch(state, val){
+            if(val){
+                state.currentSearch = val.toLowerCase();
+            } else {
+                state.currentSearch = val;
+            }
+        },
+        setCommTable(state, val){
+            state.commTable = val;
+        },
+        setResourceTable(state, val){
+            state.resourceTable = val;
+        },
         setResourceProfile(state, val){
             state.resourceProfile = val;
         },
