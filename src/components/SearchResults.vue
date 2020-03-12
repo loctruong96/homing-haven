@@ -7,7 +7,7 @@
         </transition>
         <div v-if="searchRes && looked">
             <div class="resultsSection">
-                <p class="resultCount"><span><b><i> We found {searchRes.numResults} results </i></b></span></p>
+                <p class="resultCount"><span><b><i> Results for "{{$route.params.id}}"  </i></b></span></p>
 
                 <div class="commResults" v-if="commFound && looked">
                     <h1>Communities</h1>
@@ -16,12 +16,14 @@
                         style="width: 95%">
                         <el-table-column
                             width=90>
-                            <el-button class="viewButton"
-                                size="mini"
-                                @click="viewCommunity"
-                                round>
-                                View
-                            </el-button>
+                            <template slot-scope="scope">
+                                <el-button class="viewButton"
+                                           size="mini"
+                                           @click="viewCommunity(scope.$index, scope.row)"
+                                           round>
+                                    View
+                                </el-button>
+                            </template>
                         </el-table-column>
                         <el-table-column
                             prop="community"
@@ -33,7 +35,7 @@
                         </el-table-column>
                     </el-table>
                 </div>
-               
+
                 <div class="resourceResults" v-if="resFound && looked">
                     <h1>Resources</h1>
                      <el-table class="rtable_format"
@@ -41,12 +43,14 @@
                         style="width: 95%">
                         <el-table-column
                             width=90>
+                            <template slot-scope="scope">
                             <el-button class="viewButton"
                                 size="mini"
-                                @click="viewResource"
+                                @click="viewResource(scope.$index, scope.row)"
                                 round>
                                 View
                             </el-button>
+                            </template>
                         </el-table-column>
                         <el-table-column
                             prop="resource"
@@ -62,7 +66,7 @@
                         </el-table-column>
                     </el-table>
                 </div>
-                
+
             </div>
         </div>
         <div class="noResults" v-if="!searchRes && looked">
@@ -81,7 +85,7 @@
     const fb = require('../firebaseConfig.js');
     export default {
         beforeCreate() {
-         
+
         },
         beforeUpdate() {
             this.looked = true;
@@ -115,11 +119,11 @@
             }
         },
         methods: {
-            viewCommunity(link){
-                this.$router.push(`/community/${link}`)
+            viewCommunity(index, row){
+                this.$router.push(`/community/${row.community}`)
             },
-            viewResource(link){
-                 this.$router.push(`/resource/${link}`)
+            viewResource(index, row){
+                this.$router.push(`/resource/${row.resource}`)
             }
         }
     }
