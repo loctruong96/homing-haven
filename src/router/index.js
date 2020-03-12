@@ -104,7 +104,7 @@ const router = new Router({
       }
     },
     {
-      path: '/searchResults',
+      path: '/search/:id',
       name: 'SearchResults',
       component: SearchResults,
       meta: {
