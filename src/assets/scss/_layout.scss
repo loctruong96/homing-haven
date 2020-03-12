@@ -1358,7 +1358,7 @@ header {
   }
 
   .slide2 {
-    border-color:black;
+    // border-color:black;
     border-style: solid;
   }
 
@@ -1635,6 +1635,38 @@ header {
       color: white;
     }
   }
+
+  .resources {
+    .el-icon-user-solid{
+      font-size: 60px;
+    }
+
+    .headerContainer {
+      width: 100%;
+      display: flex;
+      // background:blue;
+      // color: blue;
+  
+      // border-style: solid;
+      // border-width: 2px;
+      // border-color: blue;
+  
+      ul {
+        list-style-type: none;
+      }
+  
+      li {
+        display: inline;
+        float: left;
+        // border-style: solid;
+        // border-width: 2px;
+        // border-color: blue;
+        // background-color:green;
+  
+      }
+  
+  }
+  }
   .communityGuidelines {
     color: $darkestmain;
     background: $white;
@@ -1649,7 +1681,7 @@ header {
 .description {
     border-style: solid;
     border-width: 2px;
-    border-color: black;
+    // border-color: black;
   }
   .commDetails {
     display: flex;
@@ -1682,29 +1714,40 @@ header {
   .resourceCategories{
     padding: 2vw;
     color: $darkestmain;
-    //background-color: black;
+    background-color: black;
   }
 
-  .headerContainer {
-    width: 100%;
-    display: flex;
-    //background:blue;
-    //color: blue;
+//   .headerContainer {
+//     width: 100%;
+//     display: flex;
+//     background:blue;
+//     color: blue;
 
-    //border-style: solid;
-    //border-width: 2px;
-    //border-color: blue;
+//     border-style: solid;
+//     border-width: 2px;
+//     border-color: blue;
 
-    ul {
-      list-style-type: none;
-    }
+//     ul {
+//       list-style-type: none;
+//     }
 
-    li {
-      list-style-type: none;
-      display: inline;
-      float: left;
-    }
+//     li {
+//       list-style-type: none;
+//       display: inline;
+//       //float: left;
+//       border-style: solid;
+//       border-width: 2px;
+//       border-color: blue;
 
+//     }
+
+// }
+
+.testClass {
+  border-style: solid;
+  border-width: 2px;
+  border-color: blue;
+  color: red;
 }
 
   .clearfix:before,
@@ -1718,14 +1761,15 @@ header {
     clear: both
   }
 
-  .box-card {
-    width: 80%;
-    margin-bottom: 20px;
-  }
+  // .box-card {
+  //   width: 80%;
+  //   margin-bottom: 20px;
+  // }
 
   .el-icon-user-solid{
-    font-size: 50px;
+    font-size: 10px;
   }
+
   .userInfo{
     //flex-direction: column;
     display: table-cell;
@@ -1973,6 +2017,9 @@ header {
 
 
 //Search Results
+
+}
+
 #searchResults {
   .resultsSection {
     padding-left: 5vw;
@@ -2070,5 +2117,4 @@ header {
     }
 
   }
-}
 }
