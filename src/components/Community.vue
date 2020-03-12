@@ -230,8 +230,6 @@
         <div class="commBanner" v-if="!communityProfile && looked">
             <h1 align="center">Community Not Found</h1>
         </div>
-
-
     </div>
 
 </template>
