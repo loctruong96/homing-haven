@@ -37,6 +37,7 @@
     form input {
         flex-grow:1;
         border:none;
+        /*width: 10%;*/
         background:#f7f1f1;
         padding:0 1.5em;
         font-size:initial;
