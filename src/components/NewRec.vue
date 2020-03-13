@@ -20,7 +20,17 @@
                     <h3 style="float: right; ">Help us know where to send people in need....</h3>
                     <form @submit.prevent>
                         <p style=" margin-top: 20px;">
-                            Resource:<input v-model.trim="name" type="text"  id="name" placeholder="Your resource's name"/>
+                            Resource:<input v-model.trim="name" type="text"  id="name" placeholder="What resource are you providing??"/>
+                        </p>
+                        <p>
+                            Description:<el-input
+                                type="textarea"
+                                placeholder="What is your resource about?"
+                                v-model="description"
+                                maxlength="1000"
+                                show-word-limit
+                        >
+                        </el-input>
                         </p>
                         <p style=" margin-top: 20px;">
                             Link:<input v-model.trim="link" type="text"  id="link" placeholder="/resource/resourcelink"/>
@@ -35,17 +45,8 @@
                                     @tags-changed="newTags => moderators = newTags"
                             />
                         </p>
-                        <p>
-                            Description:<el-input
-                                type="textarea"
-                                placeholder="Resource Description."
-                                v-model="description"
-                                maxlength="500"
-                                show-word-limit
-                        >
-                        </el-input>
-                        </p>
-                        <p>
+                        
+                        <!-- <p>
                             Rules:<el-input
                                 type="textarea"
                                 placeholder="Resource Rules."
@@ -54,7 +55,7 @@
                                 show-word-limit
                         >
                         </el-input>
-                        </p>
+                        </p> -->
 
                         <label for="country">Country</label>
                         <!--                    <input v-model.trim="signupForm.country" type="text" placeholder="" id="country" />-->
