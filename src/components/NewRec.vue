@@ -45,7 +45,7 @@
                                     @tags-changed="newTags => moderators = newTags"
                             />
                         </p>
-                        
+
                         <!-- <p>
                             Rules:<el-input
                                 type="textarea"
@@ -101,7 +101,7 @@
                     <AddInterest @add-interest="addInterest"/>
                 </div>
                 <div class="user-form">
-                    <h5 style=" margin-bottom: 20px;">Community that matched your interests or location</h5>
+                    <h5 style=" margin-bottom: 20px;">Add your resource to the following community</h5>
                     <ListCommunities v-bind:communities="communities"
                                      @remove-community="removeCommunity" v-if="4"
                     />
