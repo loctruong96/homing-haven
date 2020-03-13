@@ -32,49 +32,53 @@
                 </div>
                 <vueper-slides
                         class="no-shadow"
-                        :visible-slides="3"
-                        slide-multiple
-                        :gap="3"
-                        :arrows="false"
                         :slide-ratio="1 / 8"
-                        :dragging-distance="200"
+                        :visible-slides="3"
+                        :arrows="false"
+                        :gap="3"
+                        :dragging-distance="20"
                         :breakpoints="{ 1200: { slideRatio: 1 / 5 },800: { visibleSlides: 2, slideMultiple: 2, slideRatio:1/3 }, 600: { visibleSlides: 1, slideMultiple: 2, slideRatio:1/2 } }">
-                    <vueper-slide v-for="(slide, i) in slides"
-                                  :key="i"
-                                  :title="slide.title"
-                                  :content="slide.content"
-                                  :style="'background-color: ' + ['#C3C7E7', '#C3C7E7'][i % 2]" />
+                    <vueper-slide
+                            v-for="(slide, i) in categories"
+                            :key="i"
+                            :style="'background-color: ' + ['#C3C7E7', '#C3C7E7'][i % 2]">
+                        <template v-slot:content>
+                            <div class="vueperslide__content-wrapper" style="font-size: 1.3em;flex-direction: row; text-decoration-color: #007EFC">
+                                <p><span>{{ slide.text }}<br>{{slide.description}}<br><button class="button" v-on:click="handleCategories(slide)">View</button></span></p>
+                            </div>
+                        </template>
+                    </vueper-slide>
                 </vueper-slides>
 
                 <div class="recCategories">
-                    <h1>Recommended Resource Categories</h1>
+                    <h1>Recommended Resources</h1>
                 </div>
+
                 <vueper-slides
                         class="no-shadow"
+                        :slide-ratio="1 / 8"
                         :visible-slides="3"
-                        slide-multiple
                         :arrows="false"
                         :gap="3"
-                        :slide-ratio="1 / 8"
-                        :dragging-distance="200"
+                        :dragging-distance="20"
                         :breakpoints="{ 1200: { slideRatio: 1 / 5 },800: { visibleSlides: 2, slideMultiple: 2, slideRatio:1/3 }, 600: { visibleSlides: 1, slideMultiple: 2, slideRatio:1/2 } }">
-                    <vueper-slide v-for="(slide, i) in slides_recc"
-                                  :key="i"
-                                  :title="slide.title"
-                                  :content="slide.content"
-                                  :style="'background-color: ' + ['#C3C7E7', '#C3C7E7'][i % 2]" />
+                    <vueper-slide
+                            v-for="(slide, i) in tableData"
+                            :key="i"
+                            :style="'background-color: ' + ['#C3C7E7', '#C3C7E7'][i % 2]">
+                        <template v-slot:content>
+                            <div class="vueperslide__content-wrapper" style="font-size: 1.3em;flex-direction: row; text-decoration-color: #007EFC">
+                                <p><span>{{ slide.title }}<br>{{slide.description}}<br><button class="button" v-on:click="viewResource(0,slide)">View</button></span></p>
+                            </div>
+                        </template>
+                    </vueper-slide>
                 </vueper-slides>
             </div>
             </div>
 
             <div v-if="resources" class="resources">
                 <div class="resourceCategories" v-if="communityProfile">
-                    <div class="filterRecources">
-                        <select style="float: right; margin-right: 7%;">
-                            <option value="" disabled selected hidden>Sort by...</option>
-                            <option v-for="interest in sortby">{{interest}}</option>
-                        </select>
-                    </div>
+
                     <div class="popCategories">
                         <h1>Resources</h1>
                     </div>
@@ -89,7 +93,7 @@
                             <template slot-scope="scope">
                                 <el-button class="viewButton"
                                            size="mini"
-                                           @click="viewCommunity(scope.$index, scope.row)"
+                                           @click="viewResource(scope.$index, scope.row)"
                                            round>
                                     View
                                 </el-button>
@@ -119,16 +123,16 @@
                             prop="upvotes"
                             label="Upvotes"
                             sortable>
-                            
+
                         </el-table-column>
                         <el-table-column
                             prop="tag"
                             label="Tag"
                             width="112"
                             :filters="[
-                                { text: 'Food', value: 'Food' }, 
+                                { text: 'Food', value: 'Food' },
                                 { text: 'Education', value: 'Education' },
-                                { text: 'Documentation', value: 'Documentation' }, 
+                                { text: 'Documentation', value: 'Documentation' },
                                 { text: 'Healthcare', value: 'Healthcare' }
                             ]"
                             :filter-method="filterTag"
@@ -140,38 +144,6 @@
                             </template>
                         </el-table-column>
                     </el-table>
-
-
-
-
-
-                    
-                    <!-- <el-card v-for="card in cards" class="box-card">
-                        <div class="headerContainer">
-                           <ul>
-                               <li><i class="el-icon-user-solid"  style="color: gray"></i></li>     
-                                <li>
-                                    <div class="userInfo">
-                                        <div class="postInfo">
-                                            <p>{{card.user}}</p>
-                                            <p><i>{{card.date}}</i></p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="title"><h2>{{card.title}}</h2></div>
-                                </li>
-                               <!-- <li>
-                                   <div class="votes">{{card.votes}}</div>
-                               </li> -->
-                            <!-- </ul>
-                        </div>
-
-                        <div class="text item">
-                            {{card.description}}
-                            <br><br><button v-on:click="postInfo=true" class="button" style="float: right; margin-bottom: 20px">View</button>
-                        </div>
-                    </el-card> --> -->
                 </div>
             </div>
 
@@ -411,40 +383,51 @@ export default {
                    '<br><br><button @click="recc4_card"  class="button">View</button>'
                 }
             ],
+            categories: [
+                { text: 'Food', value: 'Food' },
+                { text: 'Education', value: 'Education' },
+                { text: 'Documentation', value: 'Documentation' },
+                { text: 'Health care', value: 'Healthcare' }
+            ],
             tableData: [{
                 userName: 'user1999',
                 date: '2016-05-03',
                 title: 'Food Bank in West Seattle',
                 upvotes: 45,
-                tag: 'Food'
-            }, 
-                {
+                tag: 'Food',
+                link: 'foodbankwestseattle'
+            },
+            {
                 userName: 'loctruong12',
                 date: '2016-05-06',
                 title: 'Master list of links for immigrant documentation',
                 upvotes: 15,
-                tag: 'Documentation'
-            }, 
+                tag: 'Documentation',
+                link: 'immigrantdocumentation'
+            },
             {
                 userName: 'felixTran44',
                 date: '2016-09-03',
                 title: 'Looking for scholarships? Go to Cappex.com',
                 upvotes: 88,
-                tag: 'Education'
-            }, 
+                tag: 'Education',
+                link: 'scholarships'
+            },
             {
                 userName: 'kidabrea48',
                 date: '2019-12-04',
                 title: 'FYI: This drug store is doing a 15% off deal on all items right now!',
                 upvotes: 99,
-                tag: 'Healthcare'
+                tag: 'Healthcare',
+                link:'healthcare'
             },
             {
                 userName: 'esperia97',
                 date: '2017-05-21',
                 title: 'This clinic downtown offers free STD testing!',
                 upvotes: 69,
-                tag: 'Healthcare'
+                tag: 'Healthcare',
+                link: 'freestdtesting'
             }
             ],
             subscribed: false,
@@ -493,6 +476,13 @@ export default {
         }
     },
     methods: {
+            handleCategories(selection){
+                this.home = false;
+                this.resources = true;
+                this.about = false;
+                this.adminSelect = false;
+                this.postInfo = false;
+            },
             handleSelect(key, keyPath) {
                 // console.log(key, keyPath);
                 if(key === '#home'){
@@ -551,12 +541,6 @@ export default {
                 const property = column['property'];
                 return row[property] === value;
             },
-
-
-
-
-
-           
          errorCheck(){
             let error = false;
             let foundOwner = false;
@@ -632,6 +616,9 @@ export default {
                 setTimeout(() => { this.showSuccess = false }, 2000)
             }
             return valid;
+        },
+        viewResource(index, row){
+            this.$router.push(`/resource/${row.link}`)
         },
         removeInterest(id) {
             this.communityProfile.interests = this.communityProfile.interests.filter(t=> t.id !== id);
