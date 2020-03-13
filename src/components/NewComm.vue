@@ -96,19 +96,19 @@
                     <p class="emptylist" v-else>How lonely... add try adding an interest.</p>
                     <AddInterest @add-interest="addInterest"/>
                 </div>
-                <div class="user-form">
-                    <h5 style=" margin-bottom: 20px;">Resources that matched your interests or location</h5>
-                    <p>
-                        <button class="button">Seatle Food Bank</button>
-                        <button class="button">Seattle Public Library</button>
-                        <button class="button">Costco Free Food</button>
-                    </p>
-                    <p>
-                        <button class="button">Tacoma Free Food</button>
-                        <button class="button" style="background: lightgrey;">+</button>
-                    </p>
+<!--                <div class="user-form">-->
+<!--                    <h5 style=" margin-bottom: 20px;">Resources that matched your interests or location</h5>-->
+<!--                    <p>-->
+<!--                        <button class="button">Seatle Food Bank</button>-->
+<!--                        <button class="button">Seattle Public Library</button>-->
+<!--                        <button class="button">Costco Free Food</button>-->
+<!--                    </p>-->
+<!--                    <p>-->
+<!--                        <button class="button">Tacoma Free Food</button>-->
+<!--                        <button class="button" style="background: lightgrey;">+</button>-->
+<!--                    </p>-->
 
-                </div>
+<!--                </div>-->
             </div>
         </section>
 
