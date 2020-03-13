@@ -78,8 +78,75 @@
                     <div class="popCategories">
                         <h1>Resources</h1>
                     </div>
+
+                    <el-button @click="clearFilter">Reset All Filters</el-button>
+                    <el-table
+                        ref="filterTable"
+                        :data="tableData"
+                        style="width: 85%">
+                        <el-table-column
+                            width=90>
+                            <template slot-scope="scope">
+                                <el-button class="viewButton"
+                                           size="mini"
+                                           @click="viewCommunity(scope.$index, scope.row)"
+                                           round>
+                                    View
+                                </el-button>
+                            </template>
+                        </el-table-column>
+                        <el-table-column
+                            prop="date"
+                            label="Date"
+                            sortable
+                            width="180"
+                            column-key="date"
+                            :filter-method="filterHandler"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                            prop="userName"
+                            label="Username"
+                            width="180"
+                            sortable>
+                        </el-table-column>
+                        <el-table-column
+                            prop="title"
+                            label="Title"
+                            sortable>
+                        </el-table-column>
+                        <el-table-column
+                            prop="upvotes"
+                            label="Upvotes"
+                            sortable>
+                            
+                        </el-table-column>
+                        <el-table-column
+                            prop="tag"
+                            label="Tag"
+                            width="112"
+                            :filters="[
+                                { text: 'Food', value: 'Food' }, 
+                                { text: 'Education', value: 'Education' },
+                                { text: 'Documentation', value: 'Documentation' }, 
+                                { text: 'Healthcare', value: 'Healthcare' }
+                            ]"
+                            :filter-method="filterTag"
+                            filter-placement="bottom-end">
+                            <template slot-scope="scope">
+                                <el-tag
+                                :type="scope.row.tag === 'Home' ? 'primary' : 'success'"
+                                disable-transitions>{{scope.row.tag}}</el-tag>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+
+
+
+
+
                     
-                    <el-card v-for="card in cards" class="box-card">
+                    <!-- <el-card v-for="card in cards" class="box-card">
                         <div class="headerContainer">
                            <ul>
                                <li><i class="el-icon-user-solid"  style="color: gray"></i></li>     
@@ -94,17 +161,17 @@
                                 <li>
                                     <div class="title"><h2>{{card.title}}</h2></div>
                                 </li>
-<!--                                <li>-->
-<!--                                    <div class="votes">{{card.votes}}</div>-->
-<!--                                </li>-->
-                            </ul>
+                               <!-- <li>
+                                   <div class="votes">{{card.votes}}</div>
+                               </li> -->
+                            <!-- </ul>
                         </div>
 
                         <div class="text item">
                             {{card.description}}
                             <br><br><button v-on:click="postInfo=true" class="button" style="float: right; margin-bottom: 20px">View</button>
                         </div>
-                    </el-card>
+                    </el-card> --> -->
                 </div>
             </div>
 
@@ -134,7 +201,7 @@
                     <section>
                         <div class="col1">
                             <div class="profile">
-<!--                                <img height="150px" width="150px" src="../assets/user_icon.png"/>-->
+                               <!-- <img height="150px" width="150px" src="../assets/user_icon.png"/> -->
                                 <h5 style="float: right; margin-top: 20px;">{{ communityProfile.name }}</h5>
                                 <form @submit.prevent>
                                     <p style=" margin-top: 20px;">
@@ -317,7 +384,7 @@ export default {
                    '<br><br><button @click="legalAssistance_card"  class="button">View</button>'
                 }
               ],
-              slides_recc: [
+            slides_recc: [
                 {
                   id: 'slide-0',
                   title: '<b style="font-size: 1.3em;color: ">Recommended Category 1</b>',
@@ -343,7 +410,43 @@ export default {
                   content: 'This is a description'+
                    '<br><br><button @click="recc4_card"  class="button">View</button>'
                 }
-              ],
+            ],
+            tableData: [{
+                userName: 'user1999',
+                date: '2016-05-03',
+                title: 'Food Bank in West Seattle',
+                upvotes: 45,
+                tag: 'Food'
+            }, 
+                {
+                userName: 'loctruong12',
+                date: '2016-05-06',
+                title: 'Master list of links for immigrant documentation',
+                upvotes: 15,
+                tag: 'Documentation'
+            }, 
+            {
+                userName: 'felixTran44',
+                date: '2016-09-03',
+                title: 'Looking for scholarships? Go to Cappex.com',
+                upvotes: 88,
+                tag: 'Education'
+            }, 
+            {
+                userName: 'kidabrea48',
+                date: '2019-12-04',
+                title: 'FYI: This drug store is doing a 15% off deal on all items right now!',
+                upvotes: 99,
+                tag: 'Healthcare'
+            },
+            {
+                userName: 'esperia97',
+                date: '2017-05-21',
+                title: 'This clinic downtown offers free STD testing!',
+                upvotes: 69,
+                tag: 'Healthcare'
+            }
+            ],
             subscribed: false,
             loadedMod: false,
             newOwner: '',
@@ -430,6 +533,30 @@ export default {
                     this.unsubscribe();
                 }
             },
+
+
+            resetDateFilter() {
+                this.$refs.filterTable.clearFilter('date');
+            },
+            clearFilter() {
+                this.$refs.filterTable.clearFilter();
+            },
+            formatter(row, column) {
+                return row.address;
+            },
+            filterTag(value, row) {
+                return row.tag === value;
+            },
+            filterHandler(value, row, column) {
+                const property = column['property'];
+                return row[property] === value;
+            },
+
+
+
+
+
+           
          errorCheck(){
             let error = false;
             let foundOwner = false;
