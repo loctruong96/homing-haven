@@ -84,8 +84,8 @@ export const store = new Vuex.Store({
         async fetchSearchResults({commit, state}){
             commit('setResourceTable', null);
             commit('setCommTable', null);
-            const communityResults = await fb.communityCollection.where("link","==", `${state.currentSearch}`);
-            const resourceResults = await fb.resourceCollection.where("link","==", `${state.currentSearch}`);
+            const communityResults = await fb.communityCollection.where("link",">=", `${state.currentSearch}`);
+            const resourceResults = await fb.resourceCollection.where("link",">=", `${state.currentSearch}`);
             communityResults.get().then(function (querySnapshot) {
                 if(querySnapshot.size > 0){
                     state.commTable = [];
