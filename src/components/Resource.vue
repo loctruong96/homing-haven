@@ -7,7 +7,7 @@
         </transition>
         <div v-if="resourceProfile">
             <div class="commBanner" v-if="resourceProfile">
-                <h1 align="center"><span>{{resourceProfile.name}}</span></h1>
+                <h1><span>{{resourceProfile.name}}</span></h1>
             </div>
 
             <div class="navInterests" v-if="resourceProfile">
@@ -17,8 +17,10 @@
                          text-color="#fff"
                          active-text-color="#ffd04b"
                          @select="handleSelect">
-                    <el-menu-item index="#home" style=" color: #FFFFFF"  ><i class="el-icon-s-home"  style="color: #FFFFFF"></i>Home</el-menu-item>
-                    <el-menu-item index="#resources" style=" color: #FFFFFF"  ><i class="el-icon-chat-dot-round"  style="color: #FFFFFF"></i>Questions and Comments</el-menu-item>
+                         <el-menu-item index="#home" style=" color: #FFFFFF"  ><i   class="el-icon-s-home" style="color: #FFFFFF"></i>Resource</el-menu-item>
+                         <el-menu-item index="#about" style=" color: #FFFFFF"  ><i   class="el-icon-notebook-2" style="color: #FFFFFF"></i>Questions and Answers</el-menu-item>
+                    
+                    
 <!--                    <el-menu-item index="#about" style=" color: #FFFFFF"  ><i class="el-icon-notebook-2"  style="color: #FFFFFF"></i>About</el-menu-item>-->
 <!--                    <el-menu-item index="#admin" style=" color: #FFFFFF" v-if="admin" ><i class="el-icon-s-custom"  style="color: #FFFFFF"></i>Admin</el-menu-item>-->
 <!--                    <el-menu-item index="#subscribe" style=" color: #FFFFFF;" v-if="userProfile.name !== undefined && !subscribed"><i class="el-icon-message-solid"  style="color: #FFFFFF"></i>Subscribe</el-menu-item>-->
@@ -29,19 +31,36 @@
                 <!--resource home page-->
                 <div class="communityGuidelines" v-if="resourceProfile">
                     <div class="description" v-if="resourceProfile">
-                        <h1>Description</h1>
                         <p><span>{{ resourceProfile.description }}</span></p>
                     </div>
-                    <div class="commDetails" v-if="resourceProfile">
+                    <!-- <div class="commDetails" v-if="resourceProfile">
                         <div class="rules">
                             <h3>Resource Rules</h3>
                             <p><span>{{ resourceProfile.rules }}</span></p>
                         </div>
-                    </div>
+                    </div> -->
+                    <div class="recCategories">
+                    <h1>Related Resources</h1>
+                </div>
+                <vueper-slides
+                        class="no-shadow"
+                        :visible-slides="3"
+                        slide-multiple
+                        :arrows="false"
+                        :gap="3"
+                        :slide-ratio="1 / 8"
+                        :dragging-distance="200"
+                        :breakpoints="{ 1200: { slideRatio: 1 / 5 },800: { visibleSlides: 2, slideMultiple: 2, slideRatio:1/3 }, 600: { visibleSlides: 1, slideMultiple: 2, slideRatio:1/2 } }">
+                    <vueper-slide v-for="(slide, i) in slides_recc"
+                                  :key="i"
+                                  :title="slide.title"
+                                  :content="slide.content"
+                                  :style="'background-color: ' + ['#C3C7E7', '#C3C7E7'][i % 2]" />
+                </vueper-slides>
                 </div>
             </div>
 
-            <div class="question" v-if="resources">
+            <div class="question" v-if="about">
                 <section>
                     <div class="col1">
                         <div class="profile">
@@ -397,6 +416,9 @@
                     this.adminSelect = false;
                     this.postInfo = false;
                 }
+                // else if() {
+                    
+                // }
                 else if(key === '#resources') {
                     this.home = false;
                     this.resources = true;
