@@ -523,8 +523,6 @@ export default {
                     this.unsubscribe();
                 }
             },
-
-
             resetDateFilter() {
                 this.$refs.filterTable.clearFilter('date');
             },
