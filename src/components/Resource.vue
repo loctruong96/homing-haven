@@ -39,24 +39,28 @@
                             <p><span>{{ resourceProfile.rules }}</span></p>
                         </div>
                     </div> -->
-                    <div class="recCategories">
-                    <h1>Related Resources</h1>
-                </div>
-                <vueper-slides
-                        class="no-shadow"
-                        :visible-slides="3"
-                        slide-multiple
-                        :arrows="false"
-                        :gap="3"
-                        :slide-ratio="1 / 8"
-                        :dragging-distance="200"
-                        :breakpoints="{ 1200: { slideRatio: 1 / 5 },800: { visibleSlides: 2, slideMultiple: 2, slideRatio:1/3 }, 600: { visibleSlides: 1, slideMultiple: 2, slideRatio:1/2 } }">
-                    <vueper-slide v-for="(slide, i) in slides_recc"
-                                  :key="i"
-                                  :title="slide.title"
-                                  :content="slide.content"
-                                  :style="'background-color: ' + ['#C3C7E7', '#C3C7E7'][i % 2]" />
-                </vueper-slides>
+<!--                    <div class="recCategories">-->
+<!--                    <h1>Related Resources</h1>-->
+<!--                </div>-->
+<!--                    <vueper-slides-->
+<!--                            class="no-shadow"-->
+<!--                            :slide-ratio="1 / 8"-->
+<!--                            :visible-slides="3"-->
+<!--                            :arrows="false"-->
+<!--                            :gap="3"-->
+<!--                            :dragging-distance="20"-->
+<!--                            :breakpoints="{ 1200: { slideRatio: 1 / 5 },800: { visibleSlides: 2, slideMultiple: 2, slideRatio:1/3 }, 600: { visibleSlides: 1, slideMultiple: 2, slideRatio:1/2 } }">-->
+<!--                        <vueper-slide-->
+<!--                                v-for="(slide, i) in tableData"-->
+<!--                                :key="i"-->
+<!--                                :style="'background-color: ' + ['#C3C7E7', '#C3C7E7'][i % 2]">-->
+<!--                            <template v-slot:content>-->
+<!--                                <div class="vueperslide__content-wrapper" style="font-size: 1.3em;flex-direction: row; text-decoration-color: #007EFC">-->
+<!--                                    <p><span>{{ slide.title }}<br>{{slide.description}}<br><button class="button" v-on:click="viewResource(0, slide)">View</button></span></p>-->
+<!--                                </div>-->
+<!--                            </template>-->
+<!--                        </vueper-slide>-->
+<!--                    </vueper-slides>-->
                 </div>
             </div>
 
@@ -256,6 +260,11 @@
     export default {
         beforeCreate() {
             this.looked = false;
+            // this.tableData = this.tableData.map((item)=>{
+            //    if(item.link !== this.$route.params.id){
+            //        return item;
+            //    }
+            // });
             this.$store.commit('setResourceProfile', false);
             this.$store.commit('setCurrentResource', this.$route.params.id);
             this.$store.dispatch('fetchResourceProfile');
@@ -308,57 +317,45 @@
                 showPostModal: false,
                 fullPost: {},
                 postComments: [],
-                slides: [
+                tableData: [{
+                    userName: 'user1999',
+                    date: '2016-05-03',
+                    title: 'Food Bank in West Seattle',
+                    upvotes: 45,
+                    tag: 'Food',
+                    link: 'foodbankwestseattle'
+                },
                     {
-                        id: 'slide-0',
-                        title: '<b style="font-size: 1.3em;color: ">Food Assistance</b>',
-                        content: 'This is the Food Assistance intererst.'+
-                            '<br><br><button @click="foodAssistance_card"  class="button">View</button>'
+                        userName: 'loctruong12',
+                        date: '2016-05-06',
+                        title: 'Master list of links for immigrant documentation',
+                        upvotes: 15,
+                        tag: 'Documentation',
+                        link: 'immigrantdocumentation'
                     },
                     {
-                        id: 'slide-1',
-                        title: '<b style="font-size: 1.3em;color: ">Health Care</b>',
-                        content: 'This is the Healthcare interest.'+
-                            '<br><br><button @click="healthcare_card"  class="button">View</button>'
+                        userName: 'felixTran44',
+                        date: '2016-09-03',
+                        title: 'Looking for scholarships? Go to Cappex.com',
+                        upvotes: 88,
+                        tag: 'Education',
+                        link: 'scholarships'
                     },
                     {
-                        id: 'slide-2',
-                        title: '<b style="font-size: 1.3em;color: ">Education</b>',
-                        content: 'This is the Education Interest.'+
-                            '<br><br><button @click="education_card"  class="button">View</button>'
+                        userName: 'kidabrea48',
+                        date: '2019-12-04',
+                        title: 'FYI: This drug store is doing a 15% off deal on all items right now!',
+                        upvotes: 99,
+                        tag: 'Healthcare',
+                        link:'healthcare'
                     },
                     {
-                        id: 'slide-3',
-                        title: '<b style="font-size: 1.3em;color: ">Legal Assistance</b>',
-                        content: 'This is the Legal Assistance.'+
-                            '<br><br><button @click="legalAssistance_card"  class="button">View</button>'
-                    }
-                ],
-                slides_recc: [
-                    {
-                        id: 'slide-0',
-                        title: '<b style="font-size: 1.3em;color: ">Recommended Category 1</b>',
-                        content: 'This is a description'+
-                            '<br><br><button @click="recc1_card"  class="button">View</button>'
-
-                    },
-                    {
-                        id: 'slide-1',
-                        title: '<b style="font-size: 1.3em;color: ">Recommended Category 2</b>',
-                        content: 'This is a description'+
-                            '<br><br><button @click="recc2_card"  class="button">View</button>'
-                    },
-                    {
-                        id: 'slide-2',
-                        title: '<b style="font-size: 1.3em;color: ">Recommended Category 3</b>',
-                        content: 'This is a description'+
-                            '<br><br><button @click="recc3_card"  class="button">View</button>'
-                    },
-                    {
-                        id: 'slide-3',
-                        title: '<b style="font-size: 1.3em;color: ">Recommended Category 4</b>',
-                        content: 'This is a description'+
-                            '<br><br><button @click="recc4_card"  class="button">View</button>'
+                        userName: 'esperia97',
+                        date: '2017-05-21',
+                        title: 'This clinic downtown offers free STD testing!',
+                        upvotes: 69,
+                        tag: 'Healthcare',
+                        link: 'freestdtesting'
                     }
                 ],
                 subscribed: false,
@@ -677,6 +674,9 @@
             closePostModal() {
                 this.postComments = []
                 this.showPostModal = false
+            },
+            viewResource(index, row){
+                this.$router.push(`/resource/${row.link}`)
             },
         },
         components: {
