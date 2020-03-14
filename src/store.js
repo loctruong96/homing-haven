@@ -44,6 +44,30 @@ fb.auth.onAuthStateChanged(user => {
                 store.commit('setPosts', postsArray)
             }
         })
+    } else {
+        // realtime updates from our posts collection
+        fb.postsCollection.orderBy('createdOn', 'desc').onSnapshot(querySnapshot => {
+
+            // add new posts to hiddenPosts array after initial load
+            if (querySnapshot.docChanges().length !== querySnapshot.docs.length
+                && querySnapshot.docChanges()[0].type == 'added') {
+
+                let post = querySnapshot.docChanges()[0].doc.data()
+                post.id = querySnapshot.docChanges()[0].doc.id
+
+                store.commit('setHiddenPosts', post)
+            } else {
+                let postsArray = []
+
+                querySnapshot.forEach(doc => {
+                    let post = doc.data()
+                    post.id = doc.id
+                    postsArray.push(post)
+                })
+
+                store.commit('setPosts', postsArray)
+            }
+        })
     }
 });
 

@@ -19,8 +19,8 @@
                          @select="handleSelect">
                          <el-menu-item index="#home" style=" color: #FFFFFF"  ><i   class="el-icon-s-home" style="color: #FFFFFF"></i>Resource</el-menu-item>
                          <el-menu-item index="#about" style=" color: #FFFFFF"  ><i   class="el-icon-notebook-2" style="color: #FFFFFF"></i>Questions and Answers</el-menu-item>
-                    
-                    
+
+
 <!--                    <el-menu-item index="#about" style=" color: #FFFFFF"  ><i class="el-icon-notebook-2"  style="color: #FFFFFF"></i>About</el-menu-item>-->
 <!--                    <el-menu-item index="#admin" style=" color: #FFFFFF" v-if="admin" ><i class="el-icon-s-custom"  style="color: #FFFFFF"></i>Admin</el-menu-item>-->
 <!--                    <el-menu-item index="#subscribe" style=" color: #FFFFFF;" v-if="userProfile.name !== undefined && !subscribed"><i class="el-icon-message-solid"  style="color: #FFFFFF"></i>Subscribe</el-menu-item>-->
@@ -62,7 +62,7 @@
 
             <div class="question" v-if="about">
                 <section>
-                    <div class="col1">
+                    <div class="col1" v-if="userProfile.name">
                         <div class="profile">
                             <h5>{{ userProfile.name }}</h5>
                             <p>{{ userProfile.title }}</p>
@@ -90,8 +90,8 @@
                                 <span>{{ post.createdOn | formatDate }}</span>
                                 <p>{{ post.content | trimLength }}</p>
                                 <ul>
-                                    <li><a @click="openCommentModal(post)">comments {{ post.comments }}</a></li>
-                                    <li><a @click="likePost(post.id, post.likes)">likes {{ post.likes }}</a></li>
+                                    <li v-if="userProfile.name"><a @click="openCommentModal(post)">comments {{ post.comments }}</a></li>
+                                    <li v-if="userProfile.name"><a @click="likePost(post.id, post.likes)">likes {{ post.likes }}</a></li>
                                     <li><a @click="viewPost(post)">view full post</a></li>
                                 </ul>
                             </div>
@@ -417,7 +417,7 @@
                     this.postInfo = false;
                 }
                 // else if() {
-                    
+
                 // }
                 else if(key === '#resources') {
                     this.home = false;
