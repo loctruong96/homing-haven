@@ -1,0 +1,102 @@
+// Nice-to-have styles, easy to override by the end-user.
+.vueperslides {
+  &:not(.no-shadow):not(.vueperslides--3d) &__parallax-wrapper {
+    &:before, &:after {
+      content: "";
+      position: absolute;
+      bottom: 100%;
+      left: -1em;
+      right: -1em;
+      height: 2em;
+      box-shadow: 0 0 20px rgba(#000, 0.25);
+      z-index: 2;
+    }
+
+    &:after {
+      top: 100%;
+      bottom: auto;
+    }
+  }
+
+  &__arrows {
+    color: #fff;
+
+    &--outside {color: currentColor;}
+  }
+
+  &__arrow {
+    top: 50%;
+    background-color: transparent;
+    border: none;
+    opacity: 0.7;
+
+    &--prev {left: 0.5em;}
+    &--next {right: 0.5em;}
+
+    &:hover {opacity: 1;}
+  }
+
+  &__arrows--outside &__arrow--prev {left: -3.5em;}
+  &__arrows--outside &__arrow--next {right: -3.5em;}
+
+  &__paused {
+    top: 0.7em;
+    right: 0.7em;
+    opacity: 0;
+    text-shadow: 0 0 3px rgba(#000, .4);
+    z-index: 1;
+  }
+
+  &:hover &__paused {opacity: 1;}
+
+  &__bullets:not(&__bullets--outside) {color: #fff;}
+  &__bullet {
+    margin: 1.5em 0.6em;
+    padding: 0;
+    border: none;
+    background: none;
+
+    .default {
+      width: 12px;
+      height: 12px;
+      border-radius: 12px;
+      border: 1px solid currentColor;
+      background-color: transparent;
+      box-shadow: 0 0 1px rgba(#000, 0.5), 0 0 3px rgba(#000, 0.3);
+      transition: 0.4s ease-in-out;
+      box-sizing: border-box;
+
+      span {display: none;}
+    }
+    &--active .default {border-width: 6px;}
+  }
+}
+
+.vueperslide {
+  background-position: center;
+
+  &__image {background-position: center;}
+
+  &__content-wrapper:not(&__content-wrapper--outside-top):not(&__content-wrapper--outside-bottom) {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  &__content-wrapper.parallax-fixed-content {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+  }
+}
