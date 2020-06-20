@@ -1,0 +1,12 @@
+{
+    "firebase-api": {
+      "apiKey": "AIzaSyBsnbAXvIMy1wwZLvU-HdL8q4-TIZ5DbsU",
+      "authDomain": "homing-haven.firebaseapp.com",
+      "databaseURL": "https://homing-haven.firebaseio.com",
+      "projectId": "homing-haven",
+      "storageBucket": "homing-haven.appspot.com",
+      "messagingSenderId": "21958596571",
+      "appId": "1:21958596571:web:bca3377763ca029a6e39fe",
+      "measurementId": "G-MXM791BX2Z"
+    }
+  }
